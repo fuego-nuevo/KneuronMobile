@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+// import {
+//   React,
+//   AppRegistry,
+//   StyleSheet,
+//   Text,
+//   View
+// } from 'react-native';
 
-// import Navigator from 'react-native-deprecated-custom-components';
+// import App from "./app/components/App";
+// AppRegistry.registerComponent("kneuronMobile", () => App);
 
-import App from "./app/components/App";
-import Login from './app/components/Login';
-import {Scene, Router, Actions} from 'react-native-router-flux';
+//_______________________________________________________________________
+
+// import Login from './app/components/Login';
+// import {Scene, Router, Actions} from 'react-native-router-flux';
 
 
 /*export default class kneuronMobile extends Component {
@@ -26,4 +28,36 @@ import {Scene, Router, Actions} from 'react-native-router-flux';
 AppRegistry.registerComponent('kneuronMobile', () => kneuronMobile);*/
 
 
-AppRegistry.registerComponent("homemade", () => App);
+//_______________________________________________________________________
+
+import React, { Component } from 'react';
+import { AppRegistry } from 'react-native';
+import { Provider } from 'react-redux';
+import App from './app/components/App';
+import { createStore, applyMiddleware } from 'redux';
+import Reducers from './app/reducers/index';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+
+
+const logger = createLogger({});
+const middleware = [
+  thunkMiddleware,
+  logger,
+];
+const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
+
+
+const store = createStoreWithMiddleware(Reducers);
+
+export default class kneuronMobile extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
+  }
+}
+// store={store}
+AppRegistry.registerComponent('kneuronMobile', () => kneuronMobile);

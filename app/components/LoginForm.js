@@ -10,25 +10,67 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 
-// import Navigator from 'react-native-deprecated-custom-components';
+import {Actions} from 'react-native-router-flux';
 
 
 export default class Login extends Component {
+
+    constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: ''
+    };
+    this.passwordChange = this.passwordChange.bind(this);
+    this.emailChange = this.emailChange.bind(this);
+
+  }
+
+  emailChange(text) {
+    console.log('this is the text line 30',text)
+    this.setState({
+      email: text,
+    });
+  }
+  passwordChange(text) {
+    this.setState({
+      password: text,
+    });
+  }
+  handleClick(event) {
+    console.log("this is the refs on line 26", this.refs)
+    const email = this.state.email;
+    const password = this.state.password;
+    const creds = { email: email, password: password };
+    this.props.onLoginClick(creds);
+    // console.log('this is email' ,"hi")
+  }
+
+
+
   render() {
+    console.log("this is the state of email and password",this.state)
     return (
       <View behavior="padding" style={styles.container}>
-        <TextInput 
+        <TextInput
+          type="text"
+          refs="email"
           placeholder="Enter Your Email fool"
+          onChangeText={(text) => this.emailChange(text)}
           style={styles.input} 
           />
         <TextInput 
+          type="password"
+          refs="password"
           placeholder="Enter Your Password fool"
+          onChangeText={(text) => this.passwordChange(text)}
           secureTextEntry
           style={styles.input} 
           />
 
         <TouchableOpacity style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>Login</Text>
+          {/*<Text style={styles.buttonText} onPress={() => Actions.test()}>Login</Text>*/}
+          <Text style={styles.buttonText} onPress={event => this.handleClick(event)}>Login</Text>
         </TouchableOpacity>
       </View >
 

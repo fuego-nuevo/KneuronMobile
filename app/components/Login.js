@@ -8,12 +8,18 @@ import {
   Image,
   KeyboardAvoidingView
 } from 'react-native';
+import { loginUser } from '../actions/login';
 
 // import Navigator from 'react-native-deprecated-custom-components';
 
 
 export default class Login extends Component {
+    constructor(props) {
+    super(props);
+    this.state = {};
+  }
   render() {
+    const { dispatch, errorMessage, isAuthenticated } = this.props;
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.logoContainer}>
@@ -21,7 +27,10 @@ export default class Login extends Component {
           <Text style={styles.title}>Login page bitchhess</Text>
         </View>
         <View style={styles.formContainer}>
-          <LoginForm />
+          <LoginForm 
+              isAuthenticated={isAuthenticated}
+              errorMessage={errorMessage}
+              onLoginClick={creds => dispatch(loginUser(creds))}/>
         </View>
       </KeyboardAvoidingView>
 

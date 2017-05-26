@@ -61,7 +61,7 @@ exports.loginUser = (creds) => {
         dispatch(receiveLogin(response.data));
         console.log('before dashboard');
         console.log(AsyncStorage, "this is asnycstorage 60!!!!!!!!!!!!!")
-        console.log(AsyncStorage.getItem('id_token'))
+        console.log('this is the token when they signup',AsyncStorage.getItem('id_token'))
         Actions.test();
         console.log('after dashboard');
       })
@@ -86,14 +86,14 @@ exports.signupUser = (creds) => {
 
     return axios.post('http://localhost:8080/api/teachers', body)
       .then((response) => {
-        console.log(response);
-        if (response.statusText !== 'Created') {
+        console.log("this is the response in 89 of signup!!!!!!",response);
+        if (!response.data) {
           dispatch(loginError('Bad Request...'));
           console.log('user did not sign up succesfully')
           return Promise.reject(response);
         }
         AsyncStorage.setItem('id_token', response.data.id_token);
-        AsyncStorage.setItem('access_token', response.data.id_token);
+        console.log('this is the token when they signup',AsyncStorage.getItem('id_token'))
         dispatch(receiveLogin(response.data));
         console.log('user did sign up succesfully')
         Actions.test();

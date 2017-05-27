@@ -112,7 +112,6 @@ exports.logoutUser = () => {
     dispatch(requestLogout());
     console.log('got past the dispatch');
     AsyncStorage.removeItem('id_token');
-    AsyncStorage.removeItem('access_token');
     dispatch(receiveLogout());
     console.log('did you receive logout');
   };

@@ -39,11 +39,10 @@ export default class Login extends Component {
   }
   handleClick() {
     console.log("this is the refs on line 26", this.refs)
-    const email = this.state.email.toLowerCase();
+    const email = this.state.email;
     const password = this.state.password;
     const creds = { email: email, password: password };
     this.props.onLoginClick(creds);
-    // console.log('this is email' ,"hi")
   }
 
 

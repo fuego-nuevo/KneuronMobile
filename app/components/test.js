@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Actions} from 'react-native-router-flux';
+import CohortList from './cohortList';
 
 import {
   AppRegistry,
@@ -43,13 +44,14 @@ componentDidMount () {
       console.log("this is the state of token boiz",this.state.id_token);
         return (
             <Container>
+                <CohortList />
                 <Content />
                 <Footer >
                     <FooterTab>
                         <Button onPress={Actions.test}>
                             <Text>Home</Text>
                         </Button>
-                        <Button onPress={Actions.profile}>
+                        <Button onPress={Actions.profile} >
                             <Text>Profile</Text>
                         </Button>
                         <Button >

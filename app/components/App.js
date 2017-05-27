@@ -32,13 +32,13 @@ class App extends Component {
     return (
       <Router>
         <Scene key='root' >          
-            <Scene key='login' component={Login} title='Login Bitches' isAuthenticated={isAuthenticated} errorMessage={errorMessage} dispatch={dispatch} /> 
-            <Scene key='test' component={Test} title='Fucking Work'  />
-            <Scene key='signup' component={Signup} title='Fucking Work you fuck'  />
-            <Scene key='profile' component={Profile} title='Profile Page'  />
-            {/*<Scene
-              key="/dashboard"
-              render={this.renderDashboard} />         */}
+          <Scene key='login' component={Login} title='Login Bitches' isAuthenticated={isAuthenticated} errorMessage={errorMessage} dispatch={dispatch} initial/> 
+          <Scene key='test' component={Test} title='Fucking Work'  />
+          <Scene key='signup' component={Signup} title='Fucking Work you fuck'  />
+          <Scene key='profile' component={Profile} title='Profile Page'  />
+          {/*<Scene
+            key="/dashboard"
+            render={this.renderDashboard} />         */}
         </Scene>
       </Router>
   );

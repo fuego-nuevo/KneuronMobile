@@ -62,7 +62,7 @@ exports.loginUser = (creds) => {
         console.log('before dashboard');
         console.log(AsyncStorage, "this is asnycstorage 60!!!!!!!!!!!!!")
         console.log('this is the token when they signup',AsyncStorage.getItem('id_token'))
-        Actions.test({type: ActionConst.RESET});
+        Actions.home({type: ActionConst.RESET});
         console.log('after dashboard');
       })
       .catch((err) => {
@@ -96,7 +96,7 @@ exports.signupUser = (creds) => {
         console.log('this is the token when they signup',AsyncStorage.getItem('id_token'))
         dispatch(receiveLogin(response.data));
         console.log('user did sign up succesfully')
-        Actions.test();
+        Actions.home();
       })
       .catch((err) => {
         console.log('Error: ', err);

@@ -61,7 +61,15 @@ import {
 } from 'react-native';
 import { Container, Content, List, ListItem, Thumbnail, Body, Left, Right } from 'native-base';
 export default class CohortListEntry extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+
+    }
+  }
+
     render() {
+      console.log('this is the props in cohortlistentry', this.props)
         return (
           <Container style={{marginTop: 70}}>
             <ListItem avatar >
@@ -69,11 +77,11 @@ export default class CohortListEntry extends Component {
                 <Thumbnail source={require('./images/loginpic.jpg')} />
               </Left>
               <Body >
-                <Text >CS 101</Text>
-                  <Text note>Lets code YallLets code YallLetds code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code YallLets code Yall</Text>
+                <Text >{this.props.cohort.subject}</Text>
+                  <Text note>Lets code Yall</Text>
               </Body>
               <Right>
-                <Text note>3:43 pm</Text>
+                <Text note>{this.props.cohort.time}</Text>
               </Right>
             </ListItem>
 

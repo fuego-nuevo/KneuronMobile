@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
@@ -62,7 +62,7 @@ exports.loginUser = (creds) => {
         console.log('before dashboard');
         console.log(AsyncStorage, "this is asnycstorage 60!!!!!!!!!!!!!")
         console.log('this is the token when they signup',AsyncStorage.getItem('id_token'))
-        Actions.test();
+        Actions.test({type: ActionConst.RESET});
         console.log('after dashboard');
       })
       .catch((err) => {
@@ -76,7 +76,7 @@ exports.signupUser = (creds) => {
   const body = {
     email: creds.email,
     password: creds.password,
-    userType: 0,
+    userType: 1,
     fName: creds.fName,
     lName: creds.lName,
     username: creds.username,
@@ -84,7 +84,7 @@ exports.signupUser = (creds) => {
   return (dispatch) => {
     dispatch(requestLogin(creds));
 
-    return axios.post('http://localhost:8080/api/teachers', body)
+    return axios.post('http://localhost:8080/api/students', body)
       .then((response) => {
         console.log("this is the response in 89 of signup!!!!!!",response);
         if (!response.data) {
@@ -113,6 +113,7 @@ exports.logoutUser = () => {
     console.log('got past the dispatch');
     AsyncStorage.removeItem('id_token');
     dispatch(receiveLogout());
+    Actions.login();
     console.log('did you receive logout');
   };
 };

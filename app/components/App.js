@@ -4,11 +4,13 @@ import { Router, Scene, Modal } from "react-native-router-flux";
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import Login from './Login';
-import Test from './test';
-import Signup from './signup'
-import Profile from './profile';
+import Home from './Home';
+import Signup from './SignUp';
+import Profile from './Profile';
+import NavBar from './Navbar';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+
 
 
 class App extends Component {
@@ -33,9 +35,10 @@ class App extends Component {
       <Router>
         <Scene key='root' >          
           <Scene key='login' component={Login} title='Login Bitches' isAuthenticated={isAuthenticated} errorMessage={errorMessage} dispatch={dispatch} initial/> 
-          <Scene key='test' component={Test} title='Fucking Work'  />
+          <Scene key='home' component={Home} title='Fucking Work'  />
           <Scene key='signup' component={Signup} title='Fucking Work you fuck'  />
           <Scene key='profile' component={Profile} title='Profile Page'  />
+          <Scene key='navbar' component={NavBar} title='Nav' dispatch={dispatch}/>
           {/*<Scene
             key="/dashboard"
             render={this.renderDashboard} />         */}

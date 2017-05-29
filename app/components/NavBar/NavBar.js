@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  KeyboardAvoidingView,
-  AsyncStorage,
-} from 'react-native';
+import { View } from 'react-native';
 import { Container, Content, Footer, FooterTab, Button, Icon, Badge } from 'native-base';
 import { logoutUser } from '../../actions/login';
 
@@ -22,20 +13,21 @@ class NavBar extends Component {
   }
   render() {
     const { logoutUser } = this.props;
+    const { container, button } = styles;
     return (
-      <View style={styles.container}>
-        <Footer >
+      <View>
+        <Footer style={container} >
           <FooterTab>
-            <Button onPress={Actions.home}>
+            <Button style={button} onPress={Actions.home}>
               <Icon name="apps" />
             </Button>
-            <Button>
+            <Button style={button}>
               <Icon name="camera" />
             </Button>
-            <Button onPress={logoutUser}>
+            <Button style={button} onPress={logoutUser}>
               <Icon active name="navigate" />
             </Button>
-            <Button onPress={Actions.profile} >
+            <Button style={button} onPress={Actions.profile} >
               <Icon name="person" />
             </Button>
           </FooterTab>
@@ -50,7 +42,14 @@ const styles = {
     bottom: 0,
     left: 0,
     right: 0,
+    backgroundColor: 'black',
   },
-};
+  button: {
+    backgroundColor: 'black',
+    borderRightWidth: 0.6,
+    borderColor: 'lightgray',
+    borderRadius: 0,
+  }
+}
 
 export default connect(null, { logoutUser })(NavBar);

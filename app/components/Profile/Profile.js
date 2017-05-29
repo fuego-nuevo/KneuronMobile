@@ -10,7 +10,6 @@ import {
 import { Container, Content, Footer, FooterTab, Button, Icon, Badge } from 'native-base';
 import Navbar from '../NavBar/NavBar';
 
-
 export default class Profile extends Component {
   constructor(props) {
     super(props);
@@ -36,21 +35,21 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3498db',
+    backgroundColor: '#3498db'
   },
   logoContainer: {
     alignItems: 'center',
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   logo: {
     width: 100,
-    height: 100,
+    height: 100
   },
   title: {
     color: '#FFF',
     marginTop: 10,
     width: 160,
-    textAlign: 'center',
-  },
-});
+    textAlign: 'center'
+  }
+})

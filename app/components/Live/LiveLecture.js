@@ -76,4 +76,3 @@ export default class LiveLecture extends Component {
 
 // })
 
-// export default connect(mapStateToProps)(LiveLecture);

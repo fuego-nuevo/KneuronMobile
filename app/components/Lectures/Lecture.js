@@ -4,13 +4,22 @@ import NavBar from '../NavBar/NavBar';
 import LectureList from './LectureList';
 
 class LectureHome extends Component {
-  render(){ 
+  render(){
+    const { container } = styles;
     return (
-      <View>
-        <LectureList />
-        <NavBar />
-      </View>
+    <View style={container}>
+      <LectureList />
+      <NavBar />
+    </View>
     );
+  }
+}
+
+styles = {
+  container: {
+    flex: 1,
+    position: 'relative',
+    backgroundColor: '#dcdfe5',
   }
 }
 

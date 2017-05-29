@@ -1,45 +1,46 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import {
-  AppRegistry,
-  StyleSheet,
+  TouchableOpacity,
   Text,
   View,
-  Image,
-  KeyboardAvoidingView,
-  ScrollView
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Icon } from 'native-base';
+import { currentCohort } from '../../actions/CurrentCohort';
 
-export default class CohortListEntry extends Component {
+class CohortListEntry extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
     };
+    this.handleTap = this.handleTap.bind(this);
   }
 
-  onClassJoin() {
-
+  async handleTap() {
+    await this.props.currentCohort(this.props.cohort.cohort);
+    Actions.lecture();
   }
 
     render() {
       console.log('this is the props in cohortlistentry', this.props)
       const { container, text, time, title, join } = styles;
         return (
-          <View style={container}>
-            <View style={join}>
-              <Icon name="apps" />
+          <TouchableOpacity onPress={this.handleTap}>
+            <View style={container}>
+              <View style={join}>
+                <Icon name="apps" />
+              </View>
+              <View style={title}>
+                <Text style={text}>
+                  {this.props.cohort.cohort.subject}
+                </Text>
+              </View>
+              <View style={time}>
+                <Text style={text}>Class starts at {this.props.cohort.cohort.time}</Text>
+              </View>
             </View>
-            <View style={title}>
-              <Text style={text}>
-                {this.props.cohort.subject}
-              </Text>
-            </View>
-            <View style={time}>
-              <Text>Class starts at {this.props.cohort.time}</Text>
-            </View>
-        </View>
+          </TouchableOpacity>
         );
     }
 }
@@ -65,10 +66,9 @@ const styles = {
   },
   text: {
     textAlign: 'center',
-    textColor: 'white',
+    fontFamily: 'Futura-Medium',
   },
   title: {
-    // flex: 1,
     position: 'absolute',
     backgroundColor: 'lightgray',
     padding: 3,
@@ -82,7 +82,6 @@ const styles = {
     position: 'absolute',
     bottom: 20,
     height: 10,
-    // backgroundColor: 'blue',
     width: '90%',
     borderTopWidth: 1,
     padding: 4,
@@ -93,4 +92,6 @@ const styles = {
     right: 5,
     top: 25,
   },
-};
+}
+
+export default connect(null, { currentCohort })(CohortListEntry);

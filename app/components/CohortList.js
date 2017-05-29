@@ -3,13 +3,14 @@ import {
   AppRegistry,
   StyleSheet,
   Image,
+  ScrollView,
   KeyboardAvoidingView,
   AsyncStorage,
 } from 'react-native';
 import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Footer, FooterTab, Button } from 'native-base';
-import { Actions } from 'react-native-router-flux';
-import axios from 'axios';
 import NavBar from './NavBar';
+import {Actions} from 'react-native-router-flux';
+import axios from 'axios';
 import CohortListEntry from './CohortListEntry';
 
 let cards = [
@@ -48,37 +49,29 @@ export default class CohortList extends Component {
     });
   }
 
-  render() {
-    console.log('this is all the student datata ', this.state.allStudentData);
-    console.log('this is all the students cohorts', this.state.studentCohorts)
-    const allData = this.state.allStudentData;
-    return (
-      <View>
+render() {
+  console.log('this is all the student datata ', this.state.allStudentData);
+  console.log('this is all the students cohorts', this.state.studentCohorts)
+  const allData = this.state.allStudentData;
+  const { container } = styles;
+  return (
+    <ScrollView style={container}>
         {this.state.studentCohorts.map(cohort =>
-          (<CohortListEntry id={cohort.id} cohort={cohort} />))}
-      </View>
+          (<CohortListEntry key={cohort.id} id={cohort.id} cohort={cohort}/>))}
+    </ScrollView>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#3498db',
+    flexDirection: 'column',
+    width: '100%',
+    marginTop: '20%'
   },
-  logoContainer: {
-    alignItems: 'center',
-    flexGrow: 1,
-    justifyContent: 'center',
-  },
-  logo: {
-    width: 100,
-    height: 100
-  },
-  title: {
-    color: '#FFF',
-    marginTop: 10,
-    width: 160,
-    textAlign: 'center',
-  },
-});
+  navBar: {
+    position: 'fixed',
+    bottom: 0,
+  }
+};

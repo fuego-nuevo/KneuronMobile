@@ -14,7 +14,7 @@ import { loginUser } from '../actions/login';
 
 
 export default class Login extends Component {
-    constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {};
   }
@@ -23,14 +23,15 @@ export default class Login extends Component {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.logoContainer}>
-          <Image style={styles.logo} source={require('../components/images/loginpic.jpg')}/>
+          <Image style={styles.logo} source={require('../components/images/loginpic.jpg')} />
           <Text style={styles.title}>Login page bitchhess</Text>
         </View>
         <View style={styles.formContainer}>
           <LoginForm 
               isAuthenticated={isAuthenticated}
               errorMessage={errorMessage}
-              onLoginClick={creds => dispatch(loginUser(creds))}/>
+              onLoginClick={creds => dispatch(loginUser(creds))} 
+          />
         </View>
       </KeyboardAvoidingView>
 
@@ -46,16 +47,16 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
     flexGrow: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   logo: {
     width: 100,
-    height: 100
+    height: 100,
   },
   title: {
     color: '#FFF',
     marginTop: 10,
     width: 160,
-    textAlign: 'center'
-  }
-})
+    textAlign: 'center',
+  },
+});

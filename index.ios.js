@@ -9,13 +9,13 @@
 // import App from "./app/components/App";
 // AppRegistry.registerComponent("kneuronMobile", () => App);
 
-//_______________________________________________________________________
+// _______________________________________________________________________
 
 // import Login from './app/components/Login';
 // import {Scene, Router, Actions} from 'react-native-router-flux';
 
 
-/*export default class kneuronMobile extends Component {
+/* export default class kneuronMobile extends Component {
   render() {
     return <Router>
       <Scene key="root">
@@ -28,16 +28,16 @@
 AppRegistry.registerComponent('kneuronMobile', () => kneuronMobile);*/
 
 
-//_______________________________________________________________________
+// _______________________________________________________________________
 
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
-import App from './app/components/App';
 import { createStore, applyMiddleware } from 'redux';
-import Reducers from './app/reducers/index';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+import Reducers from './app/reducers/index';
+import App from './app/components/App';
 
 
 const logger = createLogger({});

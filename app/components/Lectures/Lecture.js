@@ -4,7 +4,7 @@ import NavBar from '../NavBar/NavBar';
 import LectureList from './LectureList';
 
 class LectureHome extends Component {
-  render(){ 
+  render() {
     return (
       <View>
         <LectureList />

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   AppRegistry,
   StyleSheet,
@@ -31,7 +32,7 @@ let cards = [
   }, 
 ];
 
-export default class CohortList extends Component {
+class CohortList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,17 +42,19 @@ export default class CohortList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8080/api/teachers/grfg1@grfg.pbz')
-    .then((res) => {
-      console.log('this is the res from cohort ', res);
-      this.setState({ allStudentData: res.data });
-      this.setState({ studentCohorts: res.data.cohort });
-    });
+    // axios.get('http://localhost:8080/api/teachers/grfg1@grfg.pbz')
+    // .then((res) => {
+    //   console.log('this is the res from cohort ', res);
+    //   this.setState({ allStudentData: res.data });
+    //   this.setState({ studentCohorts: res.data.cohort });
+    // });
+    console.log('hey');
   }
 
 render() {
   console.log('this is all the student datata ', this.state.allStudentData);
-  console.log('this is all the students cohorts', this.state.studentCohorts)
+  console.log('this is all the students cohorts', this.state.studentCohorts);
+  console.log('this is th epropss brroosksk , ', this.props);
   const allData = this.state.allStudentData;
   const { container } = styles;
   return (
@@ -75,3 +78,9 @@ const styles = {
     bottom: 0,
   }
 };
+
+const mapStateToProps = state => ({
+  profile: state.profile,
+});
+
+export default connect(mapStateToProps)(CohortList);

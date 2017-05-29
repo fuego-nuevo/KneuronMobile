@@ -18,9 +18,9 @@ export default class CohortListEntry extends Component {
     };
   }
 
-  onClassJoin() {
-
-  }
+  // onClassJoin() {
+  //
+  // }
 
     render() {
       console.log('this is the props in cohortlistentry', this.props)

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { updateProfile } from '../actions/UpdateProfile';
+import axios from 'axios';
 import {
   AppRegistry,
   StyleSheet,
@@ -10,7 +13,22 @@ import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Lef
 import NavBar from './NavBar';
 import CohortList from './CohortList';
 
-export default class Test extends Component {
+class Test extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {
+    axios.get(`http://localhost:8080/api/students/${AsyncStorage.getItem('id_token')}`)
+      .then((profile) => {
+        this.props.updateProfile(profile);
+      })
+      .catch((err) => {
+        console.log('there was an error grabbing student info, ', err);
+      })
+  }
+
   render() {
     const { container } = styles;
         return (
@@ -30,4 +48,6 @@ const styles = {
     backgroundColor: '#dcdfe5',
   }
 }
+
+export default connect(null, { updateProfile })(Test);
 

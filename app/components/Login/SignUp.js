@@ -11,7 +11,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { signupUser } from '../actions/login';
+import { signupUser } from '../../actions/login';
 
 
 class SignUp extends Component {

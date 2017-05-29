@@ -9,7 +9,7 @@ import {
 import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Footer, FooterTab, Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
-import NavBar from './NavBar';
+import NavBar from '../NavBar/NavBar';
 import CohortListEntry from './CohortListEntry';
 
 let cards = [

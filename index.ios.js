@@ -1,35 +1,3 @@
-// import {
-//   React,
-//   AppRegistry,
-//   StyleSheet,
-//   Text,
-//   View
-// } from 'react-native';
-
-// import App from "./app/components/App";
-// AppRegistry.registerComponent("kneuronMobile", () => App);
-
-// _______________________________________________________________________
-
-// import Login from './app/components/Login';
-// import {Scene, Router, Actions} from 'react-native-router-flux';
-
-
-/* export default class kneuronMobile extends Component {
-  render() {
-    return <Router>
-      <Scene key="root">
-        <Scene key="login" component={Login} title="Login Bitches"/>
-      </Scene>
-    </Router>
-  }
-  }
-
-AppRegistry.registerComponent('kneuronMobile', () => kneuronMobile);*/
-
-
-// _______________________________________________________________________
-
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';

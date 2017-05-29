@@ -50,7 +50,7 @@ const styles = {
     position: 'relative',
     flex: 1,
     backgroundColor: '#dcdfe5',
-  }
-}
+  },
+};
 
 export default connect(null, { updateProfile })(Home);

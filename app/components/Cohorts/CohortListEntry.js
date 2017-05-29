@@ -52,7 +52,6 @@ class CohortListEntry extends Component {
   }
 }
 
-
 const styles = {
   container: {
     position: 'relative',

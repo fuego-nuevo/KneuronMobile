@@ -17,31 +17,33 @@ export default class CohortListEntry extends Component {
     this.state = {
 
     };
+
+    this.onLiveClassJoin = this.onLiveClassJoin.bind(this);
   }
 
-  onClassJoin() {
-
+  onLiveClassJoin() {
+    return Actions.livelecture();
   }
 
-    render() {
-      console.log('this is the props in cohortlistentry', this.props)
-      const { container, text, time, title, join } = styles;
-        return (
-          <View style={container}>
-            <View style={join}>
-              <Icon name="apps" />
-            </View>
-            <View style={title}>
-              <Text style={text}>
-                {this.props.cohort.subject}
-              </Text>
-            </View>
-            <View style={time}>
-              <Text>Class starts at {this.props.cohort.time}</Text>
-            </View>
+  render() {
+    console.log('this is the props in cohortlistentry', this.props)
+    const { container, text, time, title, join } = styles;
+    return (
+      <View style={container}>
+        <View style={join}>
+          <Icon onPress={this.onLiveClassJoin} name="apps" />
         </View>
-        );
-    }
+        <View style={title}>
+          <Text style={text}>
+            {this.props.cohort.subject}
+          </Text>
+        </View>
+        <View style={time}>
+          <Text>Class starts at {this.props.cohort.time}</Text>
+        </View>
+      </View>
+    );
+  }
 }
 
 
@@ -60,12 +62,12 @@ const styles = {
     borderRadius: 5,
     borderBottomWidth: 0,
     shadowRadius: 2,
-    shadowOffset: {width: 0, height: 3},
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: .2,
   },
   text: {
     textAlign: 'center',
-    textColor: 'white',
+    color: 'white',
   },
   title: {
     // flex: 1,

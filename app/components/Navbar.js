@@ -52,4 +52,4 @@ const styles = {
   }
 }
 
-export default NavBar;
+export default connect(null, { logoutUser })(NavBar);

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import LoginForm from './LoginForm'
 import {
   AppRegistry,
   StyleSheet,
@@ -8,10 +7,8 @@ import {
   Image,
   KeyboardAvoidingView
 } from 'react-native';
+import LoginForm from './LoginForm';
 import { loginUser } from '../actions/login';
-
-// import Navigator from 'react-native-deprecated-custom-components';
-
 
 export default class Login extends Component {
   constructor(props) {
@@ -27,14 +24,13 @@ export default class Login extends Component {
           <Text style={styles.title}>Login page bitchhess</Text>
         </View>
         <View style={styles.formContainer}>
-          <LoginForm 
-              isAuthenticated={isAuthenticated}
-              errorMessage={errorMessage}
-              onLoginClick={creds => dispatch(loginUser(creds))} 
+          <LoginForm
+            isAuthenticated={isAuthenticated}
+            errorMessage={errorMessage}
+            onLoginClick={creds => dispatch(loginUser(creds))}
           />
         </View>
       </KeyboardAvoidingView>
-
     );
   }
 }
@@ -42,7 +38,7 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3498db'
+    backgroundColor: '#3498db',
   },
   logoContainer: {
     alignItems: 'center',

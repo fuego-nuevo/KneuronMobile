@@ -39,7 +39,6 @@ class SignUp extends Component {
   //   this.setState({ [name]: e.target.value });
   // }
 
-
   emailChange(text) {
     console.log('this is the text line 30', text);
     this.setState({
@@ -74,8 +73,8 @@ class SignUp extends Component {
 //onSubmit={(e) => { e.preventDefault(); this.props.signupUser(this.state, this.props.history); }} autoComplete="on">
 
   render() {
-    console.log('this is the props on loginform',this.props)
-    console.log('this is the state on loginform',this.state)
+    console.log('this is the props on loginform', this.props);
+    console.log('this is the state on loginform', this.state);
 
     return (
       <View behavior="padding" style={styles.container}>
@@ -85,26 +84,26 @@ class SignUp extends Component {
           onChangeText={text => this.emailChange(text)}
           style={styles.input}
         />
-        <TextInput 
+        <TextInput
           type="password"
           placeholder="Enter Your Password fool"
           onChangeText={text => this.passwordChange(text)}
           secureTextEntry
           style={styles.input}
         />
-        <TextInput 
+        <TextInput
           type="text"
           placeholder="Enter Your FirstName fool"
           onChangeText={text => this.fNameChange(text)}
           style={styles.input}
         />
-        <TextInput 
+        <TextInput
           type="text"
           placeholder="Enter Your LastName fool"
           onChangeText={text => this.lNameChange(text)}
           style={styles.input}
         />
-        <TextInput 
+        <TextInput
           type="text"
           placeholder="Enter Your UserName fool"
           onChangeText={text => this.usernameChange(text)}
@@ -118,17 +117,6 @@ class SignUp extends Component {
     );
   }
 }
-// const mapStateToProps = (state) => {
-//   const { email, username, userType, fName, lName, cohort } = state.profile;
-//   return {
-//     email
-//   };
-// }
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//       onSignUp: (datThang) => { dispatch(signupUser(datThang))}
-//   }
-// }
 
 export default connect(null, { signupUser })(SignUp);
 

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import {logoutUser} from '../actions/login'
-
 import {
   AppRegistry,
   StyleSheet,
@@ -14,42 +12,37 @@ import {
   AsyncStorage,
 } from 'react-native';
 import { Container, Content, Footer, FooterTab, Button, Icon, Badge } from 'native-base';
-class Navbar extends Component {
+import { logoutUser } from '../actions/login';
+
+class NavBar extends Component {
   constructor(props) {
     super(props);
-      this.state = {
-      };
-
+    this.state = {
+    };
+  }
+  render() {
+    const { logoutUser } = this.props;
+    return (
+      <Container>
+        <Footer >
+          <FooterTab>
+            <Button onPress={Actions.test}>
+              <Text>Home</Text>
+            </Button>
+            <Button onPress={Actions.profile} >
+              <Text>Profile</Text>
+            </Button>
+            <Button >
+              <Text>Stats!</Text>
+            </Button>
+            <Button>
+              <Text onPress={logoutUser}>Logout</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
+      </Container>
+    );
+  }
 }
 
-
-
-
-    render() {
-      const { logoutUser } = this.props;
-        return (
-            <Container>
-                <Footer >
-                    <FooterTab>
-                        <Button onPress={Actions.test}>
-                            <Text>Home</Text>
-                        </Button>
-                        <Button onPress={Actions.profile} >
-                            <Text>Profile</Text>
-                        </Button>
-                        <Button >
-                            <Text>Stats!</Text>
-                        </Button>
-                        <Button>
-                            <Text onPress={logoutUser}>Logout</Text>
-                        </Button>
-                    </FooterTab>
-                </Footer>
-            </Container>
-        );
-    }
-}
-
-
-
-export default connect(null, { logoutUser })(Navbar);
+export default connect(null, { logoutUser })(NavBar);

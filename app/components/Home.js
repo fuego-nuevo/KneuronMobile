@@ -16,24 +16,34 @@ import CohortList from './CohortList';
 class Test extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      profile: {},
+    };
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:8080/api/students/${AsyncStorage.getItem('id_token')}`)
-      .then((profile) => {
-        this.props.updateProfile(profile);
+    AsyncStorage.getItem('id_token')
+      .then((res) => {
+        axios.get(`http://localhost:8080/api/students/${res}`)
+          .then((profile) => {
+            this.setState({ profile: profile.data}, () => {
+              this.props.updateProfile(profile.data);
+            })
+          })
+          .catch((err) => {
+            console.log('there was an error grabbing student info, ', err);
+          })
       })
-      .catch((err) => {
-        console.log('there was an error grabbing student info, ', err);
-      })
+
+
   }
 
   render() {
     const { container } = styles;
+    console.log(this.state);
         return (
             <View style={container}>
-              <CohortList />
+              <CohortList cohorts={this.state.profile.studentcohorts || []} />
               <NavBar />
             </View>
         );

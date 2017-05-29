@@ -7,7 +7,7 @@ import {
   AsyncStorage,
 } from 'react-native';
 import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Footer, FooterTab, Button } from 'native-base';
-import navbar from './Navbar';
+import NavBar from './Navbar';
 import {Actions} from 'react-native-router-flux';
 import axios from 'axios';
 import CohortListEntry from './CohortListEntry'
@@ -55,16 +55,22 @@ render() {
   console.log('this is all the student datata ', this.state.allStudentData);
   console.log('this is all the students cohorts', this.state.studentCohorts)
   const allData = this.state.allStudentData;
+  // const { container } = styles;
   return (
-    <View>
+    <Container>
+      <Text>list entry</Text>
         {this.state.studentCohorts.map(cohort =>
-          (<CohortListEntry id={cohort.id} cohort={cohort}/>))}          
-    </View>
+          (<CohortListEntry key={cohort.id} id={cohort.id} cohort={cohort}/>))}
+          <NavBar/>
+    </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  backGround: {
+    backgroundColor: 'red',
+  },
   container: {
     flex: 1,
     backgroundColor: '#3498db'

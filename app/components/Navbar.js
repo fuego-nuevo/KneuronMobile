@@ -27,11 +27,12 @@ class Navbar extends Component {
 
     render() {
       const { logoutUser } = this.props;
+      const { container } = styles;
         return (
             <Container>
-                <Footer >
+                <Footer style={container}>
                     <FooterTab>
-                        <Button onPress={Actions.test}>
+                        <Button onPress={Actions.home}>
                             <Text>Home</Text>
                         </Button>
                         <Button onPress={Actions.profile} >
@@ -48,6 +49,15 @@ class Navbar extends Component {
             </Container>
         );
     }
+}
+
+
+const styles = {
+  container: {
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: 'red',
+  }
 }
 
 

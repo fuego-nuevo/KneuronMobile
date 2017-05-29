@@ -7,6 +7,7 @@ import {
   AsyncStorage,
 } from 'react-native';
 import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Footer, FooterTab, Button } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 import NavBar from './NavBar';
 import CohortList from './CohortList';
 

@@ -8,7 +8,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 import LoginForm from './LoginForm';
-import { loginUser } from '../actions/login';
+import { loginUser } from '../../actions/login';
 
 export default class Login extends Component {
   constructor(props) {

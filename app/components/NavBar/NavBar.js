@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { View } from 'react-native';
 import { Container, Content, Footer, FooterTab, Button, Icon, Badge } from 'native-base';
 import { logoutUser } from '../../actions/login';
+
 class NavBar extends Component {
   constructor(props) {
     super(props);

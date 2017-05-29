@@ -9,7 +9,7 @@ import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Lef
 import NavBar from './NavBar/NavBar';
 import CohortList from './Cohorts/CohortList';
 
-class Test extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,5 +53,5 @@ const styles = {
   }
 }
 
-export default connect(null, { updateProfile })(Test);
+export default connect(null, { updateProfile })(Home);
 

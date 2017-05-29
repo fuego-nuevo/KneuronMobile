@@ -18,6 +18,7 @@ render() {
         {this.props.cohorts.map(cohort =>
           (<CohortListEntry key={cohort.id} id={cohort.id} cohort={cohort}/>))}
     </ScrollView>
+
     );
   }
 }

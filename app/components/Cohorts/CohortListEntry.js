@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -9,6 +9,7 @@ import {
   ScrollView
 } from 'react-native';
 import { Container, Content, List, ListItem, Thumbnail, Body, Left, Right } from 'native-base';
+
 export default class CohortListEntry extends Component {
   constructor(props) {
     super(props);
@@ -16,22 +17,22 @@ export default class CohortListEntry extends Component {
 
     };
   }
-    render() {
-      console.log('this is the props in cohortlistentry', this.props)
-      const { container, text, time, title } = styles;
-        return (
-          <View style={container}>
-            <View style={title}>
-              <Text style={text}>
-                {this.props.cohort.subject}
-              </Text>
-            </View>
-            <View style={time}>
-              <Text>Class starts at {this.props.cohort.time}</Text>
-            </View>
+  render() {
+    console.log('this is the props in cohortlistentry', this.props)
+    const { container, text, time, title } = styles;
+    return (
+      <View style={container}>
+        <View style={title}>
+          <Text style={text}>
+            {this.props.cohort.subject}
+          </Text>
         </View>
-        );
-    }
+        <View style={time}>
+          <Text>Class starts at {this.props.cohort.time}</Text>
+        </View>
+      </View>
+    );
+  }
 }
 
 
@@ -50,7 +51,7 @@ const styles = {
     borderRadius: 5,
     borderBottomWidth: 0,
     shadowRadius: 2,
-    shadowOffset: {width: 0, height: 3},
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: .2,
   },
   text: {
@@ -77,5 +78,5 @@ const styles = {
     borderTopWidth: 1,
     padding: 4,
     borderColor: 'lightgray',
-  }
-}
+  },
+};

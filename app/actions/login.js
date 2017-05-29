@@ -2,10 +2,9 @@ import axios from 'axios';
 import { AsyncStorage } from 'react-native';
 import { Actions, ActionConst } from 'react-native-router-flux';
 
-
-export const LOGIN_REQUEST = 'LOGIN_REQUEST'
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-export const LOGIN_FAILURE = 'LOGIN_FAILURE'
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
@@ -50,7 +49,7 @@ exports.loginUser = (creds) => {
 
     return axios.get(`http://localhost:8080/api/teachers/${creds.email}/${creds.password}`)
       .then((response) => {
-        console.log(AsyncStorage, "this is asnycstorage 60!!!!!!!!!!!!!")
+        console.log('this is asnycstorage 60!!!!!!!!!!!!!', AsyncStorage);
         console.log(response);
         if (!response.data) {
           dispatch(loginError('Bad Request...'));
@@ -60,9 +59,9 @@ exports.loginUser = (creds) => {
         // AsyncStorage.setItem('access_token', response.data.id_token);
         dispatch(receiveLogin(response.data));
         console.log('before dashboard');
-        console.log(AsyncStorage, "this is asnycstorage 60!!!!!!!!!!!!!")
-        console.log('this is the token when they signup',AsyncStorage.getItem('id_token'))
-        Actions.home({type: ActionConst.RESET});
+        console.log(AsyncStorage, 'this is asnycstorage 60!!!!!!!!!!!!!')
+        console.log('this is the token when they signup', AsyncStorage.getItem('id_token'));
+        Actions.home({ type: ActionConst.RESET });
         console.log('after dashboard');
       })
       .catch((err) => {
@@ -86,16 +85,16 @@ exports.signupUser = (creds) => {
 
     return axios.post('http://localhost:8080/api/students', body)
       .then((response) => {
-        console.log("this is the response in 89 of signup!!!!!!",response);
+        console.log("this is the response in 89 of signup!!!!!!", response);
         if (!response.data) {
           dispatch(loginError('Bad Request...'));
-          console.log('user did not sign up succesfully')
+          console.log('user did not sign up succesfully');
           return Promise.reject(response);
         }
         AsyncStorage.setItem('id_token', response.data.id_token);
-        console.log('this is the token when they signup',AsyncStorage.getItem('id_token'))
+        console.log('this is the token when they signup', AsyncStorage.getItem('id_token'))
         dispatch(receiveLogin(response.data));
-        console.log('user did sign up succesfully')
+        console.log('user did sign up succesfully');
         Actions.home();
       })
       .catch((err) => {

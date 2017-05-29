@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signupUser } from '../actions/login';
 import {
   AppRegistry,
   StyleSheet,
@@ -11,8 +10,9 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { signupUser } from '../actions/login';
 
-import {Actions} from 'react-native-router-flux';
 
 class SignUp extends Component {
   constructor(props) {
@@ -41,30 +41,30 @@ class SignUp extends Component {
 
 
   emailChange(text) {
-    console.log('this is the text line 30',text)
+    console.log('this is the text line 30', text);
     this.setState({
-      userInfo: {...this.state.userInfo, email: text},
+      userInfo: { ...this.state.userInfo, email: text },
     });
   }
   fNameChange(text) {
     this.setState({
-      userInfo: {...this.state.userInfo, fName: text},
+      userInfo: { ...this.state.userInfo, fName: text },
     });
   }
   lNameChange(text) {
-    console.log('this is the text line 30',text)
+    console.log('this is the text line 30', text);
     this.setState({
-      userInfo: {...this.state.userInfo, lName: text},
+      userInfo: { ...this.state.userInfo, lName: text },
     });
   }
   passwordChange(text) {
     this.setState({
-      userInfo: {...this.state.userInfo, password: text},
+      userInfo: { ...this.state.userInfo, password: text },
     });
   }
   usernameChange(text) {
     this.setState({
-      userInfo: {...this.state.userInfo, username: text},
+      userInfo: { ...this.state.userInfo, username: text },
     });
   }
 
@@ -78,52 +78,43 @@ class SignUp extends Component {
     console.log('this is the state on loginform',this.state)
 
     return (
-      <View behavior ="padding" style={styles.container}>
+      <View behavior="padding" style={styles.container}>
         <TextInput
           type="text"
-          
           placeholder="Enter Your Email fool"
-          onChangeText={(text) => this.emailChange(text)}
-          style={styles.input} 
-          />
+          onChangeText={text => this.emailChange(text)}
+          style={styles.input}
+        />
         <TextInput 
           type="password"
-          
           placeholder="Enter Your Password fool"
-          onChangeText={(text) => this.passwordChange(text)}
+          onChangeText={text => this.passwordChange(text)}
           secureTextEntry
-          style={styles.input} 
-          />
+          style={styles.input}
+        />
         <TextInput 
           type="text"
-          
           placeholder="Enter Your FirstName fool"
-          onChangeText={(text) => this.fNameChange(text)}
-          
-          style={styles.input} 
-          />
+          onChangeText={text => this.fNameChange(text)}
+          style={styles.input}
+        />
         <TextInput 
           type="text"
-          
           placeholder="Enter Your LastName fool"
-          onChangeText={(text) => this.lNameChange(text)}
-          
-          style={styles.input} 
-          />
+          onChangeText={text => this.lNameChange(text)}
+          style={styles.input}
+        />
         <TextInput 
           type="text"
-          
           placeholder="Enter Your UserName fool"
-          onChangeText={(text) => this.usernameChange(text)}
-          
-          style={styles.input} 
-          />
-
+          onChangeText={text => this.usernameChange(text)}
+          style={styles.input}
+        />
         <TouchableOpacity style={styles.buttonContainer}>
           {/*<Text style={styles.buttonText} onPress={() => this.handleClick()}>Sign Up</Text>*/}
-          <Text style={styles.buttonText} onPress={() => { this.props.signupUser(this.state.userInfo) }}>Sign Up</Text>
+          <Text style={styles.buttonText} onPress={() => { this.props.signupUser(this.state.userInfo); }}>Sign Up</Text>
         </TouchableOpacity>
-      </View>    
+      </View>
     );
   }
 }
@@ -139,26 +130,26 @@ class SignUp extends Component {
 //   }
 // }
 
-export default connect(null, {signupUser})(SignUp);
+export default connect(null, { signupUser })(SignUp);
 
 const styles = StyleSheet.create({
   container: {
-    padding: 90
+    padding: 90,
   },
   input: {
     height: 40,
     backgroundColor: 'rgba(225,225,255,0.3)',
     marginBottom: 10,
     color: '#FFF',
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
   buttonContainer: {
-    backgroundColor: "#2980b9",
-    paddingVertical: 15
+    backgroundColor: '#2980b9',
+    paddingVertical: 15,
   },
   buttonText: {
     textAlign: 'center',
     color: '#FFFFFF',
-    fontWeight: '700'
-  }
+    fontWeight: '700',
+  },
 });

@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Router, Scene, Modal } from "react-native-router-flux";
-import { Provider } from 'react-redux';
+import { Router, Scene, Modal, Actions } from 'react-native-router-flux';
+import { Provider, connect } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import Login from './Login';
 import Home from './Home';
 import Signup from './SignUp';
 import Profile from './Profile';
 import NavBar from './Navbar';
-import { Actions } from 'react-native-router-flux';
-import { connect } from 'react-redux';
 
 
 
 class App extends Component {
 
-    constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {};
     // this.renderDashboard = this.renderDashboard.bind(this);

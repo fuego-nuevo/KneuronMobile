@@ -20,7 +20,7 @@ export default class Login extends Component {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.logoContainer}>
-          <Image style={styles.logo} source={require('../components/images/loginpic.jpg')} />
+          <Image style={styles.logo} source={require('../../components/images/loginpic.jpg')} />
           <Text style={styles.title}>Login page bitchhess</Text>
         </View>
         <View style={styles.formContainer}>

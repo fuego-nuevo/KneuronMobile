@@ -5,11 +5,11 @@ import { Provider, connect } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import Login from './Login/Login';
 import Home from './Home';
-import Signup from './SignUp';
-import Profile from './Profile';
-import NavBar from './NavBar';
-import Lecture from './Lecture';
-import LiveLecture from './LiveLecture';
+import Signup from './Login/SignUp';
+import Profile from './Profile/Profile';
+import NavBar from './NavBar/NavBar';
+import Lecture from './Lectures/Lecture';
+import LiveLecture from './Live/LiveLecture';
 
 class App extends Component {
 

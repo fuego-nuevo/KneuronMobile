@@ -17,17 +17,17 @@ let cards = [
   {
       text: 'CS 101',
       name: 'One',
-      image: require('./images/loginpic.jpg'),
+      image: require('../images/loginpic.jpg'),
   },
   {
       text: 'CS 202',
       name: 'two',
-      image: require('./images/loginpic.jpg'),
+      image: require('../images/loginpic.jpg'),
   },
   {
       text: 'CS 302',
       name: 'two',
-      image: require('./images/loginpic.jpg'),
+      image: require('../images/loginpic.jpg'),
   }, 
 ];
 

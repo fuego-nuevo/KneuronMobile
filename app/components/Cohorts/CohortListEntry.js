@@ -61,7 +61,7 @@ const styles = {
     borderRadius: 5,
     borderBottomWidth: 0,
     shadowRadius: 2,
-    shadowOffset: {width: 0, height: 3},
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: .2,
   },
   text: {

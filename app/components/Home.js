@@ -6,8 +6,8 @@ import {
   AsyncStorage,
 } from 'react-native';
 import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Footer, FooterTab, Button } from 'native-base';
-import NavBar from './NavBar';
-import CohortList from './CohortList';
+import NavBar from './NavBar/NavBar';
+import CohortList from './Cohorts/CohortList';
 
 class Test extends Component {
   constructor(props) {

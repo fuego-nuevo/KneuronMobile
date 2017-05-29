@@ -7,7 +7,8 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Icon } from 'native-base';
-import { currentCohort } from '../actions/CurrentCohort';
+import { currentCohort } from '../../actions/CurrentCohort';
+
 class CohortListEntry extends Component {
   constructor(props) {
     super(props);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, Text } from 'react-native';
 import { connect } from 'react-redux';
-import LectureEntry from '../components/LectureEntry';
+import LectureEntry from './LectureEntry';
 
 
 const LectureList = (props) => {

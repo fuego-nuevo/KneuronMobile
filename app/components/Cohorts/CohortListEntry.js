@@ -28,27 +28,27 @@ class CohortListEntry extends Component {
     }
   }
 
-    render() {
-      console.log('this is the props in cohortlistentry', this.props)
-      const { container, text, time, title, join } = styles;
-        return (
-          <TouchableOpacity onPress={this.handleTap}>
-            <View style={container}>
-              <View style={join}>
-                <Icon name="apps" />
-              </View>
-              <View style={title}>
-                <Text style={text}>
-                  {this.props.cohort.cohort.subject}
-                </Text>
-              </View>
-              <View style={time}>
-                <Text style={text}>Class starts at {this.props.cohort.cohort.time}</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        );
-    }
+  render() {
+    console.log('this is the props in cohortlistentry', this.props)
+    const { container, text, time, title, join } = styles;
+    return (
+      <TouchableOpacity onPress={this.handleTap}>
+        <View style={container}>
+          <View style={join}>
+            <Icon name="apps" />
+          </View>
+          <View style={title}>
+            <Text style={text}>
+              {this.props.cohort.cohort.subject}
+            </Text>
+          </View>
+          <View style={time}>
+            <Text style={text}>Class starts at {this.props.cohort.cohort.time}</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  }
 }
 
 

@@ -2,12 +2,15 @@ import React from 'react';
 import { View, Text } from 'react-native'
 
 const LectureEntry = (props) => {
-  const { container } = styles;
+  const { container, title, text } = styles;
   console.log(props)
  return (
     <View style={container}>
+      <View style={title}>
+        <Text style={text}>{props.lecture.name}</Text>
+      </View>
       <View>
-        <Text>HIIIIII{props.lecture.name}</Text>
+        <Text>{props.lecture.date}</Text>
       </View>
     </View>
   )
@@ -34,12 +37,11 @@ const styles = {
   },
   text: {
     textAlign: 'center',
-    textColor: 'white',
   },
   title: {
     // flex: 1,
     position: 'absolute',
-    backgroundColor: 'lightgray',
+    backgroundColor: 'cornflowerblue',
     padding: 3,
     width: '100%',
     top: 0,

@@ -57,7 +57,7 @@ export default class CohortList extends Component {
     return (
       <ScrollView style={container}>
           {this.state.studentCohorts.map(cohort =>
-            (<CohortListEntry key={cohort.id} id={cohort.id} cohort={cohort}/>))}
+            (<CohortListEntry key={cohort.id} id={cohort.id} cohort={cohort} />))}
       </ScrollView>
     );
   }

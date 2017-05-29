@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -15,14 +15,16 @@ export default class CohortListEntry extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      live: false,
     };
 
     this.onLiveClassJoin = this.onLiveClassJoin.bind(this);
   }
 
   onLiveClassJoin() {
-    return Actions.livelecture();
+    if (this.state.live) {
+      return Actions.livelecture();
+    }
   }
 
   render() {

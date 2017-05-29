@@ -8,11 +8,8 @@ import Home from './Home';
 import Signup from './SignUp';
 import Profile from './Profile';
 import NavBar from './NavBar';
-<<<<<<< HEAD
 import Lecture from './Lecture';
-=======
 import LiveLecture from './LiveLecture';
->>>>>>> [Feat]
 
 class App extends Component {
 

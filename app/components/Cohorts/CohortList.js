@@ -19,6 +19,16 @@ render() {
           (<CohortListEntry key={cohort.id} id={cohort.id} cohort={cohort}/>))}
     </ScrollView>
 
+  render() {
+    console.log('this is all the student datata ', this.state.allStudentData);
+    console.log('this is all the students cohorts', this.state.studentCohorts);
+    const allData = this.state.allStudentData;
+    const { container } = styles;
+    return (
+      <ScrollView style={container}>
+          {this.state.studentCohorts.map(cohort =>
+            (<CohortListEntry key={cohort.id} id={cohort.id} cohort={cohort}/>))}
+      </ScrollView>
     );
   }
 }

@@ -13,6 +13,7 @@ class CohortListEntry extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      live: false,
     };
     this.handleTap = this.handleTap.bind(this);
   }
@@ -20,6 +21,12 @@ class CohortListEntry extends Component {
   async handleTap() {
     await this.props.currentCohort(this.props.cohort.cohort);
     Actions.lecture();
+  }
+
+  onLiveClassJoin() {
+    if (this.state.live) {
+      return Actions.livelecture();
+    }
   }
 
   render() {

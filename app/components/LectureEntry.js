@@ -10,7 +10,7 @@ const LectureEntry = (props) => {
         <Text style={text}>{props.lecture.name}</Text>
       </View>
       <View>
-        <Text>{props.lecture.date}</Text>
+        <Text style={text}>{props.lecture.date}</Text>
       </View>
     </View>
   )
@@ -37,6 +37,7 @@ const styles = {
   },
   text: {
     textAlign: 'center',
+    fontFamily: 'Futura-Medium',
   },
   title: {
     // flex: 1,

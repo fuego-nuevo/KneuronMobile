@@ -36,7 +36,7 @@ class CohortListEntry extends Component {
                 </Text>
               </View>
               <View style={time}>
-                <Text>Class starts at {this.props.cohort.cohort.time}</Text>
+                <Text style={text}>Class starts at {this.props.cohort.cohort.time}</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -65,10 +65,9 @@ const styles = {
   },
   text: {
     textAlign: 'center',
-    textColor: 'white',
+    fontFamily: 'Futura-Medium',
   },
   title: {
-    // flex: 1,
     position: 'absolute',
     backgroundColor: 'lightgray',
     padding: 3,
@@ -82,7 +81,6 @@ const styles = {
     position: 'absolute',
     bottom: 20,
     height: 10,
-    // backgroundColor: 'blue',
     width: '90%',
     borderTopWidth: 1,
     padding: 4,
@@ -93,14 +91,6 @@ const styles = {
     right: 5,
     top: 25,
   },
-  // lecbutton: {
-  //   position: 'absolute',
-  //   top: -50,
-  //   width: '10%',
-  //   // display: 'flex',
-  //   // alignSelf: 'flex-start',
-  //   // backgroundColor:'black',
-  // }
 }
 
 export default connect(null, { currentCohort })(CohortListEntry);

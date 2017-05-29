@@ -8,6 +8,7 @@ import Home from './Home';
 import Signup from './SignUp';
 import Profile from './Profile';
 import NavBar from './NavBar';
+import LiveLecture from './LiveLecture';
 
 class App extends Component {
 
@@ -26,6 +27,7 @@ class App extends Component {
           <Scene key="signup" component={Signup} title="Fucking Work you fuck" />
           <Scene key="profile" component={Profile} title="Profile Page" />
           <Scene key="navbar" component={NavBar} title="Nav" dispatch={dispatch} />
+          <Scene key="livelecture" component={LiveLecture} title="LiveLecture" />
         </Scene>
       </Router>
     );

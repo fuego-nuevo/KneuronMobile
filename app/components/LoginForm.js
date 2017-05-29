@@ -37,8 +37,8 @@ export default class Login extends Component {
   }
   handleClick() {
     console.log('this is the refs on line 26', this.refs);
-    const email = this.state.email;
-    const password = this.state.password;
+    const email = this.state.email.toLowerCase().replace(/\s/g, '');
+    const password = this.state.password.replace(/\s/g, '');
     const creds = { email: email, password: password };
     this.props.onLoginClick(creds);
   }

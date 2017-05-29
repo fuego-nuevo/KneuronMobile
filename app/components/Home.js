@@ -80,7 +80,7 @@ import {
   AsyncStorage,
 } from 'react-native';
 import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Footer, FooterTab, Button } from 'native-base';
-import navbar from './Navbar';
+import NavBar from './Navbar';
 import {Actions} from 'react-native-router-flux';
 import CohortList from './CohortList';
 
@@ -88,12 +88,23 @@ import CohortList from './CohortList';
 
 class Test extends Component {
   render() {
+    const { container } = styles;
         return (
-            <Container style={{padding: 80, borderColor: "black", borderStyle: "solid", borderWidth: 10}}>
+            <View style={container}>
               <CohortList />
-            </Container>
+              <NavBar />
+            </View>
         );
     }
+}
+
+
+const styles = {
+  container: {
+    position: 'relative',
+    flex: 1,
+    backgroundColor: '#dcdfe5',
+  }
 }
 export default Test;
                                 /*<Footer >

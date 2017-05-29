@@ -22,41 +22,37 @@ class Navbar extends Component {
 
 }
 
-
-
-
-    render() {
-      const { logoutUser } = this.props;
-      const { container } = styles;
-        return (
-            <Container>
-                <Footer style={container}>
-                    <FooterTab>
-                        <Button onPress={Actions.home}>
-                            <Text>Home</Text>
-                        </Button>
-                        <Button onPress={Actions.profile} >
-                            <Text>Profile</Text>
-                        </Button>
-                        <Button >
-                            <Text>Stats!</Text>
-                        </Button>
-                        <Button>
-                            <Text onPress={logoutUser}>Logout</Text>
-                        </Button>
-                    </FooterTab>
-                </Footer>
-            </Container>
-        );
-    }
+  render() {
+    const { logoutUser } = this.props;
+    return (
+      <View style={styles.container}>
+        <Footer >
+          <FooterTab>
+            <Button onPress={Actions.home}>
+              <Icon name='apps' />
+            </Button>
+            <Button>
+              <Icon name='camera' />
+            </Button>
+            <Button onPress={logoutUser}>
+              <Icon active name='navigate' />
+            </Button>
+            <Button onPress={Actions.profile} >
+              <Icon name='person' />
+            </Button>
+          </FooterTab>
+        </Footer>
+      </View>
+    );
+  }
 }
-
 
 const styles = {
   container: {
     position: 'absolute',
     bottom: 0,
-    backgroundColor: 'red',
+    left: 0,
+    right: 0,
   }
 }
 

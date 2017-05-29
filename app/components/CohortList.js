@@ -3,6 +3,7 @@ import {
   AppRegistry,
   StyleSheet,
   Image,
+  ScrollView,
   KeyboardAvoidingView,
   AsyncStorage,
 } from 'react-native';
@@ -55,39 +56,25 @@ render() {
   console.log('this is all the student datata ', this.state.allStudentData);
   console.log('this is all the students cohorts', this.state.studentCohorts)
   const allData = this.state.allStudentData;
-  // const { container } = styles;
+  const { container } = styles;
   return (
-    <Container>
-      <Text>list entry</Text>
+    <ScrollView style={container}>
         {this.state.studentCohorts.map(cohort =>
           (<CohortListEntry key={cohort.id} id={cohort.id} cohort={cohort}/>))}
-          <NavBar/>
-    </Container>
+    </ScrollView>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  backGround: {
-    backgroundColor: 'red',
-  },
+const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#3498db'
+    flexDirection: 'column',
+    width: '100%',
+    marginTop: '20%'
   },
-  logoContainer: {
-    alignItems: 'center',
-    flexGrow: 1,
-    justifyContent: 'center'
-  },
-  logo: {
-    width: 100,
-    height: 100
-  },
-  title: {
-    color: '#FFF',
-    marginTop: 10,
-    width: 160,
-    textAlign: 'center'
+  navBar: {
+    position: 'fixed',
+    bottom: 0,
   }
-})
+};

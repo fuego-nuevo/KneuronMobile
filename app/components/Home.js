@@ -54,4 +54,3 @@ const styles = {
 }
 
 export default connect(null, { updateProfile })(Home);
-

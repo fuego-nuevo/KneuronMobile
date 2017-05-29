@@ -49,6 +49,16 @@ export default class LiveLecture extends Component {
     this.setState({ selectedTopic: event.target.value });
   }
 
+  handleQuestionSubmit() {
+    const { studentQuestion } = this.props;
+    socket.emit('student-question', { studentQuestion });
+    axios.post('/api/studentQuestions', { question: this.state.question, topic_id: topic.id, student_id: id });
+  }
+
+  // sendStudentQuestion(){
+    // axios.post('/api/')
+  // }
+
   render() {
     const { topics } = this.props;
     return (

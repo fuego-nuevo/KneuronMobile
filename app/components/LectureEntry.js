@@ -41,23 +41,13 @@ const styles = {
   title: {
     // flex: 1,
     position: 'absolute',
-    backgroundColor: 'cornflowerblue',
+    backgroundColor: '#a3b2cc',
     padding: 3,
     width: '100%',
     top: 0,
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
     height: '15%',
-  },
-  time: {
-    position: 'absolute',
-    bottom: 20,
-    height: 10,
-    // backgroundColor: 'blue',
-    width: '90%',
-    borderTopWidth: 1,
-    padding: 4,
-    borderColor: 'lightgray',
   },
 }
 export default LectureEntry;

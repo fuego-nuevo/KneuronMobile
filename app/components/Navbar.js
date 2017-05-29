@@ -45,6 +45,9 @@ const styles = {
   },
   button: {
     backgroundColor: 'black',
+    borderRightWidth: 0.6,
+    borderColor: 'lightgray',
+    borderRadius: 0,
   }
 }
 

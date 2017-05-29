@@ -28,6 +28,7 @@ class App extends Component {
           <Scene key="signup" component={Signup} title="Fucking Work you fuck" />
           <Scene key="profile" component={Profile} title="Profile Page" />
           <Scene key="navbar" component={NavBar} title="Nav" dispatch={dispatch} />
+          <Scene key="lecture" component={Lecture} title="lecture" />
           <Scene key="livelecture" component={LiveLecture} title="LiveLecture" />
         </Scene>
       </Router>

@@ -12,7 +12,7 @@ import {
   AsyncStorage,
 } from 'react-native';
 import { Container, Content, Footer, FooterTab, Button, Icon, Badge } from 'native-base';
-import { logoutUser } from '../../actions/login';
+import { logoutUser } from '../actions/login';
 
 class NavBar extends Component {
   constructor(props) {
@@ -23,26 +23,34 @@ class NavBar extends Component {
   render() {
     const { logoutUser } = this.props;
     return (
-      <Container>
+      <View style={styles.container}>
         <Footer >
           <FooterTab>
-            <Button onPress={Actions.test}>
-              <Text>Home</Text>
-            </Button>
-            <Button onPress={Actions.profile} >
-              <Text>Profile</Text>
-            </Button>
-            <Button >
-              <Text>Stats!</Text>
+            <Button onPress={Actions.home}>
+              <Icon name="apps" />
             </Button>
             <Button>
-              <Text onPress={logoutUser}>Logout</Text>
+              <Icon name="camera" />
+            </Button>
+            <Button onPress={logoutUser}>
+              <Icon active name="navigate" />
+            </Button>
+            <Button onPress={Actions.profile} >
+              <Icon name="person" />
             </Button>
           </FooterTab>
         </Footer>
-      </Container>
+      </View>
     );
   }
 }
+const styles = {
+  container: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+};
 
 export default connect(null, { logoutUser })(NavBar);

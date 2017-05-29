@@ -25,7 +25,7 @@ export default class Login extends Component {
   }
 
   emailChange(text) {
-    console.log('this is the text line 30',text)
+    console.log('this is the text line 30', text);
     this.setState({
       email: text,
     });
@@ -58,7 +58,7 @@ export default class Login extends Component {
           type="password"
           refs="password"
           placeholder="Enter Your Password fool"
-          onChangeText={(text) => this.passwordChange(text)}
+          onChangeText={text => this.passwordChange(text)}
           secureTextEntry
           style={styles.input}
         />

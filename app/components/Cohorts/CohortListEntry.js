@@ -28,6 +28,12 @@ class CohortListEntry extends Component {
     }
   }
 
+  onLiveClassJoin() {
+    if (this.state.live) {
+      return Actions.livelecture();
+    }
+  }
+
   render() {
     console.log('this is the props in cohortlistentry', this.props)
     const { container, text, time, title, join } = styles;

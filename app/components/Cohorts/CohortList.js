@@ -10,15 +10,14 @@ class CohortList extends Component {
     this.state = {};
   }
 
-render() {
-  const { container } = styles;
-  console.log('these are props line 15 ', this.props);
-  return (
-    <ScrollView style={container}>
+  render() {
+    const { container } = styles;
+    console.log('these are props line 15 ', this.props);
+    return (
+      <ScrollView style={container}>
         {this.props.cohorts.map(cohort =>
           (<CohortListEntry key={cohort.id} id={cohort.id} cohort={cohort}/>))}
-    </ScrollView>
-
+      </ScrollView>
     );
   }
 }

@@ -4,13 +4,13 @@ import NavBar from '../NavBar/NavBar';
 import LectureList from './LectureList';
 
 class LectureHome extends Component {
-  render(){
+  render() {
     const { container } = styles;
     return (
-    <View style={container}>
-      <LectureList />
-      <NavBar />
-    </View>
+      <View style={container}>
+        <LectureList />
+        <NavBar />
+      </View>
     );
   }
 }

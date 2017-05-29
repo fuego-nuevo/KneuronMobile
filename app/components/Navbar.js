@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  KeyboardAvoidingView,
-  AsyncStorage,
-} from 'react-native';
+import { View } from 'react-native';
 import { Container, Content, Footer, FooterTab, Button, Icon, Badge } from 'native-base';
 import { logoutUser } from '../actions/login';
 class NavBar extends Component {

@@ -1,44 +1,45 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import {
-  AppRegistry,
-  StyleSheet,
+  TouchableOpacity,
   Text,
   View,
-  Image,
-  KeyboardAvoidingView,
-  ScrollView
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Icon } from 'native-base';
-export default class CohortListEntry extends Component {
+import { currentCohort } from '../actions/CurrentCohort';
+class CohortListEntry extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
     };
+    this.handleTap = this.handleTap.bind(this);
   }
 
-  // onClassJoin() {
-  //
-  // }
+  async handleTap() {
+    await this.props.currentCohort(this.props.cohort.cohort);
+    Actions.lecture();
+  }
 
     render() {
       console.log('this is the props in cohortlistentry', this.props)
       const { container, text, time, title, join } = styles;
         return (
-          <View style={container}>
-            <View style={join}>
-              <Icon name="apps" />
+          <TouchableOpacity onPress={this.handleTap}>
+            <View style={container}>
+              <View style={join}>
+                <Icon name="apps" />
+              </View>
+              <View style={title}>
+                <Text style={text}>
+                  {this.props.cohort.cohort.subject}
+                </Text>
+              </View>
+              <View style={time}>
+                <Text>Class starts at {this.props.cohort.cohort.time}</Text>
+              </View>
             </View>
-            <View style={title}>
-              <Text style={text}>
-                {this.props.cohort.subject}
-              </Text>
-            </View>
-            <View style={time}>
-              <Text>Class starts at {this.props.cohort.time}</Text>
-            </View>
-        </View>
+          </TouchableOpacity>
         );
     }
 }
@@ -91,5 +92,15 @@ const styles = {
     position: 'absolute',
     right: 5,
     top: 25,
-  }
+  },
+  // lecbutton: {
+  //   position: 'absolute',
+  //   top: -50,
+  //   width: '10%',
+  //   // display: 'flex',
+  //   // alignSelf: 'flex-start',
+  //   // backgroundColor:'black',
+  // }
 }
+
+export default connect(null, { currentCohort })(CohortListEntry);

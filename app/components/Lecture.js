@@ -5,12 +5,21 @@ import LectureList from '../components/LectureList';
 
 class LectureHome extends Component {
   render(){
+    const { container } = styles;
     return (
-    <View>
+    <View style={container}>
       <LectureList />
       <NavBar />
     </View>
     );
+  }
+}
+
+styles = {
+  container: {
+    flex: 1,
+    position: 'relative',
+    backgroundColor: '#dcdfe5',
   }
 }
 

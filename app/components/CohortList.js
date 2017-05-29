@@ -29,10 +29,6 @@ const styles = {
     width: '100%',
     marginTop: '20%'
   },
-  navBar: {
-    position: 'fixed',
-    bottom: 0,
-  }
 };
 
 

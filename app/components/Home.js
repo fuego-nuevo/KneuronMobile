@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 import { updateProfile } from '../actions/UpdateProfile';
 import axios from 'axios';
 import {
-  AppRegistry,
-  StyleSheet,
-  Image,
-  KeyboardAvoidingView,
   AsyncStorage,
 } from 'react-native';
 import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Footer, FooterTab, Button } from 'native-base';
@@ -34,8 +30,6 @@ class Test extends Component {
             console.log('there was an error grabbing student info, ', err);
           })
       })
-
-
   }
 
   render() {

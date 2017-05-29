@@ -8,7 +8,8 @@ import {
   KeyboardAvoidingView,
   ScrollView
 } from 'react-native';
-import { Container, Content, List, ListItem, Thumbnail, Body, Left, Right } from 'native-base';
+import { Actions } from 'react-native-router-flux';
+import { Icon } from 'native-base';
 export default class CohortListEntry extends Component {
   constructor(props) {
     super(props);
@@ -16,11 +17,19 @@ export default class CohortListEntry extends Component {
 
     };
   }
+
+  onClassJoin() {
+
+  }
+
     render() {
       console.log('this is the props in cohortlistentry', this.props)
-      const { container, text, time, title } = styles;
+      const { container, text, time, title, join } = styles;
         return (
           <View style={container}>
+            <View style={join}>
+              <Icon name="apps" />
+            </View>
             <View style={title}>
               <Text style={text}>
                 {this.props.cohort.subject}
@@ -43,7 +52,7 @@ const styles = {
     marginBottom: 25,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 150,
+    height: 175,
     width: '90%',
     marginLeft: '5%',
     borderColor: '#ddd',
@@ -77,5 +86,10 @@ const styles = {
     borderTopWidth: 1,
     padding: 4,
     borderColor: 'lightgray',
+  },
+  join: {
+    position: 'absolute',
+    right: 5,
+    top: 25,
   }
 }

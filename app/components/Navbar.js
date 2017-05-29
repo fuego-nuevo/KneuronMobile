@@ -51,3 +51,5 @@ const styles = {
     right: 0,
   }
 }
+
+export default NavBar;

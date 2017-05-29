@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { Container, Content, Footer, FooterTab, Button, Icon, Badge } from 'native-base';
 import { logoutUser } from '../actions/login';
+
 class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -22,32 +23,26 @@ class NavBar extends Component {
   render() {
     const { logoutUser } = this.props;
     return (
-      <View style={styles.container}>
+      <Container>
         <Footer >
           <FooterTab>
-            <Button onPress={Actions.home}>
-              <Icon name="apps" />
-            </Button>
-            <Button>
-              <Icon name="camera" />
-            </Button>
-            <Button onPress={logoutUser}>
-              <Icon active name="navigate" />
+            <Button onPress={Actions.test}>
+              <Text>Home</Text>
             </Button>
             <Button onPress={Actions.profile} >
-              <Icon name="person" />
+              <Text>Profile</Text>
+            </Button>
+            <Button >
+              <Text>Stats!</Text>
+            </Button>
+            <Button>
+              <Text onPress={logoutUser}>Logout</Text>
             </Button>
           </FooterTab>
         </Footer>
-      </View>
+      </Container>
     );
   }
 }
-const styles = {
-  container: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-  }
-}
+
+export default connect(null, { logoutUser })(NavBar);

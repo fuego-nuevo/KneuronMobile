@@ -10,7 +10,7 @@ import {
 
 // import Navigator from 'react-native-deprecated-custom-components';
 import { Container, Content, Footer, FooterTab, Button, Icon, Badge } from 'native-base';
-import Navbar from './Navbar';
+import Navbar from './NavBar';
 
 
 export default class Profile extends Component {

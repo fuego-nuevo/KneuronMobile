@@ -23,13 +23,13 @@ class App extends Component {
     return (
       <Router>
         <Scene key="root" >
-          <Scene key="login" component={Login} title="Login Bitches" isAuthenticated={isAuthenticated} errorMessage={errorMessage} dispatch={dispatch} initial />
-          <Scene key="home" component={Home} title="Fucking Work" />
-          <Scene key="signup" component={Signup} title="Fucking Work you fuck" />
+          <Scene key="login" component={Login} title="Login" isAuthenticated={isAuthenticated} errorMessage={errorMessage} dispatch={dispatch} initial />
+          <Scene key="home" component={Home} title="Kneuron" />
+          <Scene key="signup" component={Signup} title="Sign Up" />
           <Scene key="profile" component={Profile} title="Profile Page" />
           <Scene key="navbar" component={NavBar} title="Nav" dispatch={dispatch} />
-          <Scene key="lecture" component={Lecture} title="lecture" />
-          <Scene key="livelecture" component={LiveLecture} title="LiveLecture" />
+          <Scene key="lecture" component={Lecture} title="Lecture" />
+          <Scene key="livelecture" component={LiveLecture} title="Live Lecture" />
         </Scene>
       </Router>
     );

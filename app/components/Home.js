@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Footer, FooterTab, Button } from 'native-base';
 import NavBar from './NavBar';
-import {Actions} from 'react-native-router-flux';
 import CohortList from './CohortList';
 
 export default class Test extends Component {

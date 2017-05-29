@@ -3,12 +3,13 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Router, Scene, Modal, Actions } from 'react-native-router-flux';
 import { Provider, connect } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import Login from './Login';
+import Login from './Login/Login';
 import Home from './Home';
-import Signup from './SignUp';
-import Profile from './Profile';
-import NavBar from './NavBar';
-import Lecture from './Lecture';
+import Signup from './Login/SignUp';
+import Profile from './Profile/Profile';
+import NavBar from './NavBar/NavBar';
+import Lecture from './Lectures/Lecture';
+import LiveLecture from './Live/LiveLecture';
 
 class App extends Component {
 
@@ -21,13 +22,14 @@ class App extends Component {
     const { dispatch, errorMessage, isAuthenticated } = this.props;
     return (
       <Router>
-        <Scene key='root' >          
-          <Scene key='login' component={Login} title='Login Bitches' isAuthenticated={isAuthenticated} errorMessage={errorMessage} dispatch={dispatch} initial/> 
-          <Scene key='home' component={Home} title='Home'  />
-          <Scene key='signup' component={Signup} title='Fucking Work you fuck'  />
-          <Scene key='profile' component={Profile} title='Profile Page'  />
-          <Scene key='navbar' component={NavBar} title='Nav' dispatch={dispatch}/>
+        <Scene key="root" >
+          <Scene key="login" component={Login} title="Login Bitches" isAuthenticated={isAuthenticated} errorMessage={errorMessage} dispatch={dispatch} initial />
+          <Scene key="home" component={Home} title="Fucking Work" />
+          <Scene key="signup" component={Signup} title="Fucking Work you fuck" />
+          <Scene key="profile" component={Profile} title="Profile Page" />
+          <Scene key="navbar" component={NavBar} title="Nav" dispatch={dispatch} />
           <Scene key="lecture" component={Lecture} title="lecture" />
+          <Scene key="livelecture" component={LiveLecture} title="LiveLecture" />
         </Scene>
       </Router>
     );

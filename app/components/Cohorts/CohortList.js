@@ -8,26 +8,26 @@ import {
   AsyncStorage,
 } from 'react-native';
 import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Footer, FooterTab, Button } from 'native-base';
-import NavBar from './NavBar';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
+import NavBar from '../NavBar/NavBar';
 import CohortListEntry from './CohortListEntry';
 
 let cards = [
   {
       text: 'CS 101',
       name: 'One',
-      image: require('./images/loginpic.jpg'),
+      image: require('../images/loginpic.jpg'),
   },
   {
       text: 'CS 202',
       name: 'two',
-      image: require('./images/loginpic.jpg'),
+      image: require('../images/loginpic.jpg'),
   },
   {
       text: 'CS 302',
       name: 'two',
-      image: require('./images/loginpic.jpg'),
+      image: require('../images/loginpic.jpg'),
   }, 
 ];
 
@@ -49,16 +49,16 @@ export default class CohortList extends Component {
     });
   }
 
-render() {
-  console.log('this is all the student datata ', this.state.allStudentData);
-  console.log('this is all the students cohorts', this.state.studentCohorts)
-  const allData = this.state.allStudentData;
-  const { container } = styles;
-  return (
-    <ScrollView style={container}>
-        {this.state.studentCohorts.map(cohort =>
-          (<CohortListEntry key={cohort.id} id={cohort.id} cohort={cohort}/>))}
-    </ScrollView>
+  render() {
+    console.log('this is all the student datata ', this.state.allStudentData);
+    console.log('this is all the students cohorts', this.state.studentCohorts)
+    const allData = this.state.allStudentData;
+    const { container } = styles;
+    return (
+      <ScrollView style={container}>
+          {this.state.studentCohorts.map(cohort =>
+            (<CohortListEntry key={cohort.id} id={cohort.id} cohort={cohort}/>))}
+      </ScrollView>
     );
   }
 }
@@ -68,10 +68,10 @@ const styles = {
     flex: 1,
     flexDirection: 'column',
     width: '100%',
-    marginTop: '20%'
+    marginTop: '20%',
   },
   navBar: {
     position: 'fixed',
     bottom: 0,
-  }
+  },
 };

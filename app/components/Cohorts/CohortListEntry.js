@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Icon } from 'native-base';
+
 export default class CohortListEntry extends Component {
   constructor(props) {
     super(props);
@@ -91,5 +92,5 @@ const styles = {
     position: 'absolute',
     right: 5,
     top: 25,
-  }
-}
+  },
+};

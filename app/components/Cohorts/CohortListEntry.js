@@ -104,6 +104,6 @@ const styles = {
     right: 5,
     top: 25,
   },
-}
+};
 
 export default connect(null, { currentCohort })(CohortListEntry);

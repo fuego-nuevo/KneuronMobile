@@ -15,12 +15,12 @@ class LectureHome extends Component {
   }
 }
 
-styles = {
+const styles = {
   container: {
     flex: 1,
     position: 'relative',
     backgroundColor: '#dcdfe5',
-  }
-}
+  },
+};
 
 export default LectureHome;

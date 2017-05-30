@@ -19,12 +19,12 @@ const styles = {
     flex: 1,
     flexDirection: 'column',
     width: '100%',
-    marginTop: '20%'
+    marginTop: '20%',
   },
 };
 
 const mapStateToProps = state => ({
   lectures: state.currentCohort.lectures,
-})
+});
 
 export default connect(mapStateToProps)(LectureList);

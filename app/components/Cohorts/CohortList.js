@@ -16,7 +16,7 @@ class CohortList extends Component {
     return (
       <ScrollView style={container}>
         {this.props.cohorts.map(cohort =>
-          (<CohortListEntry key={cohort.id} id={cohort.id} cohort={cohort}/>))}
+          (<CohortListEntry key={cohort.id} id={cohort.id} cohort={cohort} />))}
       </ScrollView>
     );
   }
@@ -27,7 +27,7 @@ const styles = {
     flex: 1,
     flexDirection: 'column',
     width: '100%',
-    marginTop: '20%'
+    marginTop: '20%',
   },
 };
 

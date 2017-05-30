@@ -1,5 +1,5 @@
 const CurrentCohortReducer = (state = {}, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'CURRENT_COHORT' :
       return action.cohort;
     default :

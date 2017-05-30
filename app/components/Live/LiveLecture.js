@@ -12,8 +12,9 @@ import io from 'socket.io-client';
 import axios from 'axios';
 
 const socket = io('http://localhost:5000');
+// const socket = io();
 
-export default class LiveLecture extends Component {
+class LiveLecture extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +24,7 @@ export default class LiveLecture extends Component {
 
     this.handleStudentQuestionSubmit = this.handleStudentQuestionSubmit.bind(this);
     this.handleStudentQuestionInputChange = this.handleStudentQuestionInputChange.bind(this);
-    this.handleTopicClick = this.handleTopicClick.bind(this);
+    this.handleTopicPress = this.handleTopicPress.bind(this);
   }
 
   componentDidMount() {
@@ -39,9 +40,12 @@ export default class LiveLecture extends Component {
     return axios.post('http://localhost:8080/api/studentQuestions', {
       question: this.state.question,
       topic_id: this.state.selectedTopic,
-      student_id: this.props.id,
+      student_id: this.props.profile.id,
     })
-      .then(data => console.log(data))
+      .then((data) => {
+        console.log(data);
+        this.setState({ question: '' });
+      })
       .catch(err => console.log(err));
   }
 
@@ -49,15 +53,16 @@ export default class LiveLecture extends Component {
     this.setState({ question: text });
   }
 
-  handleTopicClick(text) {
-    this.setState({ selectedTopic: text });
+  handleTopicPress(id) {
+    this.setState({ selectedTopic: id });
   }
 
   render() {
     const { topics } = this.props;
     return (
       <View style={{ padding: 100 }}>
-        {/*{topics.map(topic => <h1>{topic.name} onPress={this.handleTopicClick}</h1>)}*/}
+        {topics.map(topic =>
+          <Text key={topic.id} onPress={() => this.handleTopicPress(topic.id)}>{topic.name}</Text>)}
         <TextInput style={styles.input} type="text" placeholder="Ask a Question" onChangeText={this.handleStudentQuestionInputChange} />
         <TouchableOpacity style={styles.buttonContainer}>
           <Text style={styles.buttonText} onPress={this.handleStudentQuestionSubmit} > Ask! </Text>
@@ -89,7 +94,9 @@ const styles = StyleSheet.create({
   },
 });
 
-// const mapStateToProps = state => ({
+const mapStateToProps = state => ({
+  topics: state.currentLecture,
+  profile: state.profile,
+});
 
-// })
-
+export default connect(mapStateToProps)(LiveLecture);

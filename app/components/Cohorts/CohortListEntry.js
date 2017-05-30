@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   TouchableOpacity,
@@ -51,6 +51,7 @@ class CohortListEntry extends Component {
     );
   }
 }
+
 const styles = {
   container: {
     position: 'relative',

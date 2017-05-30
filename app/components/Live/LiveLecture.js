@@ -3,15 +3,18 @@ import {
   View,
   Form,
   TextInput,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
 import axios from 'axios';
 
-const socket = io('http://localhost:8081');
+const socket = io('http://localhost:5000');
+// const socket = io();
 
-// export default class LiveLecture extends Component {
-export default class LiveLecture extends Component {
+class LiveLecture extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,11 +22,9 @@ export default class LiveLecture extends Component {
       selectedTopic: null,
     };
 
-    // this.socket = io('http://localhost:8081');
-
     this.handleStudentQuestionSubmit = this.handleStudentQuestionSubmit.bind(this);
     this.handleStudentQuestionInputChange = this.handleStudentQuestionInputChange.bind(this);
-    this.handleTopicClick = this.handleTopicClick.bind(this);
+    this.handleTopicPress = this.handleTopicPress.bind(this);
   }
 
   componentDidMount() {
@@ -36,43 +37,66 @@ export default class LiveLecture extends Component {
   handleStudentQuestionSubmit() {
     const { studentQuestion } = this.props;
     socket.emit('student-question', { studentQuestion });
-    axios.post('/api/studentQuestions', { question: this.state.question, topic_id: topic.id, student_id: id });
+    return axios.post('http://localhost:8080/api/studentQuestions', {
+      question: this.state.question,
+      topic_id: this.state.selectedTopic,
+      student_id: this.props.profile.id,
+    })
+      .then((data) => {
+        console.log(data);
+        this.setState({ question: '' });
+      })
+      .catch(err => console.log(err));
   }
 
-  handleStudentQuestionInputChange(event) {
-    event.preventDefault();
-    this.setState({ question: event.target.value });
+  handleStudentQuestionInputChange(text) {
+    this.setState({ question: text });
   }
 
-  handleTopicClick(event) {
-    event.preventDefault();
-    this.setState({ selectedTopic: event.target.value });
+  handleTopicPress(id) {
+    this.setState({ selectedTopic: id });
   }
-
-  handleQuestionSubmit() {
-    const { studentQuestion } = this.props;
-    socket.emit('student-question', { studentQuestion });
-    axios.post('/api/studentQuestions', { question: this.state.question, topic_id: topic.id, student_id: id });
-  }
-
-  // sendStudentQuestion(){
-    // axios.post('/api/')
-  // }
 
   render() {
     const { topics } = this.props;
     return (
-      <View>
-        {topics.map(topic => <h1>{topic.name} onPress={this.handleTopicClick}</h1>)}
-        <Form onSubmitEditing={this.handleStudentQuestionSubmit}>
-          <TextInput type="text" placeholder="Ask a Question" onChangeText={this.handleStudentQuestionInputChange} />
-        </Form>
+      <View style={{ padding: 100 }}>
+        {topics.map(topic =>
+          <Text key={topic.id} onPress={() => this.handleTopicPress(topic.id)}>{topic.name}</Text>)}
+        <TextInput style={styles.input} type="text" placeholder="Ask a Question" onChangeText={this.handleStudentQuestionInputChange} />
+        <TouchableOpacity style={styles.buttonContainer}>
+          <Text style={styles.buttonText} onPress={this.handleStudentQuestionSubmit} > Ask! </Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
-// const mapStateToProps = state => ({
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+  },
+  input: {
+    height: 40,
+    backgroundColor: 'rgba(225,225,255,0.3)',
+    marginBottom: 10,
+    color: '#D3D3D3',
+    paddingHorizontal: 10,
+  },
+  buttonContainer: {
+    backgroundColor: '#2980b9',
+    paddingVertical: 15,
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: '#FFFFFF',
+    fontWeight: '700',
+  },
+});
 
-// })
+const mapStateToProps = state => ({
+  topics: state.currentLecture,
+  profile: state.profile,
+});
 
+export default connect(mapStateToProps)(LiveLecture);

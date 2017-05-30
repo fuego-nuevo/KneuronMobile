@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateProfile } from '../actions/UpdateProfile';
 import axios from 'axios';
 import {
   AsyncStorage,
 } from 'react-native';
 import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Footer, FooterTab, Button } from 'native-base';
+import { updateProfile } from '../actions/UpdateProfile';
 import NavBar from './NavBar/NavBar';
 import CohortList from './Cohorts/CohortList';
 
@@ -50,8 +50,7 @@ const styles = {
     position: 'relative',
     flex: 1,
     backgroundColor: '#dcdfe5',
-  }
-}
+  },
+};
 
 export default connect(null, { updateProfile })(Home);
-

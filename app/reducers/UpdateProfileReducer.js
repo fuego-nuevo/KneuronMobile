@@ -1,5 +1,5 @@
 const UpdateProfileReducer = (state = {}, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'UPDATE_PROFILE' :
       return action.profile;
     default :

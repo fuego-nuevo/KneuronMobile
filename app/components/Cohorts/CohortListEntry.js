@@ -21,11 +21,6 @@ class CohortListEntry extends Component {
   async handleTap() {
     await this.props.currentCohort(this.props.cohort.cohort);
     Actions.lecture();
-
-  onLiveClassJoin() {
-    if (this.state.live) {
-      return Actions.livelecture();
-    }
   }
 
   onLiveClassJoin() {
@@ -56,8 +51,6 @@ class CohortListEntry extends Component {
     );
   }
 }
-
-
 const styles = {
   container: {
     position: 'relative',

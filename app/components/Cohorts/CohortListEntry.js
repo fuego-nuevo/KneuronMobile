@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   TouchableOpacity,
@@ -13,6 +13,7 @@ class CohortListEntry extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      live: false,
     };
     this.handleTap = this.handleTap.bind(this);
   }
@@ -22,29 +23,34 @@ class CohortListEntry extends Component {
     Actions.lecture();
   }
 
-    render() {
-      console.log('this is the props in cohortlistentry', this.props)
-      const { container, text, time, title, join } = styles;
-        return (
-          <TouchableOpacity onPress={this.handleTap}>
-            <View style={container}>
-              <View style={join}>
-                <Icon name="apps" />
-              </View>
-              <View style={title}>
-                <Text style={text}>
-                  {this.props.cohort.cohort.subject}
-                </Text>
-              </View>
-              <View style={time}>
-                <Text style={text}>Class starts at {this.props.cohort.cohort.time}</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        );
+  onLiveClassJoin() {
+    if (this.state.live) {
+      return Actions.livelecture();
     }
-}
+  }
 
+  render() {
+    console.log('this is the props in cohortlistentry', this.props)
+    const { container, text, time, title, join } = styles;
+    return (
+      <TouchableOpacity onPress={this.handleTap}>
+        <View style={container}>
+          <View style={join}>
+            <Icon name="apps" />
+          </View>
+          <View style={title}>
+            <Text style={text}>
+              {this.props.cohort.cohort.subject}
+            </Text>
+          </View>
+          <View style={time}>
+            <Text style={text}>Class starts at {this.props.cohort.cohort.time}</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+}
 
 const styles = {
   container: {
@@ -61,7 +67,7 @@ const styles = {
     borderRadius: 5,
     borderBottomWidth: 0,
     shadowRadius: 2,
-    shadowOffset: {width: 0, height: 3},
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: .2,
   },
   text: {
@@ -92,6 +98,6 @@ const styles = {
     right: 5,
     top: 25,
   },
-}
+};
 
 export default connect(null, { currentCohort })(CohortListEntry);

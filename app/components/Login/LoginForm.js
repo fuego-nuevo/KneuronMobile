@@ -30,12 +30,14 @@ export default class Login extends Component {
       email: text,
     });
   }
+
   passwordChange(text) {
     this.setState({
       password: text,
     });
   }
-  handleClick() {
+
+  handleLoginClick() {
     console.log('this is the refs on line 26', this.refs);
     const email = this.state.email.toLowerCase().replace(/\s/g, '');
     const password = this.state.password.replace(/\s/g, '');
@@ -63,7 +65,7 @@ export default class Login extends Component {
           style={styles.input}
         />
         <TouchableOpacity style={styles.buttonContainer}>
-          <Text style={styles.buttonText} onPress={() => this.handleClick()}>Login</Text>
+          <Text style={styles.buttonText} onPress={() => this.handleLoginClick()}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonContainer}>
           <Text style={styles.buttonText} onPress={Actions.signup}>SignUp</Text>

@@ -10,6 +10,7 @@ import Profile from './Profile/Profile';
 import NavBar from './NavBar/NavBar';
 import Lecture from './Lectures/Lecture';
 import LiveLecture from './Live/LiveLecture';
+import EditProfile from './Profile/EditProfile';
 
 class App extends Component {
 
@@ -30,6 +31,7 @@ class App extends Component {
           <Scene key="navbar" component={NavBar} title="Nav" dispatch={dispatch} />
           <Scene key="lecture" component={Lecture} title="lecture" />
           <Scene key="livelecture" component={LiveLecture} title="LiveLecture" />
+          <Scene key="editprofile" component={EditProfile} title="EditProfile" />
         </Scene>
       </Router>
     );

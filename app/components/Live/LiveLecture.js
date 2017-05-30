@@ -28,6 +28,7 @@ class LiveLecture extends Component {
   }
 
   componentDidMount() {
+    socket.emit('join', { id: this.props.teacher.teacher_id });
     socket.on('live-lecture');
     socket.on('pop-quiz', () => {
       console.log('Quiz received');
@@ -36,7 +37,7 @@ class LiveLecture extends Component {
 
   handleStudentQuestionSubmit() {
     const { studentQuestion } = this.props;
-    socket.emit('student-question', { studentQuestion });
+    socket.emit('student-question', { topicId: this.state.selectedTopic, name: `${this.props.profile.fName} ${this.props.profile.lName}`, question: this.state.question, teacher: this.props.teacher.teacher_id });
     return axios.post('http://localhost:8080/api/studentQuestions', {
       question: this.state.question,
       topic_id: this.state.selectedTopic,
@@ -59,6 +60,7 @@ class LiveLecture extends Component {
 
   render() {
     const { topics } = this.props;
+    console.log('this.props', this.props)
     return (
       <View style={{ padding: 100 }}>
         {topics.map(topic =>
@@ -97,6 +99,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({
   topics: state.currentLecture,
   profile: state.profile,
+  teacher: state.currentCohort,
 });
 
 export default connect(mapStateToProps)(LiveLecture);

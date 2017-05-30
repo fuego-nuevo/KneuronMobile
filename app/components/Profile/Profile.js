@@ -27,30 +27,41 @@ export default class Profile extends Component {
     return (
       <View >
         <Text style={{ padding: 40, marginTop: 100 }}>Profile</Text>
-        <Navbar />
+        
+          <Navbar />
+        
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#3498db',
+//   },
+//   logoContainer: {
+//     alignItems: 'center',
+//     flexGrow: 1,
+//     justifyContent: 'center',
+//   },
+//   logo: {
+//     width: 100,
+//     height: 100,
+//   },
+//   title: {
+//     color: '#FFF',
+//     marginTop: 10,
+//     width: 160,
+//     textAlign: 'center',
+//   },
+// });
+
+const styles = {
   container: {
-    flex: 1,
-    backgroundColor: '#3498db',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
-  logoContainer: {
-    alignItems: 'center',
-    flexGrow: 1,
-    justifyContent: 'center',
-  },
-  logo: {
-    width: 100,
-    height: 100,
-  },
-  title: {
-    color: '#FFF',
-    marginTop: 10,
-    width: 160,
-    textAlign: 'center',
-  },
-});
+};

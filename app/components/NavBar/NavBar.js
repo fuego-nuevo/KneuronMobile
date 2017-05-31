@@ -21,7 +21,7 @@ class NavBar extends Component {
             <Button style={button} onPress={Actions.home}>
               <Icon name="apps" />
             </Button>
-            <Button style={button}>
+            <Button style={button} onPress={Actions.cameraroute}>
               <Icon name="camera" />
             </Button>
             <Button style={button} onPress={logoutUser}>

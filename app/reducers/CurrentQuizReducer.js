@@ -3,7 +3,7 @@ const CurrentQuizReducer = (state = {}, action) => {
     case 'CURRENT_QUIZ' :
       return action.quizzes;
     default :
-      return { ...state };
+      return state;
   }
 };
 

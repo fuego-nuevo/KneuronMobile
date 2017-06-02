@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import {
   View,
-  Form,
   TextInput,
   Text,
   TouchableOpacity,
-  StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import io from 'socket.io-client';
 import axios from 'axios';
+import { currentQuiz } from '../../actions/CurrentQuiz';
 
 const socket = io('http://localhost:5000');
 // const socket = io();
@@ -25,23 +25,36 @@ class LiveLecture extends Component {
     this.handleStudentQuestionSubmit = this.handleStudentQuestionSubmit.bind(this);
     this.handleStudentQuestionInputChange = this.handleStudentQuestionInputChange.bind(this);
     this.handleTopicPress = this.handleTopicPress.bind(this);
+    this.handlePopQuiz = this.handlePopQuiz.bind(this);
   }
 
   componentDidMount() {
-    socket.emit('join', { id: this.props.teacher.teacher_id });
+    const { teacher, currentQuiz } = this.props;
+    socket.emit('join', { id: teacher.teacher_id });
     socket.on('live-lecture');
-    socket.on('pop-quiz', () => {
-      console.log('Quiz received');
+    socket.on('pop-quiz', (quizQuestion) => {
+      console.log('Quiz received', quizQuestion);
+      // quizQuestion = JSON.parse(quizQuestion);
+      this.handlePopQuiz(quizQuestion);
     });
   }
 
+  setModalVisible(visible) {
+    this.setState({ isShowingQuizModal: visible });
+  }
+
   handleStudentQuestionSubmit() {
-    const { studentQuestion } = this.props;
-    socket.emit('student-question', { topicId: this.state.selectedTopic, name: `${this.props.profile.fName} ${this.props.profile.lName}`, question: this.state.question, teacher: this.props.teacher.teacher_id });
+    const { profile, teacher } = this.props;
+    socket.emit('student-question', {
+      topicId: this.state.selectedTopic,
+      name: `${profile.fName} ${profile.lName}`,
+      question: this.state.question,
+      teacher: teacher.teacher_id,
+    });
     return axios.post('http://localhost:8080/api/studentQuestions', {
       question: this.state.question,
       topic_id: this.state.selectedTopic,
-      student_id: this.props.profile.id,
+      student_id: profile.id,
     })
       .then((data) => {
         console.log(data);
@@ -58,25 +71,33 @@ class LiveLecture extends Component {
     this.setState({ selectedTopic: id });
   }
 
+  async handlePopQuiz(quizQuestion) {
+    const { currentQuiz } = this.props;
+    await currentQuiz(quizQuestion);
+    return Actions.livequiz();
+  }
+
   render() {
     const { topics } = this.props;
-    console.log('this.props', this.props)
+    const { container, input, buttonContainer, buttonText } = styles;
+    console.log('this.props', this.props);
     return (
-      <View style={{ padding: 100 }}>
+      <View style={container}>
         {topics.map(topic =>
           <Text key={topic.id} onPress={() => this.handleTopicPress(topic.id)}>{topic.name}</Text>)}
-        <TextInput style={styles.input} type="text" placeholder="Ask a Question" onChangeText={this.handleStudentQuestionInputChange} />
-        <TouchableOpacity style={styles.buttonContainer}>
-          <Text style={styles.buttonText} onPress={this.handleStudentQuestionSubmit} > Ask! </Text>
+        <TextInput style={input} type="text" placeholder="Ask a Question" onChangeText={this.handleStudentQuestionInputChange} />
+        <TouchableOpacity style={buttonContainer}>
+          <Text style={buttonText} onPress={this.handleStudentQuestionSubmit} > Ask! </Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
-    padding: 20,
+    padding: 80,
+    backgroundColor: 'gray',
   },
   input: {
     height: 40,
@@ -94,7 +115,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '700',
   },
-});
+};
 
 const mapStateToProps = state => ({
   topics: state.currentLecture,
@@ -102,4 +123,4 @@ const mapStateToProps = state => ({
   teacher: state.currentCohort,
 });
 
-export default connect(mapStateToProps)(LiveLecture);
+export default connect(mapStateToProps, { currentQuiz })(LiveLecture);

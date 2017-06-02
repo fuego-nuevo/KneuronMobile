@@ -64,11 +64,18 @@ class CameraRoute extends Component {
             subject_id: this.props.profile.username,
             gallery_name: 'kneuron',
         }
-          axios.post('http://localhost:8080/api/studentAttendance', body)
+          axios.post('http://localhost:8080/api/facialVerify', body)
           .then(res => {
             console.log('this is the verification for kairo sent pic ', res);
             if (res.data.images[0].transaction.confidence > .60) {
               console.log('you are who you say you are');
+              let attendance = {
+                lecture_id: this.props.currentLecture[0].id,
+                student_id: this.props.profile.id,
+                present: true,
+              }
+              axios.post('http://localhost:8080/api/studentAttendance', body)
+              .then()
             } else {
               console.log('who the fuckk are you broo');
             }
@@ -83,7 +90,7 @@ class CameraRoute extends Component {
 
 
   render() {
-    console.log("this is the props of camera roll!!!!!!!!!!!!!!!!")
+    console.log("this is the props of camera roll!!!!!!!!!!!!!!!!", this.props)
     console.log('this is the state of camera!!', this.state.path)
     return (
       <View style={styles.container}>
@@ -118,6 +125,7 @@ class CameraRoute extends Component {
 }
 const mapStateToProps = state => ({
   profile: state.profile,
+  currentLecture: state.currentLecture,
 });
 
 export default connect(mapStateToProps)(CameraRoute);

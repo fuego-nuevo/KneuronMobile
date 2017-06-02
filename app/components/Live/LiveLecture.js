@@ -10,6 +10,7 @@ import {
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
 import axios from 'axios';
+import { Actions } from 'react-native-router-flux';
 
 const socket = io('http://localhost:5000');
 // const socket = io();
@@ -66,6 +67,9 @@ class LiveLecture extends Component {
         <TextInput style={styles.input} type="text" placeholder="Ask a Question" onChangeText={this.handleStudentQuestionInputChange} />
         <TouchableOpacity style={styles.buttonContainer}>
           <Text style={styles.buttonText} onPress={this.handleStudentQuestionSubmit} > Ask! </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonContainer}>
+          <Text style={styles.buttonText} onPress={Actions.cameraroute}>Attendance</Text>
         </TouchableOpacity>
       </View>
     );

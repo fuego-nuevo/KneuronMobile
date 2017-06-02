@@ -10,6 +10,8 @@ import { Actions } from 'react-native-router-flux';
 import io from 'socket.io-client';
 import axios from 'axios';
 import { currentQuiz } from '../../actions/CurrentQuiz';
+import { Actions } from 'react-native-router-flux';
+
 
 const socket = io('http://localhost:5000');
 // const socket = io();

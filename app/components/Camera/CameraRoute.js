@@ -15,30 +15,30 @@ import { connect } from 'react-redux';
 // import {app_id , app_key} from 'react-native-dotenv';
 class CameraRoute extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       path: null,
     };
     // console.log('this is the app id and app key', app_id, app_key);
   }
 
-  takePicture() {
-    // const options = {};
-    //options.location = ...
-    this.camera.capture()
-      .then((data) => {
-        // Camera.constants.CaptureTarget.cameraRoll
+  // takePicture() {
+  //   // const options = {};
+  //   //options.location = ...
+  //   this.camera.capture()
+  //     .then((data) => {
+  //       // Camera.constants.CaptureTarget.cameraRoll
 
-        console.log('this is the data ',data)
-        console.log("this is ther data.path ",data.path);
-        RNFS.readFile(data.path, 'base64')
-        .then(res => {
-          console.log("this is the res of the readfile" ,res)
-          // this.setState({path: res})
-        })
-      })
-      .catch(err => console.error(err));
-  }
+  //       console.log('this is the data ',data)
+  //       console.log("this is ther data.path ",data.path);
+  //       RNFS.readFile(data.path, 'base64')
+  //       .then(res => {
+  //         console.log("this is the res of the readfile" ,res)
+  //         // this.setState({path: res})
+  //       })
+  //     })
+  //     .catch(err => console.error(err));
+  // }
 
   // takePicture() {
   //   this.camera.capture()
@@ -55,28 +55,30 @@ class CameraRoute extends Component {
   sendToKairo() {
     this.camera.capture()
       .then((data) => {
-        console.log('this is the data from taking kairo photopic', data)
+        console.log('this is the data from taking kairo photopic', data);
         RNFS.readFile(data.path, 'base64')
         .then(res => {
-          console.log('this is the res of the readfile', typeof res)        
-          let config = {
-          headers: {"Content-Type": "application/json", "app_id": "app_id", "app_key": "app_key" },
-        };
-        axios.post("https://api.kairos.com/verify", JSON.stringify({"image": res, "subject_id": "test", "gallery_name": "test"}), config)
-        .then(res => {
-        console.log('this is the verification for kairo sent pic ', res)
-        if(res.data.images[0].transaction.confidence > .60){
-          console.log('you are who you say you are')
-        } else {
-          console.log('who the fuckk are you broo')
+          console.log('this is the res of the readfile', typeof res);
+          const body = {
+            image: res,
+            subject_id: this.props.profile.username,
+            gallery_name: 'kneuron',
         }
+          axios.post('http://localhost:8080/api/studentAttendance', body)
+          .then(res => {
+            console.log('this is the verification for kairo sent pic ', res);
+            if (res.data.images[0].transaction.confidence > .60) {
+              console.log('you are who you say you are');
+            } else {
+              console.log('who the fuckk are you broo');
+            }
         // .catch(err => {
         //   console.log("there was an error verifying the kairo pic ", err);
         // })
+          });
+        });
       })
-      })
-      })
-      .catch(err => console.error(err))
+      .catch(err => console.error(err));
   }
 
 
@@ -92,15 +94,14 @@ class CameraRoute extends Component {
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}
           captureTarget={Camera.constants.CaptureTarget.disk}>
-          {/*<Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>*/}
-          <TouchableHighlight
+          {/*<TouchableHighlight
           style={styles.capture}
           onPress={this.takePicture.bind(this)}
           underlayColor="rgba(255, 255, 255, 0.5)"
 
         >
           <Text>Profile Pic</Text>
-        </TouchableHighlight>
+        </TouchableHighlight>*/}
           <TouchableHighlight
           style={styles.capture1}
           onPress={this.sendToKairo.bind(this)}
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
   preview: {
     flex: 1,
     justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   capture: {
     flex: 0,
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     color: '#000',
     padding: 10,
-    margin: -5
+    margin: -5,
   },
   capture1: {
     flex: 0,
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     color: '#000',
     padding: 10,
-    margin: 40
-  }
+    margin: 40,
+  },
 });
 

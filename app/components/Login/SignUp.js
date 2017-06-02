@@ -60,11 +60,13 @@ class SignUp extends Component {
         RNFS.readFile(data.path, 'base64')
         .then(res => {
           // console.log("this is the res of the readfile" ,res)
-          let body = {
+          const body = {
             'image': res,
-            'subject_id': this,.state.email,
+            'subject_id': this.state.userInfo.username,
             'gallery_name': 'kneuron'
           }
+          // console.log('this is the body.image of signup ',body.image)
+          this.imageChange(res);
           axios.post("http://localhost:8080/api/camera", body)
           // .then(res => {
           //   console.log("this is the res after enrolling your picture to gallery",res)

@@ -6,11 +6,12 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
 import _ from 'lodash';
 import io from 'socket.io-client';
 
-const socket = io();
+const socket = io('http://localhost:5000');
 
 class LiveQuiz extends Component {
   // constructor({ quiz, profile }) {
@@ -57,7 +58,7 @@ class LiveQuiz extends Component {
         }
       });
     });
-    return this.state.correct;
+    return this.state.correct / questions.length;
   }
 
   postAnswersToDB() {
@@ -74,19 +75,20 @@ class LiveQuiz extends Component {
   }
 
   async submitAnswers() {
-    const { profile } = this.props;
-    socket.emit('student-answers', {
-      student_id: profile.id,
+    const { profile, teacher } = this.props;
+    await socket.emit('student-answers', {
       correct: this.gradeAnswers(this.state.selectedAnswers),
+      name: `${profile.fName} ${profile.lName}`,
+      teacher: teacher.teacher_id,
     });
-    this.postAnswersToDB();
+    await this.postAnswersToDB();
+    Actions.livelecture();
   }
 
   render() {
     const { container } = styles;
-    const { quiz } = this.props;
+    const { quiz, profile } = this.props;
     const questions = JSON.parse(quiz.questions);
-    console.log(questions);
     return (
       <View style={container}>
         {questions.map(question =>
@@ -130,6 +132,7 @@ const styles = {
 const mapStateToProps = state => ({
   quiz: state.currentQuiz,
   profile: state.profile,
+  teacher: state.currentCohort,
 });
 
 export default connect(mapStateToProps)(LiveQuiz);

@@ -38,7 +38,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>This app lets the user take a picture to be stored in the local camera roll</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This App stores photos take in the camera Roll.</string>
 	<key>UIAppFonts</key>

@@ -11,12 +11,15 @@ import Camera from 'react-native-camera';
 import RNFS from 'react-native-fs';
 import axios from 'axios';
 import { connect } from 'react-redux';
+
+// import {app_id , app_key} from 'react-native-dotenv';
 class CameraRoute extends Component {
   constructor(props) {
     super(props)
     this.state = {
       path: null,
     };
+    // console.log('this is the app id and app key', app_id, app_key);
   }
 
   takePicture() {
@@ -57,7 +60,7 @@ class CameraRoute extends Component {
         .then(res => {
           console.log('this is the res of the readfile', typeof res)        
           let config = {
-          headers: {"Content-Type": "application/json", "app_id": "59193b0b", "app_key": "625d66480c5897855db7b295808b465b"}
+          headers: {"Content-Type": "application/json", "app_id": "app_id", "app_key": "app_key" },
         };
         axios.post("https://api.kairos.com/verify", JSON.stringify({"image": res, "subject_id": "test", "gallery_name": "test"}), config)
         .then(res => {
@@ -78,7 +81,7 @@ class CameraRoute extends Component {
 
 
   render() {
-    console.log("this is the props of camera roll!!!!!!!!!!!!!!!!", this.props)
+    console.log("this is the props of camera roll!!!!!!!!!!!!!!!!")
     console.log('this is the state of camera!!', this.state.path)
     return (
       <View style={styles.container}>

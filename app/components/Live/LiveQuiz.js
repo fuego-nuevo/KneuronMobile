@@ -10,6 +10,7 @@ import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
 import _ from 'lodash';
 import io from 'socket.io-client';
+import TimerMixin from 'react-timer-mixin';
 
 const socket = io('http://localhost:5000');
 
@@ -20,6 +21,7 @@ class LiveQuiz extends Component {
     super(props);
     this.state = {
       questions: null,
+      secondsRemaining: 1,
       correct: 0,
       selectedAnswers: {
         student_id: this.props.profile.id,
@@ -28,11 +30,19 @@ class LiveQuiz extends Component {
     this.submitAnswers = this.submitAnswers.bind(this);
     this.gradeAnswers = this.gradeAnswers.bind(this);
     this.postAnswersToDB = this.postAnswersToDB.bind(this);
+    this.setQuestionsIntoState = this.setQuestionsIntoState.bind(this);
+    this.timerTick = this.timerTick.bind(this);
   }
 
   componentDidMount() {
-    // this.setState({ questions: questions });
-    // console.log('these are the questions in CDM ', this.state.questions);
+    const { quiz } = this.props;
+    this.setQuestionsIntoState();
+    this.setState({ secondsRemaining: quiz.time });
+    setInterval(this.timerTick, 1000);
+    return this.state.secondsRemaining === 0 ? Actions.livelecture() : null;
+  }
+
+  setQuestionsIntoState() {
     const { quiz } = this.props;
     const questions = JSON.parse(quiz.questions);
     const answerObj = {};
@@ -40,6 +50,11 @@ class LiveQuiz extends Component {
       answerObj[question.id] = null;
     });
     Object.assign(this.state.selectedAnswers, answerObj);
+  }
+
+  timerTick() {
+    this.setState({ secondsRemaining: this.state.secondsRemaining - 1 });
+
   }
 
   handleSelectedAnswer(id, selected) {
@@ -89,8 +104,10 @@ class LiveQuiz extends Component {
     const { container } = styles;
     const { quiz, profile } = this.props;
     const questions = JSON.parse(quiz.questions);
+    console.log('these are the rfucking proppppsss   ', this.props)
     return (
       <View style={container}>
+        <Text>Time Remaining: {this.state.secondsRemaining}</Text>
         {questions.map(question =>
           <View>
             <Text key={question.id}>{question.name}</Text>

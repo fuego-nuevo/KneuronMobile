@@ -5,6 +5,7 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
@@ -36,20 +37,9 @@ class LiveQuiz extends Component {
 
   componentDidMount() {
     const { quiz } = this.props;
-    this.setQuestionsIntoState();
     this.setState({ secondsRemaining: quiz.time });
     setInterval(this.timerTick, 1000);
     return this.state.secondsRemaining === 0 ? Actions.livelecture() : null;
-  }
-
-  setQuestionsIntoState() {
-    const { quiz } = this.props;
-    const questions = JSON.parse(quiz.questions);
-    const answerObj = {};
-    _.each(questions, question => {
-      answerObj[question.id] = null;
-    });
-    Object.assign(this.state.selectedAnswers, answerObj);
   }
 
   timerTick() {
@@ -58,7 +48,7 @@ class LiveQuiz extends Component {
   }
 
   handleSelectedAnswer(id, selected) {
-    this.setState({ selectedAnswers: { ...this.state.selectedAnswers, [id]: selected } });
+    this.setState({ selectedAnswers: { ...this.state.selectedAnswers, [id]: selected } }, () => console.log('this is the state of seleleeeeeeee ', this.state.selectedAnswers));
   }
 
   gradeAnswers() {
@@ -90,14 +80,26 @@ class LiveQuiz extends Component {
   }
 
   async submitAnswers() {
-    const { profile, teacher } = this.props;
-    await socket.emit('student-answers', {
-      correct: this.gradeAnswers(this.state.selectedAnswers),
-      name: `${profile.fName} ${profile.lName}`,
-      teacher: teacher.teacher_id,
-    });
-    await this.postAnswersToDB();
-    Actions.pop();
+    const { profile, teacher, quiz } = this.props;
+    const questions = JSON.parse(quiz.questions);
+    if (Object.keys(this.state.selectedAnswers).length >= questions.length) {
+      await socket.emit('student-answers', {
+        correct: this.gradeAnswers(this.state.selectedAnswers),
+        name: `${profile.fName} ${profile.lName}`,
+        teacher: teacher.teacher_id,
+      });
+      await this.postAnswersToDB();
+      Actions.pop();
+    } else {
+      Alert.alert(
+        'All questions have not been answered!',
+        'Go back and check your answers',
+        [
+          { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ],
+        { cancelable: false },
+      );
+    }
   }
 
   render() {

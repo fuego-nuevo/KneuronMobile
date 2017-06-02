@@ -13,13 +13,20 @@ import io from 'socket.io-client';
 const socket = io();
 
 class LiveQuiz extends Component {
+  // constructor({ quiz, profile }) {
   constructor(props) {
+    // super({ quiz, profile });
     super(props);
     this.state = {
       questions: null,
-      selectedAnswers: {},
+      correct: 0,
+      selectedAnswers: {
+        student_id: this.props.profile.id,
+      },
     };
     this.submitAnswers = this.submitAnswers.bind(this);
+    this.gradeAnswers = this.gradeAnswers.bind(this);
+    this.postAnswersToDB = this.postAnswersToDB.bind(this);
   }
 
   componentDidMount() {
@@ -38,11 +45,23 @@ class LiveQuiz extends Component {
     this.setState({ selectedAnswers: { ...this.state.selectedAnswers, [id]: selected } });
   }
 
-  async submitAnswers() {
-    const { profile } = this.props;
-    socket.emit('student-answers', {
-      answers: this.state.selectedAnswers,
+  gradeAnswers() {
+    const { quiz, profile } = this.props;
+    const questions = JSON.parse(quiz.questions);
+    _.each(questions, question => {
+      _.each(this.state.selectedAnswers, (choice, questionId) => {
+        if (question.id === parseInt(questionId, 10)) {
+          if (choice === question.correct) {
+            this.state.correct += 1;
+          }
+        }
+      });
     });
+    return this.state.correct;
+  }
+
+  postAnswersToDB() {
+    const { profile } = this.props;
     _.each(this.state.selectedAnswers, (choice, questionId) => {
       axios.post('http://localhost:8080/api/answers', {
         selected: choice,
@@ -54,10 +73,20 @@ class LiveQuiz extends Component {
     });
   }
 
+  async submitAnswers() {
+    const { profile } = this.props;
+    socket.emit('student-answers', {
+      student_id: profile.id,
+      correct: this.gradeAnswers(this.state.selectedAnswers),
+    });
+    this.postAnswersToDB();
+  }
+
   render() {
     const { container } = styles;
     const { quiz } = this.props;
     const questions = JSON.parse(quiz.questions);
+    console.log(questions);
     return (
       <View style={container}>
         {questions.map(question =>

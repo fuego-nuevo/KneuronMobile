@@ -97,14 +97,13 @@ class LiveQuiz extends Component {
       teacher: teacher.teacher_id,
     });
     await this.postAnswersToDB();
-    Actions.livelecture();
+    Actions.pop();
   }
 
   render() {
     const { container } = styles;
     const { quiz, profile } = this.props;
     const questions = JSON.parse(quiz.questions);
-    console.log('these are the rfucking proppppsss   ', this.props)
     return (
       <View style={container}>
         <Text>Time Remaining: {this.state.secondsRemaining}</Text>

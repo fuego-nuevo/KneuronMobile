@@ -89,6 +89,9 @@ class LiveLecture extends Component {
         <TouchableOpacity style={buttonContainer}>
           <Text style={buttonText} onPress={this.handleStudentQuestionSubmit} > Ask! </Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonContainer}>
+          <Text style={styles.buttonText} onPress={Actions.cameraroute}>Attendance</Text>
+        </TouchableOpacity>
       </View>
     );
   }

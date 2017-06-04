@@ -16,11 +16,13 @@ class LectureEntry extends Component {
   }
 
   async onLiveClassJoin() {
-    await this.props.currentLecture(this.props.lecture.topics);
+    const { lecture, currentLecture } = this.props;
+    await currentLecture(lecture.topics);
     return this.state.live ? Actions.livelecture() : null;
   }
 
   render() {
+    const { lecture } = this.props;
     const { container, title, text, join } = styles;
     console.log(this.props);
     return (
@@ -29,10 +31,10 @@ class LectureEntry extends Component {
           <Icon name="apps" onPress={this.onLiveClassJoin} />
         </View>
         <View style={title}>
-          <Text style={text}>{this.props.lecture.name}</Text>
+          <Text style={text}>{lecture.name}</Text>
         </View>
         <View>
-          <Text style={text}>{this.props.lecture.date}</Text>
+          <Text style={text}>{lecture.date}</Text>
         </View>
       </View>
     );

@@ -23,7 +23,7 @@ class LiveQuestion extends Component {
 
   handleAnswerSubmit() {
     const { question, profile } = this.props;
-    axios.post('http://localhost:8080/api/answers', {
+    axios.post('http://169.254.137.166:5000/api/answers', {
       selected: this.state.selectedAnswer,
       question_id: question.id,
       student_id: profile.id,

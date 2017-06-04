@@ -69,7 +69,7 @@ class LiveQuiz extends Component {
   postAnswersToDB() {
     const { profile } = this.props;
     _.each(this.state.selectedAnswers, (choice, questionId) => {
-      axios.post('http://localhost:8080/api/answers', {
+      axios.post('http://169.254.137.166:5000/api/answers', {
         selected: choice,
         question_id: questionId,
         student_id: profile.id,

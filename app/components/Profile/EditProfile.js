@@ -67,7 +67,7 @@ export default class EditProfile extends Component {
     };
     AsyncStorage.getItem('id_token')
     .then(res => {
-      axios.put(`http://localhost:8080/api/students/${res}`, body)
+      axios.put(`http://169.254.137.166:5000/api/students/${res}`, body)
       .then(putres => {
         console.log(putres)
       })

@@ -47,7 +47,7 @@ exports.loginUser = (creds) => {
   return (dispatch) => {
     dispatch(requestLogin(creds));
 
-    return axios.get(`http://localhost:8080/api/students/${creds.email}/${creds.password}`)
+    return axios.get(`http://169.254.137.166:5000/api/students/${creds.email}/${creds.password}`)
       .then((response) => {
         console.log(response);
         console.log('this is asnycstorage 60!!!!!!!!!!!!!', AsyncStorage);
@@ -84,7 +84,7 @@ exports.signupUser = (creds) => {
   return (dispatch) => {
     dispatch(requestLogin(creds));
 
-    return axios.post('http://localhost:8080/api/students', body)
+    return axios.post('http://169.254.137.166:5000/api/students', body)
       .then((response) => {
         console.log("this is the response in 89 of signup!!!!!!", response);
         if (!response.data) {

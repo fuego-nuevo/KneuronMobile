@@ -32,7 +32,7 @@ class SignUp extends Component {
         lName: '',
         password: '',
         username: '',
-        image: '',
+        image: 'hi',
       },
     };
     // this.handleClick = this.handleClick.bind(this);
@@ -59,7 +59,7 @@ class SignUp extends Component {
         console.log("this is ther data.path ",data.path);
         RNFS.readFile(data.path, 'base64')
         .then(res => {
-          // console.log("this is the res of the readfile" ,res)
+          console.log("this is the res of the readfile" ,res)
           const body = {
             'image': res,
             'subject_id': this.state.userInfo.username,
@@ -67,7 +67,7 @@ class SignUp extends Component {
           }
           // console.log('this is the body.image of signup ',body.image)
           this.imageChange(res);
-          axios.post("http://localhost:8080/api/camera", body)
+          axios.post("http://169.254.137.166:5000/api/camera", body)
           // .then(res => {
           //   console.log("this is the res after enrolling your picture to gallery",res)
           // })
@@ -119,8 +119,8 @@ class SignUp extends Component {
 //onSubmit={(e) => { e.preventDefault(); this.props.signupUser(this.state, this.props.history); }} autoComplete="on">
 
   render() {
-    console.log('this is the props on loginform', this.props);
-    console.log('this is the state on loginform', this.state);
+    console.log('this is the props on loginform 122', this.props);
+    console.log('this is the state on loginform 123', this.state);
 
     return (
       <View behavior="padding" style={styles.container}>

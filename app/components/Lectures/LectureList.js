@@ -6,7 +6,7 @@ import LectureEntry from './LectureEntry';
 
 const LectureList = (props) => {
   const { container } = styles;
-  console.log(props);
+  console.log("PROPS INSIDE LECTURELIST ARE: ", props);
   return (
     <ScrollView style={container}>
       {props.lectures.map(lecture => <LectureEntry key={lecture.id} lecture={lecture} />)}

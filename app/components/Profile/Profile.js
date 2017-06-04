@@ -33,7 +33,7 @@ fetchStudentData() {
   AsyncStorage.getItem('id_token')
   .then(res => {
   console.log('this is the token in profile please work ', res)
-  axios.get(`http://localhost:8080/api/students/${res}`)
+  axios.get(`http://169.254.137.166:5000/api/students/${res}`)
   .then(data => {
     console.log("this is the data for the students",data)
     this.setState({ username: data.data.username, email: data.data.email, fName: data.data.fName, lName: data.data.lName });

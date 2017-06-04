@@ -20,8 +20,9 @@ class Home extends Component {
   componentDidMount() {
     AsyncStorage.getItem('id_token')
       .then((res) => {
-        axios.get(`http://localhost:8080/api/students/${res}`)
+        axios.get(`http://169.254.137.166:5000/api/students/${res}`)
           .then((profile) => {
+            console.log("this is the profile data from home!!!!!!!!!!!!!", profile.data)
             this.setState({ profile: profile.data}, () => {
               this.props.updateProfile(profile.data);
             })

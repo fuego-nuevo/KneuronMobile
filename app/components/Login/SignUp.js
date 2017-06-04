@@ -17,6 +17,7 @@ import { signupUser } from '../../actions/login';
 import Camera from 'react-native-camera';
 import RNFS from 'react-native-fs';
 import axios from 'axios';
+import Config from 'react-native-config';
 // require('dotenv').config();
 // import {app_id , app_key} from 'react-native-dotenv';
 
@@ -67,7 +68,7 @@ class SignUp extends Component {
           }
           // console.log('this is the body.image of signup ',body.image)
           this.imageChange(res);
-          axios.post("http://169.254.137.166:5000/api/camera", body)
+          axios.post(`${Config.Local_Host}/api/camera`, body)
           // .then(res => {
           //   console.log("this is the res after enrolling your picture to gallery",res)
           // })

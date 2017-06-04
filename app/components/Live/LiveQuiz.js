@@ -12,6 +12,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import io from 'socket.io-client';
 import TimerMixin from 'react-timer-mixin';
+import Config from 'react-native-config';
 
 const socket = io('http://localhost:5000');
 
@@ -69,7 +70,7 @@ class LiveQuiz extends Component {
   postAnswersToDB() {
     const { profile } = this.props;
     _.each(this.state.selectedAnswers, (choice, questionId) => {
-      axios.post('http://169.254.137.166:5000/api/answers', {
+      axios.post(`${Config.Local_Host}/api/answers`, {
         selected: choice,
         question_id: questionId,
         student_id: profile.id,

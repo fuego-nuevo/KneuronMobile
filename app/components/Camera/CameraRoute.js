@@ -12,6 +12,7 @@ import RNFS from 'react-native-fs';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { LatLonEllipsoidal } from 'geodesy';
+import Config from 'react-native-config';
 
 // import {app_id , app_key} from 'react-native-dotenv';
 class CameraRoute extends Component {
@@ -108,7 +109,7 @@ class CameraRoute extends Component {
                 subject_id: this.props.profile.username,
                 gallery_name: 'kneuron',
               };
-              axios.post('http://169.254.137.166:5000/api/facialVerify', body)
+              axios.post(`${Config.Local_Host}/api/facialVerify`, body)
               .then(res => {
                 console.log('this is the verification for kairo sent pic ', res);
                 if (res.data.images[0].transaction.confidence > .60 && withinClassRange === true) {
@@ -118,7 +119,7 @@ class CameraRoute extends Component {
                     student_id: this.props.profile.id,
                     present: true,
                   };
-                  axios.post('http://169.254.137.166:5000/api/studentAttendance', attendance)
+                  axios.post(`${Config.Local_Host}/api/studentAttendance`, attendance)
                   .then(res => {
                     console.log('this is the res from posting attendance', res);
 
@@ -129,7 +130,7 @@ class CameraRoute extends Component {
                     student_id: this.props.profile.id,
                     present: false,
                   };
-                  axios.post('http://169.254.137.166:5000/api/studentAttendance', attendance)
+                  axios.post(`${Config.Local_Host}/api/studentAttendance`, attendance)
                   .then(res => {
                     console.log('this is the res from posting attendance', res);
                   });

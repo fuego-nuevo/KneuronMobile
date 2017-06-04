@@ -8,6 +8,7 @@ import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Lef
 import { updateProfile } from '../actions/UpdateProfile';
 import NavBar from './NavBar/NavBar';
 import CohortList from './Cohorts/CohortList';
+import Config from 'react-native-config';
 
 class Home extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Home extends Component {
   componentDidMount() {
     AsyncStorage.getItem('id_token')
       .then((res) => {
-        axios.get(`http://169.254.137.166:5000/api/students/${res}`)
+        axios.get(`${Config.Local_Host}/api/students/${res}`)
           .then((profile) => {
             console.log("this is the profile data from home!!!!!!!!!!!!!", profile.data)
             this.setState({ profile: profile.data}, () => {

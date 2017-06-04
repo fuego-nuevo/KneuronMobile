@@ -8,6 +8,7 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import io from 'socket.io-client';
+import Config from 'react-native-config';
 import axios from 'axios';
 import { currentQuiz } from '../../actions/CurrentQuiz';
 
@@ -53,7 +54,7 @@ class LiveLecture extends Component {
       question: this.state.question,
       teacher: teacher.teacher_id,
     });
-    return axios.post('http://169.254.137.166:5000/api/studentQuestions', {
+    return axios.post(`${Config.Local_Host}/api/studentQuestions`, {
       question: this.state.question,
       topic_id: this.state.selectedTopic,
       student_id: profile.id,

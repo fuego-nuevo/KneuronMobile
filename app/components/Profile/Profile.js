@@ -13,6 +13,7 @@ import { Actions } from 'react-native-router-flux';
 import { Container, Content, Footer, FooterTab, Button, Icon, Badge } from 'native-base';
 import Navbar from '../NavBar/NavBar';
 import axios from 'axios';
+import Config from 'react-native-config';
 
 export default class Profile extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ fetchStudentData() {
   AsyncStorage.getItem('id_token')
   .then(res => {
   console.log('this is the token in profile please work ', res)
-  axios.get(`http://169.254.137.166:5000/api/students/${res}`)
+  axios.get(`${Config.Local_Host}/api/students/${res}`)
   .then(data => {
     console.log("this is the data for the students",data)
     this.setState({ username: data.data.username, email: data.data.email, fName: data.data.fName, lName: data.data.lName });

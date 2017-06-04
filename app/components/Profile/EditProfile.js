@@ -13,6 +13,7 @@ import {
 import { Container, Content, Footer, FooterTab, Button, Icon, Badge } from 'native-base';
 import Navbar from '../NavBar/NavBar';
 import axios from 'axios';
+import Config from 'react-native-config';
 
 export default class EditProfile extends Component {
   constructor(props) {
@@ -67,7 +68,7 @@ export default class EditProfile extends Component {
     };
     AsyncStorage.getItem('id_token')
     .then(res => {
-      axios.put(`http://169.254.137.166:5000/api/students/${res}`, body)
+      axios.put(`${Config.Local_Host}/api/students/${res}`, body)
       .then(putres => {
         console.log(putres)
       })

@@ -59,7 +59,7 @@ class LiveQuiz extends Component {
   }
 
   handleSelectedAnswer(id, selected) {
-    this.setState({ selectedAnswers: { ...this.state.selectedAnswers, [id]: selected } }, () => console.log('this is the state of seleleeeeeeee ', this.state.selectedAnswers));
+    this.setState({ selectedAnswers: { ...this.state.selectedAnswers, [id]: selected } });
   }
 
   gradeAnswers() {

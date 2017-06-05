@@ -16,10 +16,27 @@ class Home extends Component {
     this.state = {
       profile: {},
     };
+    this.getCorhortList = this.getCorhortList.bind(this);
   }
 
   componentDidMount() {
     AsyncStorage.getItem('id_token')
+      .then((res) => {
+        axios.get(`${Config.Local_Host}/api/students/${res}`)
+          .then((profile) => {
+            console.log("this is the profile data from home!!!!!!!!!!!!!", profile.data)
+            this.setState({ profile: profile.data}, () => {
+              this.props.updateProfile(profile.data);
+            })
+          })
+          .catch((err) => {
+            console.log('there was an error grabbing student info, ', err);
+          })
+      })
+  }
+
+  getCorhortList() {
+        AsyncStorage.getItem('id_token')
       .then((res) => {
         axios.get(`${Config.Local_Host}/api/students/${res}`)
           .then((profile) => {
@@ -39,7 +56,7 @@ class Home extends Component {
     console.log(this.state);
         return (
             <View style={container}>
-              <CohortList cohorts={this.state.profile.studentcohorts || []} />
+              <CohortList cohorts={this.state.profile.studentcohorts || []}  refresh={this.getCorhortList}/>
               <NavBar />
             </View>
         );

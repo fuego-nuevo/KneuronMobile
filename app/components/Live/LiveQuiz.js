@@ -33,7 +33,6 @@ class LiveQuiz extends Component {
     this.submitAnswers = this.submitAnswers.bind(this);
     this.gradeAnswers = this.gradeAnswers.bind(this);
     this.postAnswersToDB = this.postAnswersToDB.bind(this);
-    this.postResultsToDB = this.postResultsToDB.bind(this);
     this.timerTick = this.timerTick.bind(this);
   }
 

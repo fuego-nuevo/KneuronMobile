@@ -19,7 +19,6 @@ import { currentQuiz } from '../../actions/CurrentQuiz';
 
 
 const socket = io(`${Config.Local_Host}`);
-// const socket = io();
 
 class LiveLecture extends Component {
   constructor(props) {
@@ -43,8 +42,6 @@ class LiveLecture extends Component {
       Toast.show('Teacher is tracking attendance now'
     , Toast.LONG)});
     socket.on('pop-quiz', (quizQuestion) => {
-      console.log('Quiz received', quizQuestion);
-      // quizQuestion = JSON.parse(quizQuestion);
       this.handlePopQuiz(quizQuestion);
     });
   }

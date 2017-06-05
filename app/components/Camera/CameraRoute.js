@@ -20,6 +20,7 @@ class CameraRoute extends Component {
     super(props);
     this.state = {
       path: null,
+      present: null,
     };
     // console.log('this is the app id and app key', app_id, app_key);
     // this.getUserCoords = this.getUserCoords.bind(this);
@@ -113,6 +114,7 @@ class CameraRoute extends Component {
               .then(res => {
                 console.log('this is the verification for kairo sent pic ', res);
                 if (res.data.images[0].transaction.confidence > .60 && withinClassRange === true) {
+                  this.setState({present: true})
                   console.log('you are who you say you are');
                   let attendance = {
                     lecture_id: this.props.currentLecture.id,
@@ -125,6 +127,7 @@ class CameraRoute extends Component {
 
                   });
                 } else {
+                  this.setState({present: false})
                   let attendance = {
                     lecture_id: this.props.currentLecture.id,
                     student_id: this.props.profile.id,

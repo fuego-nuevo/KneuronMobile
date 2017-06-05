@@ -8,8 +8,11 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import io from 'socket.io-client';
+import Config from 'react-native-config';
 import axios from 'axios';
 import { currentQuiz } from '../../actions/CurrentQuiz';
+
+
 
 const socket = io('http://localhost:5000');
 // const socket = io();
@@ -51,7 +54,7 @@ class LiveLecture extends Component {
       question: this.state.question,
       teacher: teacher.teacher_id,
     });
-    return axios.post('http://localhost:8080/api/studentQuestions', {
+    return axios.post(`${Config.Local_Host}/api/studentQuestions`, {
       question: this.state.question,
       topic_id: this.state.selectedTopic,
       student_id: profile.id,
@@ -80,7 +83,8 @@ class LiveLecture extends Component {
   render() {
     const { topics } = this.props;
     const { container, input, buttonContainer, buttonText } = styles;
-    console.log('this.props', this.props);
+    console.log('this.props in live lecture boiiiiiiiiiiiiiiiI', this.props);
+    console.log('this is the topics in live lecture lime 86 !!!!!!!!!!!!!!!!!!!', topics)
     return (
       <View style={container}>
         {topics.map(topic =>
@@ -121,7 +125,7 @@ const styles = {
 };
 
 const mapStateToProps = state => ({
-  topics: state.currentLecture,
+  topics: state.CurrentLectureTopics,
   profile: state.profile,
   teacher: state.currentCohort,
 });

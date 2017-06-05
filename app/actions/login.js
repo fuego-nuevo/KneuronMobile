@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native';
 import { Actions, ActionConst } from 'react-native-router-flux';
+import Config from 'react-native-config'
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -47,7 +48,7 @@ exports.loginUser = (creds) => {
   return (dispatch) => {
     dispatch(requestLogin(creds));
 
-    return axios.get(`http://localhost:8080/api/students/${creds.email}/${creds.password}`)
+    return axios.get(`${Config.Local_Host}/api/students/${creds.email}/${creds.password}`)
       .then((response) => {
         console.log(response);
         console.log('this is asnycstorage 60!!!!!!!!!!!!!', AsyncStorage);
@@ -84,7 +85,7 @@ exports.signupUser = (creds) => {
   return (dispatch) => {
     dispatch(requestLogin(creds));
 
-    return axios.post('http://localhost:8080/api/students', body)
+    return axios.post(`${Config.Local_Host}/api/students`, body)
       .then((response) => {
         console.log("this is the response in 89 of signup!!!!!!", response);
         if (!response.data) {

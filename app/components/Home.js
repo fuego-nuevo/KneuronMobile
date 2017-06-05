@@ -8,6 +8,7 @@ import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Lef
 import { updateProfile } from '../actions/UpdateProfile';
 import NavBar from './NavBar/NavBar';
 import CohortList from './Cohorts/CohortList';
+import Config from 'react-native-config';
 
 class Home extends Component {
   constructor(props) {
@@ -15,13 +16,31 @@ class Home extends Component {
     this.state = {
       profile: {},
     };
+    this.getCorhortList = this.getCorhortList.bind(this);
   }
 
   componentDidMount() {
     AsyncStorage.getItem('id_token')
       .then((res) => {
-        axios.get(`http://localhost:8080/api/students/${res}`)
+        axios.get(`${Config.Local_Host}/api/students/${res}`)
           .then((profile) => {
+            console.log("this is the profile data from home!!!!!!!!!!!!!", profile.data)
+            this.setState({ profile: profile.data}, () => {
+              this.props.updateProfile(profile.data);
+            })
+          })
+          .catch((err) => {
+            console.log('there was an error grabbing student info, ', err);
+          })
+      })
+  }
+
+  getCorhortList() {
+        AsyncStorage.getItem('id_token')
+      .then((res) => {
+        axios.get(`${Config.Local_Host}/api/students/${res}`)
+          .then((profile) => {
+            console.log("this is the profile data from home!!!!!!!!!!!!!", profile.data)
             this.setState({ profile: profile.data}, () => {
               this.props.updateProfile(profile.data);
             })
@@ -37,7 +56,7 @@ class Home extends Component {
     console.log(this.state);
         return (
             <View style={container}>
-              <CohortList cohorts={this.state.profile.studentcohorts || []} />
+              <CohortList cohorts={this.state.profile.studentcohorts || []}  refresh={this.getCorhortList}/>
               <NavBar />
             </View>
         );

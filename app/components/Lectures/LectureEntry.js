@@ -3,7 +3,8 @@ import { View, Text } from 'react-native';
 import { Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { currentLecture } from '../../actions/CurrentLecture';
+import { CurrentLecture } from '../../actions/CurrentLecture';
+import { CurrentLectureTopics } from '../../actions/CurrentLectureTopics';
 
 class LectureEntry extends Component {
   constructor(props) {
@@ -15,13 +16,22 @@ class LectureEntry extends Component {
     this.onLiveClassJoin = this.onLiveClassJoin.bind(this);
   }
 
-  async onLiveClassJoin() {
-    const { lecture, currentLecture } = this.props;
-    await currentLecture(lecture.topics);
+  onLiveClassJoin() {
+    
+    console.log("this is current lecture!!!!!!!!!!!", CurrentLecture)
+    console.log('this is the lecture.topics please fuckking workkk broo', this.props.lecture.topics);
+    console.log("this is props lecture!!!!!!!!!!!", this.props)
+
+    const { lecture, CurrentLecture, CurrentLectureTopics } = this.props;
+    CurrentLectureTopics(lecture.topics);
+    CurrentLecture(lecture);
+    // console.log('this is the variable in line 26 of lecture entry ', variable);
     return this.state.live ? Actions.livelecture() : null;
-  }
+    } 
+
 
   render() {
+    console.log('this is the props in lecture entry plessssssssssss' ,this.props);
     const { lecture } = this.props;
     const { container, title, text, join } = styles;
     console.log(this.props);
@@ -81,4 +91,4 @@ const styles = {
   },
 };
 
-export default connect(null, { currentLecture })(LectureEntry);
+export default connect(null, { CurrentLectureTopics, CurrentLecture })(LectureEntry);

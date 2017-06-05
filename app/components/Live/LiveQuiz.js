@@ -32,20 +32,30 @@ class LiveQuiz extends Component {
     this.submitAnswers = this.submitAnswers.bind(this);
     this.gradeAnswers = this.gradeAnswers.bind(this);
     this.postAnswersToDB = this.postAnswersToDB.bind(this);
-    this.setQuestionsIntoState = this.setQuestionsIntoState.bind(this);
     this.timerTick = this.timerTick.bind(this);
   }
 
   componentDidMount() {
     const { quiz } = this.props;
     this.setState({ secondsRemaining: quiz.time });
-    setInterval(this.timerTick, 1000);
-    return this.state.secondsRemaining === 0 ? Actions.livelecture() : null;
+    this.state.secondsRemaining > 0 ? setInterval(this.timerTick, 1000) : null;
   }
 
   timerTick() {
-    this.setState({ secondsRemaining: this.state.secondsRemaining - 1 });
-
+    this.state.secondsRemaining > 0 ? this.setState({ secondsRemaining: this.state.secondsRemaining - 1 }, () => {
+      if (this.state.secondsRemaining === 0) {
+        Alert.alert(
+          'Time is up!',
+          [
+            { text: 'OK', onPress: () => console.log('OK Pressed') },
+          ],
+        { cancelable: false },
+      );
+        this.postAnswersToDB();
+        Actions.pop();
+      }
+    }) : null;
+    // );
   }
 
   handleSelectedAnswer(id, selected) {

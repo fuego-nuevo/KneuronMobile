@@ -13,6 +13,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { LatLonEllipsoidal } from 'geodesy';
 import Config from 'react-native-config';
+import Toast from 'react-native-simple-toast';
 
 // import {app_id , app_key} from 'react-native-dotenv';
 class CameraRoute extends Component {
@@ -116,6 +117,7 @@ class CameraRoute extends Component {
                 if (res.data.images[0].transaction.confidence > .60 && withinClassRange === true) {
                   this.setState({present: true})
                   console.log('you are who you say you are');
+                  Toast.show('You have been marked present!', Toast.LONG);
                   let attendance = {
                     lecture_id: this.props.currentLecture.id,
                     student_id: this.props.profile.id,
@@ -133,6 +135,7 @@ class CameraRoute extends Component {
                     student_id: this.props.profile.id,
                     present: false,
                   };
+                  Toast.show('You have been marked absent!', Toast.LONG);               
                   axios.post(`${Config.Local_Host}/api/studentAttendance`, attendance)
                   .then(res => {
                     console.log('this is the res from posting attendance', res);

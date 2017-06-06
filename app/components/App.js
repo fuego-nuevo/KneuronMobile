@@ -13,6 +13,7 @@ import LiveLecture from './Live/LiveLecture';
 import LiveQuiz from './Live/LiveQuiz';
 import EditProfile from './Profile/EditProfile';
 import CameraRoute from './Camera/CameraRoute';
+import LoginNew from './Login/LoginNew';
 
 class App extends Component {
 
@@ -26,16 +27,17 @@ class App extends Component {
     return (
       <Router>
         <Scene key="root" >
-          <Scene key="login" component={Login} title="Login" isAuthenticated={isAuthenticated} errorMessage={errorMessage} dispatch={dispatch} initial />
-          <Scene key="home" component={Home} title="Kneuron" />
-          <Scene key="signup" component={Signup} title="Sign Up" />
-          <Scene key="profile" component={Profile} title="Profile Page" />
-          <Scene key="navbar" component={NavBar} title="Nav" dispatch={dispatch} />
-          <Scene key="lecture" component={Lecture} title="lecture" />
-          <Scene key="livelecture" component={LiveLecture} title="LiveLecture" />
-          <Scene key="livequiz" component={LiveQuiz} title="Pop Quiz" />
-          <Scene key="cameraroute" component={CameraRoute} title="CameraRoute" />
-          <Scene key="editprofile" component={EditProfile} title="EditProfile" />
+          <Scene key="login" component={Login} hideNavBar={true} title="Login" isAuthenticated={isAuthenticated} errorMessage={errorMessage} dispatch={dispatch} initial />
+          <Scene key="home" component={Home} hideNavBar={true} title="Kneuron" />
+          <Scene key="signup" component={Signup} hideNavBar={true} title="Sign Up" />
+          <Scene key="profile" component={Profile} hideNavBar={true} title="Profile Page" />
+          <Scene key="navbar" component={NavBar} hideNavBar={true} title="Nav" dispatch={dispatch} />
+          <Scene key="lecture" component={Lecture} hideNavBar={true} title="lecture" />
+          <Scene key="livelecture" component={LiveLecture} hideNavBar={true} title="LiveLecture" />
+          <Scene key="livequiz" component={LiveQuiz} hideNavBar={true} title="Pop Quiz" />
+          <Scene key="cameraroute" component={CameraRoute} hideNavBar={true} title="CameraRoute" />
+          <Scene key="editprofile" component={EditProfile} hideNavBar={true} title="EditProfile" />
+
         </Scene>
       </Router>
     );

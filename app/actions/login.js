@@ -84,20 +84,19 @@ exports.signupUser = (creds) => {
   };
   return (dispatch) => {
     dispatch(requestLogin(creds));
-
     return axios.post(`${Config.Local_Host}/api/students`, body)
       .then((response) => {
         console.log("this is the response in 89 of signup!!!!!!", response);
-        if (!response.data) {
-          dispatch(loginError('Bad Request...'));
-          console.log('user did not sign up succesfully');
-          return Promise.reject(response);
-        }
+        // if (!response.data) {
+        //   dispatch(loginError('Bad Request...'));
+        //   console.log('user did not sign up succesfully');
+        //   return Promise.reject(response);
+        // }
         AsyncStorage.setItem('id_token', response.data.id_token);
         console.log('this is the token when they signup', AsyncStorage.getItem('id_token'))
         dispatch(receiveLogin(response.data));
         console.log('user did sign up succesfully');
-        Actions.home();
+        Actions.login();
       })
       .catch((err) => {
         console.log('Error: ', err);

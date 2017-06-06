@@ -54,17 +54,17 @@ class CohortList extends Component {
   }
 
   sendCode() {
-    let body = {
+    const body = {
       code: this.state.classCode,
       student_id: this.props.profile.id, 
-    }
+    };
     axios.post(`${Config.Local_Host}/api/studentCohorts`, body)
-    .then(data => {
+    .then((data) => {
       console.log("this is the data returned from posting new class", data);
-      this.props.refresh();
-      this.setState({classCode: this.state.classCode });
+      this.props.getCorhortList();
+      this.setState({ classCode: this.state.classCode });
     })
-
+    .catch(error => console.log('This is the error in sendCode ', error));
   }
 
   render() {

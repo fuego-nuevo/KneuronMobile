@@ -57,3 +57,4 @@ fastlane/screenshots
 
 Graveyard.js
 yarn.lock
+.env

@@ -23,25 +23,26 @@ class Home extends Component {
     AsyncStorage.getItem('id_token')
       .then((res) => {
         axios.get(`${Config.Local_Host}/api/students/${res}`)
-          .then((profile) => {
-            console.log("this is the profile data from home!!!!!!!!!!!!!", profile.data)
-            this.setState({ profile: profile.data}, () => {
-              this.props.updateProfile(profile.data);
+          .then(({ data }) => {
+            console.log("this is the profile data from home!!!!!!!!!!!!!", data)
+            this.setState({ profile: data }, () => {
+              this.props.updateProfile(data);
             })
           })
           .catch((err) => {
             console.log('there was an error grabbing student info, ', err);
           })
       })
+      .catch(error => console.log('Error in CDM of Home ', error));
   }
 
   getCorhortList() {
-        AsyncStorage.getItem('id_token')
+    AsyncStorage.getItem('id_token')
       .then((res) => {
         axios.get(`${Config.Local_Host}/api/students/${res}`)
           .then((profile) => {
             console.log("this is the profile data from home!!!!!!!!!!!!!", profile.data)
-            this.setState({ profile: profile.data}, () => {
+            this.setState({ profile: profile.data }, () => {
               this.props.updateProfile(profile.data);
             })
           })
@@ -54,13 +55,13 @@ class Home extends Component {
   render() {
     const { container } = styles;
     console.log(this.state);
-        return (
-            <View style={container}>
-              <CohortList cohorts={this.state.profile.studentcohorts || []}  refresh={this.getCorhortList}/>
-              <NavBar />
-            </View>
-        );
-    }
+    return (
+        <View style={container}>
+          <CohortList cohorts={this.state.profile.studentcohorts || []} getCorhortList={this.getCorhortList} />
+          <NavBar />
+        </View>
+    );
+  }
 }
 
 

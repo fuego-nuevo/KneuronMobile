@@ -37,6 +37,7 @@ class App extends Component {
           <Scene key="livequiz" component={LiveQuiz} hideNavBar={true} title="Pop Quiz" />
           <Scene key="cameraroute" component={CameraRoute} hideNavBar={true} title="CameraRoute" />
           <Scene key="editprofile" component={EditProfile} hideNavBar={true} title="EditProfile" />
+
         </Scene>
       </Router>
     );

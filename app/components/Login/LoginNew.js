@@ -11,6 +11,8 @@ import {
   TouchableOpacity,
   // StatusBar
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { loginUser } from '../../actions/login';
 
 const { width, height } = Dimensions.get("window");
 
@@ -19,13 +21,46 @@ const background = require('../images/loginpic.jpg');
 // const lockIcon = require("./login1_lock.png");
 // const personIcon = require("./login1_person.png");
 
-export default class LoginScreen extends Component {
+export default class LoginNew extends Component {
 
 // componentWillMount() {
 //   StatusBar.setHidden(true);
 // }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+    };
+    this.passwordChange = this.passwordChange.bind(this);
+    this.emailChange = this.emailChange.bind(this);
+  }
+
+  emailChange(text) {
+    console.log('this is the text line 30', text);
+    this.setState({
+      email: text,
+    });
+  }
+
+  passwordChange(text) {
+    this.setState({
+      password: text,
+    });
+  }
+
+  handleLoginClick() {
+    // console.log('this is the props on line 26', this.props);
+    const email = this.state.email.toLowerCase().replace(/\s/g, '');
+    const password = this.state.password.replace(/\s/g, '');
+    const creds = { email: email, password: password };
+    this.props.onLoginClick(creds);
+  }
+
   render() {
+        console.log('this is the props on line 26', this.props);
+
     return (
       <View style={styles.container}>
         <Image source={background} style={styles.background} resizeMode="cover">
@@ -40,6 +75,7 @@ export default class LoginScreen extends Component {
               <TextInput 
                 placeholder="Username" 
                 placeholderTextColor="#FFF"
+                onChangeText={text => this.emailChange(text)}
                 style={styles.input} 
               />
             </View>
@@ -50,13 +86,14 @@ export default class LoginScreen extends Component {
               <TextInput 
                 placeholderTextColor="#FFF"
                 placeholder="Password" 
-                style={styles.input} 
+                style={styles.input}
+                onChangeText={text => this.passwordChange(text)} 
                 secureTextEntry 
               />
             </View>
             <TouchableOpacity activeOpacity={.5}>
               <View style={styles.button}>
-                <Text style={styles.buttonText}>Sign In</Text>
+                <Text style={styles.buttonText} onPress={() => this.handleLoginClick()}>Sign In</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -65,7 +102,7 @@ export default class LoginScreen extends Component {
               <Text style={styles.accountText}>Don't have an account?</Text>
               <TouchableOpacity activeOpacity={.5}>
                 <View>
-                  <Text style={styles.signupLinkText}>Sign Up</Text>
+                  <Text style={styles.signupLinkText} onPress={Actions.signup}>Sign Up</Text>
                 </View>
               </TouchableOpacity>
             </View>

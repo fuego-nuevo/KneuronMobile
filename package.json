@@ -17,6 +17,7 @@
     "react-native": "^0.44.2",
     "react-native-button": "^1.8.2",
     "react-native-camera": "^0.9.0",
+    "react-native-clean-form": "^0.4.1",
     "react-native-cli": "^2.0.1",
     "react-native-config": "^0.4.2",
     "react-native-deprecated-custom-components": "^0.1.0",

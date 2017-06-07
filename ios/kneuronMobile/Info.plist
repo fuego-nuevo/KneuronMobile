@@ -26,8 +26,14 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>http://52.88.184.104</key>
+			<string></string>
+			<key>kneuroned.io</key>
+			<string></string>
 			<key>localhost</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
@@ -38,7 +44,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>This app lets the user take a picture to be stored in the local camera roll</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This App stores photos take in the camera Roll.</string>
 	<key>UIAppFonts</key>

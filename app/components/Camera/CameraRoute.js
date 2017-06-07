@@ -10,10 +10,13 @@ import {
 import Camera from 'react-native-camera';
 import RNFS from 'react-native-fs';
 import axios from 'axios';
+import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import { LatLonEllipsoidal } from 'geodesy';
 import Config from 'react-native-config';
 import Toast from 'react-native-simple-toast';
+
+const socket = io(`${Config.Local_Host}`);
 
 // import {app_id , app_key} from 'react-native-dotenv';
 class CameraRoute extends Component {
@@ -72,8 +75,8 @@ class CameraRoute extends Component {
         console.log("inside  coord loc baby!: ", position.coords.latitude);
         const { id, lat, lng } = this.props.currentLecture;
         let withinClassRange = false;
-        var studentLat = position.coords.latitude;
-        var studentLng = position.coords.longitude;
+        const studentLat = position.coords.latitude;
+        const studentLng = position.coords.longitude;
       
 
         let p1 = new LatLonEllipsoidal(studentLat, studentLng);
@@ -109,7 +112,7 @@ class CameraRoute extends Component {
               const body = {
                 image: res,
                 subject_id: this.props.profile.username,
-                gallery_name: 'kneuron',
+                gallery_name: 'kneuron1',
               };
               axios.post(`${Config.Local_Host}/api/facialVerify`, body)
               .then(res => {
@@ -126,6 +129,11 @@ class CameraRoute extends Component {
                   axios.post(`${Config.Local_Host}/api/studentAttendance`, attendance)
                   .then(res => {
                     console.log('this is the res from posting attendance', res);
+                    socket.emit('student-track', {
+                    name: this.props.profile.fName + " " + this.props.profile.lName,
+                    present: true,
+                    teacher: this.props.teacher.teacher_id,
+                  });
 
                   });
                 } else {
@@ -135,16 +143,24 @@ class CameraRoute extends Component {
                     student_id: this.props.profile.id,
                     present: false,
                   };
-                  Toast.show('You have been marked absent!', Toast.LONG);               
                   axios.post(`${Config.Local_Host}/api/studentAttendance`, attendance)
                   .then(res => {
                     console.log('this is the res from posting attendance', res);
+                  Toast.show('You have been marked absent!', Toast.LONG); 
+                  socket.emit('student-track', {
+                    name: this.props.profile.fName + " " + this.props.profile.lName,
+                    present: false,
+                    teacher: this.props.teacher.teacher_id,
+                  });              
                   });
                   console.log('who the fuckk are you broo');
                 }
             // .catch(err => {
             //   console.log("there was an error verifying the kairo pic ", err);
             // })
+              })
+              .catch((err) => {
+                console.log('this is err for verifying kairo', err);
               });
             });
           })
@@ -193,6 +209,7 @@ const mapStateToProps = state => ({
   profile: state.profile,
   currentLecture: state.CurrentLecture,
   currentLectureTopics: state.CurrentLectureTopics,
+  teacher: state.currentCohort,
 });
 
 export default connect(mapStateToProps)(CameraRoute);

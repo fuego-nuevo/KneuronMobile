@@ -4,17 +4,21 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import io from 'socket.io-client';
+import Navbar from '../NavBar/NavBar';
 import Config from 'react-native-config';
 import axios from 'axios';
+import Toast from 'react-native-simple-toast';
+const { width, height } = Dimensions.get("window");
 import { currentQuiz } from '../../actions/CurrentQuiz';
 
 
 
-const socket = io('http://localhost:5000');
+const socket = io(`${Config.Local_Host}`);
 // const socket = io();
 
 class LiveLecture extends Component {
@@ -35,6 +39,9 @@ class LiveLecture extends Component {
     const { teacher, currentQuiz } = this.props;
     socket.emit('join', { id: teacher.teacher_id });
     socket.on('live-lecture');
+    socket.on('attendance', () => {
+      Toast.show('Teacher is tracking attendance now'
+    , Toast.LONG)});
     socket.on('pop-quiz', (quizQuestion) => {
       console.log('Quiz received', quizQuestion);
       // quizQuestion = JSON.parse(quizQuestion);
@@ -88,7 +95,7 @@ class LiveLecture extends Component {
     return (
       <View style={container}>
         {topics.map(topic =>
-          <Text key={topic.id} onPress={() => this.handleTopicPress(topic.id)}>{topic.name}</Text>)}
+          <Text style={{textAlign: 'center'}} key={topic.id} onPress={() => this.handleTopicPress(topic.id)}>{topic.name}</Text>)}
         <TextInput style={input} type="text" placeholder="Ask a Question" onChangeText={this.handleStudentQuestionInputChange} />
         <TouchableOpacity style={buttonContainer}>
           <Text style={buttonText} onPress={this.handleStudentQuestionSubmit} > Ask! </Text>
@@ -96,6 +103,9 @@ class LiveLecture extends Component {
         <TouchableOpacity style={styles.buttonContainer}>
           <Text style={styles.buttonText} onPress={Actions.cameraroute}>Attendance</Text>
         </TouchableOpacity>
+        <View style={{position: 'absolute', bottom: 0, width: '100%' }}>
+          <Navbar />
+        </View>
       </View>
     );
   }
@@ -103,7 +113,8 @@ class LiveLecture extends Component {
 
 const styles = {
   container: {
-    padding: 80,
+    padding: 70,
+    height: height,
     backgroundColor: 'gray',
   },
   input: {
@@ -116,6 +127,7 @@ const styles = {
   buttonContainer: {
     backgroundColor: '#2980b9',
     paddingVertical: 15,
+    marginBottom: 10,
   },
   buttonText: {
     textAlign: 'center',

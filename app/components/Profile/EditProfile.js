@@ -9,11 +9,14 @@ import {
   AsyncStorage,
   TextInput,
   TouchableOpacity,
+  Dimensions,
+  ScrollView,
 } from 'react-native';
 import { Container, Content, Footer, FooterTab, Button, Icon, Badge } from 'native-base';
 import Navbar from '../NavBar/NavBar';
 import axios from 'axios';
 import Config from 'react-native-config';
+const { width, height } = Dimensions.get("window");
 
 export default class EditProfile extends Component {
   constructor(props) {
@@ -83,36 +86,38 @@ export default class EditProfile extends Component {
   render() {
     console.log('this is props from redux profile!', this.props);
     return (
-      <View behavior="padding" style={styles.container}>
-        <TextInput
-          type="text"
-          refs="fName"
-          placeholder="Enter Your First Name"
-          onChangeText={text => this.fNameChange(text)}
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          
-        />
-        <TextInput
-          type="text"
-          refs="lName"
-          placeholder="Enter Your Last Name"
-          onChangeText={text => this.lNameChange(text)}
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        />
-        <TextInput
-          type="text"
-          refs="username"
-          placeholder="Enter Your Username"
-          onChangeText={text => this.userNameChange(text)}
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        />        
-        <TouchableOpacity style={{padding: 70}}>
-          <Text onPress={() => this.handleClick()}>Update Profile</Text>
-        </TouchableOpacity>
-          <View style={{position: 'absolute', bottom: 0, width: 376}}>
-            <Navbar />
-          </View>          
-      </View >
+      <Container>
+        <ScrollView behavior="padding" style={styles.container}>
+          <TextInput
+            type="text"
+            refs="fName"
+            placeholder="Enter Your First Name"
+            onChangeText={text => this.fNameChange(text)}
+            style={{height: 40, backgroundColor: 'white', marginTop: 80, textAlign: 'center', margin: 20, borderRadius: 8}}
+            
+          />
+          <TextInput
+            type="text"
+            refs="lName"
+            placeholder="Enter Your Last Name"
+            onChangeText={text => this.lNameChange(text)}
+            style={{height: 40, textAlign: 'center', backgroundColor: '#DDDDDD', borderRadius: 8, margin: 20} }
+          />
+          <TextInput
+            type="text"
+            refs="username"
+            placeholder="Enter Your Username"
+            onChangeText={text => this.userNameChange(text)}
+            style={{height: 40, textAlign: 'center', backgroundColor: 'grey', borderRadius: 8, margin: 20}}
+          />        
+          <Button style={{margin: 0, borderRadius: 20, backgroundColor: 'green', height: 40, width: '45%', textAlign: 'center', left: '4%', marginBottom: 75 }}>
+            <Text onPress={() => this.handleClick()}>Update Profile</Text>
+          </Button>
+        </ScrollView >
+        <View style={{position: 'relative', bottom: 0, width: '100%'}}>
+          <Navbar />
+        </View>
+      </Container>
     );
   }
 }
@@ -123,7 +128,6 @@ const styles = {
     flex: 1,
     backgroundColor: '#3498db',
     position: 'relative',
-    padding: 90,
   },
   logoContainer: {
     alignItems: 'center',
@@ -140,12 +144,13 @@ const styles = {
     width: 160,
     textAlign: 'center',
   },
-    input: {
+  input: {
     height: 40,
     backgroundColor: 'rgba(225,225,255,0.3)',
     marginBottom: 10,
     color: '#FFF',
     paddingHorizontal: 10,
+    textAlign: 'center',
   },
   buttonContainer: {
     backgroundColor: '#2980b9',

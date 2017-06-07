@@ -9,12 +9,15 @@ import {
   TextInput,
 } from 'react-native';
 import  { connect } from "react-redux";
+import Navbar from '../NavBar/NavBar';
 import CohortListEntry from './CohortListEntry';
 import Button from 'react-native-button';
 import Modal from 'react-native-modalbox';
 import Slider from 'react-native-slider';
 import axios from 'axios';
 import Config from 'react-native-config';
+const { width, height } = Dimensions.get("window");
+
 
 let screen = Dimensions.get('window');
 
@@ -77,7 +80,7 @@ class CohortList extends Component {
       <View style={styles.wrapper}>
         <Button onPress={() => this.setState({isOpen: true})} style={styles.btn}>Add Class</Button>
 
-        <Modal isOpen={this.state.isOpen} onClosed={() => this.setState({isOpen: false})} style={[styles.modal, styles.modal4]} position={"center"} backdropContent={BContent}>
+        <Modal isOpen={this.state.isOpen} onClosed={() => this.setState({isOpen: false})} style={[styles.modal]} position={"center"} backdropContent={BContent}>
           <TextInput
             type="text"
             placeholder="Enter Class Code"
@@ -94,6 +97,9 @@ class CohortList extends Component {
             (<CohortListEntry key={cohort.id} id={cohort.id} cohort={cohort} />))}
         </ScrollView>
         }
+        <View style={{position: 'absolute', bottom: 0, width: '100%'}}>
+          <Navbar />
+        </View>
       </View>
 
     );
@@ -125,7 +131,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     width: '100%',
-    marginTop: '20%',
+    marginTop: '5%',
   },
 
   modal: {
@@ -133,22 +139,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  modal2: {
-    height: 230,
-    backgroundColor: '#3B5998',
-  },
-
-  modal3: {
-    height: 300,
-    width: 300,
-  },
-
-  modal4: {
-    height: 300,
-  },
-
   btn: {
-    margin: 10,
     backgroundColor: '#3B5998',
     color: 'white',
     padding: 10,

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Router, Scene, Modal, Actions } from 'react-native-router-flux';
-import { Provider, connect } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { connect } from 'react-redux';
 import Login from './Login/Login';
 import Home from './Home';
 import Signup from './Login/SignUp';
@@ -27,7 +26,7 @@ class App extends Component {
     return (
       <Router>
         <Scene key="root" >
-          <Scene key="login" component={Login} hideNavBar={true} title="Login" isAuthenticated={isAuthenticated} errorMessage={errorMessage} dispatch={dispatch} initial />
+          <Scene key="login" component={LoginNew} hideNavBar={true} title="Login" isAuthenticated={isAuthenticated} errorMessage={errorMessage} dispatch={dispatch} initial />
           <Scene key="home" component={Home} hideNavBar={true} title="Kneuron" />
           <Scene key="signup" component={Signup} hideNavBar={true} title="Sign Up" />
           <Scene key="profile" component={Profile} hideNavBar={true} title="Profile Page" />
@@ -36,7 +35,7 @@ class App extends Component {
           <Scene key="livelecture" component={LiveLecture} hideNavBar={true} title="LiveLecture" />
           <Scene key="livequiz" component={LiveQuiz} hideNavBar={true} title="Pop Quiz" />
           <Scene key="cameraroute" component={CameraRoute} hideNavBar={true} title="CameraRoute" />
-          <Scene key="editprofile" component={EditProfile} hideNavBar={true} title="EditProfile" />
+          <Scene key="editprofile" component={EditProfile} title="EditProfile" />
 
         </Scene>
       </Router>

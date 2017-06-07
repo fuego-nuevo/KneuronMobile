@@ -11,12 +11,13 @@ import {
   TouchableOpacity,
   // StatusBar
 } from 'react-native';
+import { Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { loginUser } from '../../actions/login';
 
 const { width, height } = Dimensions.get("window");
 
-const background = require('../images/loginpic.jpg');
+const background = require('../images/loginnewpic.jpg');
 // const mark = require("./login1_mark.png");
 // const lockIcon = require("./login1_lock.png");
 // const personIcon = require("./login1_person.png");
@@ -35,6 +36,8 @@ export default class LoginNew extends Component {
     };
     this.passwordChange = this.passwordChange.bind(this);
     this.emailChange = this.emailChange.bind(this);
+    const { dispatch, errorMessage, isAuthenticated } = this.props;
+
   }
 
   emailChange(text) {
@@ -55,22 +58,22 @@ export default class LoginNew extends Component {
     const email = this.state.email.toLowerCase().replace(/\s/g, '');
     const password = this.state.password.replace(/\s/g, '');
     const creds = { email: email, password: password };
-    this.props.onLoginClick(creds);
+    this.props.dispatch(loginUser(creds));
   }
 
   render() {
+        const { dispatch, errorMessage, isAuthenticated } = this.props;
         console.log('this is the props on line 26', this.props);
 
     return (
       <View style={styles.container}>
         <Image source={background} style={styles.background} resizeMode="cover">
           <View style={styles.markWrap}>
-            <Image source={background} style={styles.mark} resizeMode="contain" />
           </View>
           <View style={styles.wrapper}>
             <View style={styles.inputWrap}>
               <View style={styles.iconWrap}>
-                <Image source={'https://www.iconfinder.com/data/icons/ui-1/60/05-512.png'} style={styles.icon} resizeMode="contain" />
+                <Icon name='lock' style={styles.icon} resizeMode="contain" />
               </View>
               <TextInput 
                 placeholder="Username" 
@@ -81,7 +84,7 @@ export default class LoginNew extends Component {
             </View>
             <View style={styles.inputWrap}>
               <View style={styles.iconWrap}>
-                <Image source={'http://www.endlessicons.com/wp-content/uploads/2013/05/lock-icon-2-614x460.png'} style={styles.icon} resizeMode="contain" />
+                <Icon name='person' style={styles.icon} resizeMode="contain" />
               </View>
               <TextInput 
                 placeholderTextColor="#FFF"
@@ -136,8 +139,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginVertical: 10,
     height: 40,
-    borderBottomWidth: 1,
-    borderBottomColor: "#CCC"
+    borderBottomWidth: 3,
+    borderBottomColor: "black"
   },
   iconWrap: {
     paddingHorizontal: 7,
@@ -151,9 +154,10 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     paddingHorizontal: 10,
+    backgroundColor: 'grey',
   },
   button: {
-    backgroundColor: "#FF3366",
+    backgroundColor: "grey",
     paddingVertical: 20,
     alignItems: "center",
     justifyContent: "center",
@@ -176,10 +180,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   accountText: {
-    color: "#D8D8D8"
+    color: "black",
   },
   signupLinkText: {
-    color: "#FFF",
+    color: "black",
     marginLeft: 5,
   }
 });

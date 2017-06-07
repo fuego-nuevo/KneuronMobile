@@ -58,7 +58,6 @@ class Home extends Component {
     return (
         <View style={container}>
           <CohortList cohorts={this.state.profile.studentcohorts || []} getCorhortList={this.getCorhortList} />
-          <NavBar />
         </View>
     );
   }

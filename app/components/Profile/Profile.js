@@ -8,9 +8,12 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   AsyncStorage,
+  Dimensions,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Container, Content, Footer, FooterTab, Button, Icon, Badge } from 'native-base';
+const { width, height } = Dimensions.get("window");
+
 import Navbar from '../NavBar/NavBar';
 import axios from 'axios';
 import Config from 'react-native-config';
@@ -66,7 +69,7 @@ fetchStudentData() {
         <TouchableOpacity style={styles.buttonContainer}>
           <Text style={styles.buttonText} onPress={Actions.editprofile}>Edit Profile!</Text>
         </TouchableOpacity>
-          <View style={{position: 'absolute', bottom: 0, width: 376}}>
+          <View style={{position: 'absolute', bottom: 0, width: '100%'}}>
             <Navbar />
           </View> 
       </View>

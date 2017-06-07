@@ -20,11 +20,11 @@ export default class Login extends Component {
     const { dispatch, errorMessage, isAuthenticated } = this.props;
     return (
       <View behavior="padding" style={styles.container}>
-        <LoginNew
+        {/*<LoginNew
           errorMessage={errorMessage}
           onLoginClick={creds => dispatch(loginUser(creds))}
           isAuthenticated={isAuthenticated}
-        />
+        />*/}
       </View>
     );
   }

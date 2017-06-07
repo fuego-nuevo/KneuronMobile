@@ -87,8 +87,6 @@ class LiveLecture extends Component {
   render() {
     const { topics } = this.props;
     const { container, input, buttonContainer, buttonText } = styles;
-    console.log('this.props in live lecture boiiiiiiiiiiiiiiiI', this.props);
-    console.log('this is the topics in live lecture lime 86 !!!!!!!!!!!!!!!!!!!', topics)
     return (
       <View style={container}>
         {topics.map(topic =>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native';
 import { Actions, ActionConst } from 'react-native-router-flux';
-import Config from 'react-native-config'
+import Config from 'react-native-config';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';

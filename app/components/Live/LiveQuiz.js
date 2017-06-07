@@ -33,6 +33,7 @@ class LiveQuiz extends Component {
     this.submitAnswers = this.submitAnswers.bind(this);
     this.gradeAnswers = this.gradeAnswers.bind(this);
     this.postAnswersToDB = this.postAnswersToDB.bind(this);
+    this.postResultsToDB = this.postResultsToDB.bind(this);
     this.timerTick = this.timerTick.bind(this);
   }
 
@@ -44,9 +45,9 @@ class LiveQuiz extends Component {
 
   timerTick() {
     // this.state.secondsRemaining > 0 ? this.setState({ secondsRemaining: this.state.secondsRemaining - 1 }
-    this.state.secondsRemaining > 0 ? this.setState({ secondsRemaining: this.state.secondsRemaining - 1 }) : null;
-    // this.postAnswersToDB();
-    // Actions.pop();
+    this.state.secondsRemaining > 0 ? this.setState({ secondsRemaining: this.state.secondsRemaining - 1 }) :
+    this.postAnswersToDB();
+    Actions.pop();
   }
 
   handleSelectedAnswer(id, selected) {
@@ -114,7 +115,7 @@ class LiveQuiz extends Component {
         teacher: cohort.teacher_id,
       });
       await this.postAnswersToDB();
-      // await this.postResultsToDB();
+      await this.postResultsToDB();
       Actions.pop();
     } else {
       Alert.alert(

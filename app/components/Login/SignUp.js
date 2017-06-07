@@ -76,6 +76,9 @@ class SignUp extends Component {
             console.log('this is the res after enrolling picture',res);
           })
         })
+        .catch((err) => {
+          console.log('err in signup picture', err);
+        })
       })
       .catch(err => console.error(err));
   }

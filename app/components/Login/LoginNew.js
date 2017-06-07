@@ -132,7 +132,6 @@ const styles = StyleSheet.create({
   },
   markWrapTwo: {
     flex: 1,
-    paddingVertical: ,
   },
   mark: {
     width: null,

@@ -12,12 +12,13 @@ import io from 'socket.io-client';
 import Navbar from '../NavBar/NavBar';
 import Config from 'react-native-config';
 import axios from 'axios';
+import Toast from 'react-native-simple-toast';
 const { width, height } = Dimensions.get("window");
 import { currentQuiz } from '../../actions/CurrentQuiz';
 
 
 
-const socket = io('http://localhost:5000');
+const socket = io(`${Config.Local_Host}`);
 // const socket = io();
 
 class LiveLecture extends Component {
@@ -38,6 +39,9 @@ class LiveLecture extends Component {
     const { teacher, currentQuiz } = this.props;
     socket.emit('join', { id: teacher.teacher_id });
     socket.on('live-lecture');
+    socket.on('attendance', () => {
+      Toast.show('Teacher is tracking attendance now'
+    , Toast.LONG)});
     socket.on('pop-quiz', (quizQuestion) => {
       console.log('Quiz received', quizQuestion);
       // quizQuestion = JSON.parse(quizQuestion);

@@ -140,7 +140,6 @@ const styles = StyleSheet.create({
   },
 
   btn: {
-
     backgroundColor: '#3B5998',
     color: 'white',
     padding: 10,

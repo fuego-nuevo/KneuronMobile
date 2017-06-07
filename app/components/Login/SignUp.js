@@ -64,7 +64,7 @@ class SignUp extends Component {
           const body = {
             'image': res,
             'subject_id': this.state.userInfo.username,
-            'gallery_name': 'kneuron'
+            'gallery_name': 'kneuron1'
           }
           // console.log('this is the body.image of signup ',body.image)
           this.imageChange(res);

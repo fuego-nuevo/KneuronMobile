@@ -9,6 +9,7 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
+  ScrollView,
   // StatusBar
 } from 'react-native';
 import { Icon } from 'native-base';
@@ -66,8 +67,9 @@ export default class LoginNew extends Component {
         console.log('this is the props on line 26', this.props);
 
     return (
-      <View style={styles.container}>
-        <Image source={background} style={styles.background} resizeMode="cover">
+      <ScrollView style={styles.container}>
+        
+        <Image source={background} style={styles.background} >
           <View style={styles.markWrap}>
           </View>
           <View style={styles.wrapper}>
@@ -110,18 +112,27 @@ export default class LoginNew extends Component {
               </TouchableOpacity>
             </View>
           </View>
+          <View style={styles.markWrapTwo}>
+          </View>
         </Image>
-      </View>
+      </ScrollView>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    opacity: 0.7,
+    height: '100%',
+    width: '100%',
   },
   markWrap: {
     flex: 1,
     paddingVertical: 30,
+  },
+  markWrapTwo: {
+    flex: 1,
+    paddingVertical: ,
   },
   mark: {
     width: null,
@@ -129,8 +140,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   background: {
-    width,
-    height,
+    width: '100%',
+    height: '100%',
   },
   wrapper: {
     paddingVertical: 30,
@@ -162,6 +173,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 30,
+    width: '70%',
+    left: '15%',
   },
   buttonText: {
     color: "#FFF",

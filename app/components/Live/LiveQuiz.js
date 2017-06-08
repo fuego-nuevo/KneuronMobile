@@ -17,39 +17,41 @@ import Config from 'react-native-config';
 const socket = io('http://localhost:5000');
 
 class LiveQuiz extends Component {
-  // constructor({ quiz, profile }) {
-  constructor(props) {
-    // super({ quiz, profile });
-    super(props);
+  constructor({ quiz, profile }) {
+  // constructor(props) {
+    super({ quiz, profile });
+    // super(props);
     this.state = {
       questions: null,
       secondsRemaining: 1,
       correct: 0,
       selectedAnswers: {
-        student_id: this.props.profile.id,
+        // student_id: this.props.profile.id,
+        student_id: profile.id,
       },
     };
     this.submitAnswers = this.submitAnswers.bind(this);
     this.gradeAnswers = this.gradeAnswers.bind(this);
     this.postAnswersToDB = this.postAnswersToDB.bind(this);
-    this.setQuestionsIntoState = this.setQuestionsIntoState.bind(this);
+    this.postResultsToDB = this.postResultsToDB.bind(this);
     this.timerTick = this.timerTick.bind(this);
   }
 
   componentDidMount() {
     const { quiz } = this.props;
     this.setState({ secondsRemaining: quiz.time });
-    setInterval(this.timerTick, 1000);
-    return this.state.secondsRemaining === 0 ? Actions.livelecture() : null;
+    this.state.secondsRemaining > 0 ? setInterval(this.timerTick, 1000) : null;
   }
 
   timerTick() {
-    this.setState({ secondsRemaining: this.state.secondsRemaining - 1 });
-
+    // this.state.secondsRemaining > 0 ? this.setState({ secondsRemaining: this.state.secondsRemaining - 1 }
+    this.state.secondsRemaining > 0 ? this.setState({ secondsRemaining: this.state.secondsRemaining - 1 }) : null;
+    // this.postAnswersToDB();
+    // Actions.pop();
   }
 
   handleSelectedAnswer(id, selected) {
-    this.setState({ selectedAnswers: { ...this.state.selectedAnswers, [id]: selected } }, () => console.log('this is the state of seleleeeeeeee ', this.state.selectedAnswers));
+    this.setState({ selectedAnswers: { ...this.state.selectedAnswers, [id]: selected } });
   }
 
   gradeAnswers() {
@@ -76,20 +78,44 @@ class LiveQuiz extends Component {
         student_id: profile.id,
       })
         .then(data => console.log(data))
-        .catch(error => console.log('Error in submitAnswers ', error));
+        .catch(error => console.log('Error in postAnswersToDB ', error));
     });
   }
 
+  postResultsToDB() {
+    const { cohort, profile } = this.props;
+    axios.post(`${Config.Local_Host}/api/results`, {
+      student_id: profile.id,
+      quiz_id: quizid,
+      cohort_id: cohort.id,
+      lecture_id: lecture_id,
+      percentage: this.gradeAnswers(this.state.selectedAnswers),
+    })
+      .then(data => console.log(data))
+      .catch(error => console.log('Error in postResultsToDB ', error));
+  }
+
+  // postResultsToDB() {
+  //   const { cohort, profile } = this.props;
+  //   axios.post(`${Config.Local_Host}/api/answers`, {
+  //     percentage: this.state.selectedAnswers,
+  //     cohort_id: cohort.id,
+  //     topic_id: questionId,
+  //     student_id: profile.id,
+  //   })
+  // }
+
   async submitAnswers() {
-    const { profile, teacher, quiz } = this.props;
+    const { profile, cohort, quiz } = this.props;
     const questions = JSON.parse(quiz.questions);
-    if (Object.keys(this.state.selectedAnswers).length >= questions.length) {
+    if (Object.keys(this.state.selectedAnswers).length > questions.length) {
       await socket.emit('student-answers', {
         correct: this.gradeAnswers(this.state.selectedAnswers),
         name: `${profile.fName} ${profile.lName}`,
-        teacher: teacher.teacher_id,
+        teacher: cohort.teacher_id,
       });
       await this.postAnswersToDB();
+      // await this.postResultsToDB();
       Actions.pop();
     } else {
       Alert.alert(
@@ -107,6 +133,7 @@ class LiveQuiz extends Component {
     const { container } = styles;
     const { quiz, profile } = this.props;
     const questions = JSON.parse(quiz.questions);
+    console.log('these are the props in livequiz', this.props)
     return (
       <View style={container}>
         <Text>Time Remaining: {this.state.secondsRemaining}</Text>
@@ -151,7 +178,7 @@ const styles = {
 const mapStateToProps = state => ({
   quiz: state.currentQuiz,
   profile: state.profile,
-  teacher: state.currentCohort,
+  cohort: state.currentCohort,
 });
 
 export default connect(mapStateToProps)(LiveQuiz);

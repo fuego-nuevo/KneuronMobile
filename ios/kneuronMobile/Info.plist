@@ -30,6 +30,10 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>169.254.137.166</key>
+			<string></string>
+			<key>169.254.137.166:5000</key>
+			<string></string>
 			<key>http://52.88.184.104</key>
 			<string></string>
 			<key>kneuroned.io</key>

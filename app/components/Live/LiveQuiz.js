@@ -14,7 +14,7 @@ import io from 'socket.io-client';
 import TimerMixin from 'react-timer-mixin';
 import Config from 'react-native-config';
 
-const socket = io('http://localhost:5000');
+const socket = io(`${Config.Local_Host}`);
 
 class LiveQuiz extends Component {
   constructor({ quiz, profile }) {
@@ -70,6 +70,7 @@ class LiveQuiz extends Component {
 
   postAnswersToDB() {
     const { profile } = this.props;
+    console.log('this is the type of profile id ', typeof profile.id);
     _.each(this.state.selectedAnswers, (choice, questionId) => {
       axios.post(`${Config.Local_Host}/api/answers`, {
         selected: choice,
@@ -98,7 +99,7 @@ class LiveQuiz extends Component {
     const { profile, cohort, quiz } = this.props;
     const questions = JSON.parse(quiz.questions);
     if (Object.keys(this.state.selectedAnswers).length > questions.length) {
-      await socket.emit('student-answers', {
+      socket.emit('student-answers', {
         correct: this.gradeAnswers(this.state.selectedAnswers),
         name: `${profile.fName} ${profile.lName}`,
         teacher: cohort.teacher_id,

@@ -42,6 +42,11 @@ class LiveLecture extends Component {
     socket.on('pop-quiz', (quizQuestion) => {
       this.handlePopQuiz(quizQuestion);
     });
+    socket.on('leave', () => {
+      Toast.show('Live lecture has ended!', Toast.LONG);
+      socket.emit('leave', { id: teacher.teacher_id });
+      Actions.home();
+    });
   }
 
   setModalVisible(visible) {
@@ -96,7 +101,7 @@ class LiveLecture extends Component {
         <TouchableOpacity style={styles.buttonContainer}>
           <Text style={styles.buttonText} onPress={Actions.cameraroute}>Attendance</Text>
         </TouchableOpacity>
-        <View style={{position: 'absolute', bottom: 0, width: '100%' }}>
+        <View style={{position: 'absolute', bottom: 13, left: '80%' }}>
           <Navbar />
         </View>
       </View>

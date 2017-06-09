@@ -91,7 +91,7 @@ class CohortList extends Component {
             onChangeText={text => this.classCode(text)}
           />
           <TouchableOpacity style={styles.buttonContainer}>
-          <Text style={styles.buttonText} onPress={() => { this.sendCode(); }}>Submit Clas Code</Text>
+          <Text style={styles.buttonText} onPress={() => { this.sendCode(); }}>Submit Class Code</Text>
         </TouchableOpacity>
         </Modal>
         { !this.state.isOpen &&
@@ -169,13 +169,15 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     backgroundColor: 'rgba(225,225,255,0.3)',
-    marginBottom: 10,
-    color: '#FFF',
     paddingHorizontal: 10,
     color: 'black',
+    width: '60%',
+    marginLeft: '20%',
+    marginBottom: 40,
+    textAlign: 'center',
   },
   buttonContainer: {
-    backgroundColor: '#2980b9',
+    backgroundColor: '#da0576',
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 20,

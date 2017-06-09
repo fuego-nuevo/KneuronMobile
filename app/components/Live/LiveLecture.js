@@ -5,6 +5,8 @@ import {
   Text,
   TouchableOpacity,
   Dimensions,
+  Picker,
+  ScrollView,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -92,8 +94,10 @@ class LiveLecture extends Component {
     const { container, input, buttonContainer, buttonText } = styles;
     return (
       <View style={container}>
+        <ScrollView >
         {topics.map(topic =>
-          <Text style={{textAlign: 'center'}} key={topic.id} onPress={() => this.handleTopicPress(topic.id)}>{topic.name}</Text>)}
+          <Text style={{textAlign: 'center', marginBottom: 5, borderWidth: 2}} key={topic.id} onPress={() => this.handleTopicPress(topic.id)}>{topic.name}</Text>)}
+        </ScrollView>
         <TextInput style={input} type="text" placeholder="Ask a Question" onChangeText={this.handleStudentQuestionInputChange} />
         <TouchableOpacity style={buttonContainer}>
           <Text style={buttonText} onPress={this.handleStudentQuestionSubmit} > Ask! </Text>
@@ -101,7 +105,7 @@ class LiveLecture extends Component {
         <TouchableOpacity style={styles.buttonContainer}>
           <Text style={styles.buttonText} onPress={Actions.cameraroute}>Attendance</Text>
         </TouchableOpacity>
-        <View style={{position: 'absolute', bottom: 13, left: '80%' }}>
+        <View style={{position: 'absolute', bottom: 13, left: '75%' }}>
           <Navbar />
         </View>
       </View>
@@ -113,19 +117,24 @@ const styles = {
   container: {
     padding: 70,
     height: height,
-    backgroundColor: 'gray',
+    backgroundColor: '#dcdfe5',
   },
   input: {
     height: 40,
+    marginTop: 200,
     backgroundColor: 'rgba(225,225,255,0.3)',
-    marginBottom: 10,
-    color: '#D3D3D3',
+    color: 'black',
     paddingHorizontal: 10,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 5,
   },
   buttonContainer: {
-    backgroundColor: '#2980b9',
+    backgroundColor: 'black',
     paddingVertical: 15,
     marginBottom: 10,
+    borderRadius: 5,
   },
   buttonText: {
     textAlign: 'center',

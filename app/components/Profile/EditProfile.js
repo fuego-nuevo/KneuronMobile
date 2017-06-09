@@ -93,7 +93,7 @@ export default class EditProfile extends Component {
             refs="fName"
             placeholder="Enter Your First Name"
             onChangeText={text => this.fNameChange(text)}
-            style={{height: 40, backgroundColor: 'white', marginTop: 80, textAlign: 'center', margin: 20, borderRadius: 8}}
+            style={{height: 40, backgroundColor: 'rgba(255,255,255,.7)', marginTop: 80, textAlign: 'center', margin: 20, borderRadius: 8, width: '60%', marginLeft: '20%'}}
             
           />
           <TextInput
@@ -101,17 +101,17 @@ export default class EditProfile extends Component {
             refs="lName"
             placeholder="Enter Your Last Name"
             onChangeText={text => this.lNameChange(text)}
-            style={{height: 40, textAlign: 'center', backgroundColor: '#DDDDDD', borderRadius: 8, margin: 20} }
+            style={{height: 40, textAlign: 'center', backgroundColor: 'rgba(255,255,255,.7)', borderRadius: 8, margin: 20, width: '60%', marginLeft: '20%'} }
           />
           <TextInput
             type="text"
             refs="username"
             placeholder="Enter Your Username"
             onChangeText={text => this.userNameChange(text)}
-            style={{height: 40, textAlign: 'center', backgroundColor: 'grey', borderRadius: 8, margin: 20}}
+            style={{height: 40, textAlign: 'center', backgroundColor: 'rgba(255,255,255,.7)', borderRadius: 8, margin: 20, width: '60%', marginLeft: '20%'}}
           />        
-          <Button style={{margin: 0, borderRadius: 20, backgroundColor: 'green', height: 40, width: '45%', textAlign: 'center', left: '4%', marginBottom: 75 }}>
-            <Text onPress={() => this.handleClick()}>Update Profile</Text>
+          <Button style={{margin: 0, borderRadius: 8, backgroundColor: 'black', height: 40, width: '45%', marginBottom: 75, marginTop: 40, width: '40%', marginLeft: '30%' }}>
+            <Text style={{color: 'white', textAlign: 'center' }} onPress={() => this.handleClick()}>Update Profile</Text>
           </Button>
         </ScrollView >
         <View style={{position: 'relative', bottom: 13, width: '100%'}}>
@@ -126,7 +126,7 @@ export default class EditProfile extends Component {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#3498db',
+    backgroundColor: '#dcdfe5',
     position: 'relative',
   },
   logoContainer: {

@@ -35,14 +35,14 @@ class CohortListEntry extends Component {
     return (
       <TouchableOpacity onPress={this.handleTap}>
         <View style={container}>
-          <View style={join}>
-            <Icon name="apps" />
-          </View>
           <View style={title}>
             <Text style={text}>
               {this.props.cohort.cohort.subject}
             </Text>
           </View>
+            <Text style={text}>
+              {this.props.cohort.cohort.semester}
+            </Text>
           <View style={time}>
             <Text style={text}>Class starts at {this.props.cohort.cohort.time}</Text>
           </View>

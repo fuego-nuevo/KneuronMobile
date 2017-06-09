@@ -17,7 +17,7 @@ const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
 
 
 const store = createStoreWithMiddleware(Reducers);
-
+  console.disableYellowBox = true;
 export default class kneuronMobile extends Component {
   render() {
     return (

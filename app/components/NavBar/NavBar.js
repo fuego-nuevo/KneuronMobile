@@ -17,7 +17,7 @@ class NavBar extends Component {
     const { logoutUser } = this.props;
     const { container, button } = styles;
     return (
-      <View style={{flex:1, backgroundColor: '#f3f3f3'}}>
+      <View style={{ marginBottom: 10,backgroundColor: '#f3f3f3'}}>
         {/*Rest of App come ABOVE the action button component!*/}
         <ActionButton buttonColor="#da0576">
           <ActionButton.Item buttonColor='#9b59b6' title="Home" onPress={Actions.home}>

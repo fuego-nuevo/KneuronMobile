@@ -9,13 +9,10 @@ import io from 'socket.io-client';
 import Config from 'react-native-config';
 
 import { updateProfile } from '../actions/UpdateProfile';
-import io from 'socket.io-client';
 import NavBar from './NavBar/NavBar';
 import CohortList from './Cohorts/CohortList';
 
-const socket = io('http://localhost:5000');
-
-const socket = io('http://localhost:5000');
+const socket = io(`${Config.Local_Host}`);
 
 class Home extends Component {
   constructor(props) {

@@ -27,17 +27,9 @@
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+		<false/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>169.254.137.166</key>
-			<string></string>
-			<key>169.254.137.166:5000</key>
-			<string></string>
-			<key>http://52.88.184.104</key>
-			<string></string>
-			<key>kneuroned.io</key>
-			<string></string>
 			<key>localhost</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
@@ -88,6 +80,7 @@
 		<string>Skia.ttf</string>
 		<string>Times New Roman.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>MaterialCommunityIcons.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

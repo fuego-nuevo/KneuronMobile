@@ -103,7 +103,7 @@ class LiveLecture extends Component {
         <TouchableOpacity style={styles.buttonContainer}>
           <Text style={styles.buttonText} onPress={Actions.cameraroute}>Attendance</Text>
         </TouchableOpacity>
-        <View style={{position: 'absolute', bottom: 0, width: '100%' }}>
+        <View style={{position: 'absolute', bottom: 13, left: '80%' }}>
           <Navbar />
         </View>
       </View>

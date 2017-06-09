@@ -79,7 +79,7 @@ class CameraRoute extends Component {
           const body = {
             image: res,
             subject_id: this.props.profile.username,
-            gallery_name: 'kneuron1',
+            gallery_name: 'kneuron2',
           };
           axios.post(`${Config.Local_Host}/api/facialVerify`, body)
           .then(res => {
@@ -147,7 +147,8 @@ class CameraRoute extends Component {
           }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}
-          captureTarget={Camera.constants.CaptureTarget.disk}>
+          captureTarget={Camera.constants.CaptureTarget.disk}
+          type={Camera.constants.Type.front}>
           {/*<TouchableHighlight
           style={styles.capture}
           onPress={this.takePicture.bind(this)}

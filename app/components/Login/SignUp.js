@@ -10,7 +10,8 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableHighlight,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  ScrollView,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { signupUser } from '../../actions/login';
@@ -64,7 +65,7 @@ class SignUp extends Component {
           const body = {
             'image': res,
             'subject_id': this.state.userInfo.username,
-            'gallery_name': 'kneuron1'
+            'gallery_name': 'kneuron2'
           }
           // console.log('this is the body.image of signup ',body.image)
           this.imageChange(res);
@@ -127,36 +128,36 @@ class SignUp extends Component {
     console.log('this is the state on loginform 123', this.state);
 
     return (
-      <View behavior="padding" style={styles.container}>
+      <View style={styles.container}>
         <View>
           <TextInput
             type="text"
-            placeholder="Enter Your Email fool"
+            placeholder="Enter Your Email"
             onChangeText={text => this.emailChange(text)}
             style={styles.input}
           />
           <TextInput
             type="password"
-            placeholder="Enter Your Password fool"
+            placeholder="Enter Your Password"
             onChangeText={text => this.passwordChange(text)}
             secureTextEntry
             style={styles.input}
           />
           <TextInput
             type="text"
-            placeholder="Enter Your FirstName fool"
+            placeholder="Enter Your FirstName"
             onChangeText={text => this.fNameChange(text)}
             style={styles.input}
           />
           <TextInput
             type="text"
-            placeholder="Enter Your LastName fool"
+            placeholder="Enter Your LastName"
             onChangeText={text => this.lNameChange(text)}
             style={styles.input}
           />
           <TextInput
             type="text"
-            placeholder="Enter Your UserName fool"
+            placeholder="Enter Your UserName"
             onChangeText={text => this.usernameChange(text)}
             style={styles.input}
           />
@@ -168,6 +169,7 @@ class SignUp extends Component {
           }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.stretch}
+          type={Camera.constants.Type.front}
           captureTarget={Camera.constants.CaptureTarget.disk}>
           <TouchableHighlight
           style={styles.capture}
@@ -194,7 +196,8 @@ export default connect(null, { signupUser })(SignUp);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 65,
+    padding: 20,
+    backgroundColor: 'white',
   },
   camera: {
     flex: 1,
@@ -207,7 +210,7 @@ const styles = StyleSheet.create({
   },
   capture: {
     flex: 0,
-    backgroundColor: 'yellow',
+    backgroundColor: 'white',
     borderRadius: 5,
     color: '#000',
     padding: 10,
@@ -219,9 +222,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: 'black',
     paddingHorizontal: 10,
+    textAlign: 'center',
+    width: '70%',
+    left: '15%',
+    borderRadius: 3,
   },
   buttonContainer: {
-    backgroundColor: '#2980b9',
+    backgroundColor: '#da0576',
     paddingVertical: 15,
   },
   buttonText: {

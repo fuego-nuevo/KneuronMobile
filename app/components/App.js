@@ -26,7 +26,7 @@ class App extends Component {
     return (
       <Router>
         <Scene key="root" >
-          <Scene key="login" component={LoginNew} hideNavBar={true} title="Login" isAuthenticated={isAuthenticated} errorMessage={errorMessage} dispatch={dispatch} initial />
+          <Scene key="login" component={LoginNew} hideNavBar={true} title="Login" isAuthenticated={isAuthenticated} errorMessage={errorMessage} dispatch={dispatch} intital  />
           <Scene key="home" component={Home} hideNavBar={true} title="Kneuron" />
           <Scene key="signup" component={Signup} hideNavBar={true} title="Sign Up" />
           <Scene key="profile" component={Profile} hideNavBar={true} title="Profile Page" />

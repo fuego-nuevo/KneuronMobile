@@ -33,7 +33,6 @@ class LiveQuiz extends Component {
     this.submitAnswers = this.submitAnswers.bind(this);
     this.gradeAnswers = this.gradeAnswers.bind(this);
     this.postAnswersToDB = this.postAnswersToDB.bind(this);
-    this.postResultsToDB = this.postResultsToDB.bind(this);
     this.timerTick = this.timerTick.bind(this);
   }
 
@@ -45,9 +44,9 @@ class LiveQuiz extends Component {
 
   timerTick() {
     // this.state.secondsRemaining > 0 ? this.setState({ secondsRemaining: this.state.secondsRemaining - 1 }
-    this.state.secondsRemaining > 0 ? this.setState({ secondsRemaining: this.state.secondsRemaining - 1 }) : null;
-    // this.postAnswersToDB();
-    // Actions.pop();
+    this.state.secondsRemaining > 0 ? this.setState({ secondsRemaining: this.state.secondsRemaining - 1 }) :
+    this.postAnswersToDB();
+    Actions.pop();
   }
 
   handleSelectedAnswer(id, selected) {
@@ -83,27 +82,17 @@ class LiveQuiz extends Component {
   }
 
   postResultsToDB() {
-    const { cohort, profile } = this.props;
+    const { cohort, profile, lecture_id, quiz } = this.props;
     axios.post(`${Config.Local_Host}/api/results`, {
       student_id: profile.id,
-      quiz_id: quizid,
+      quiz_id: quiz.id,
       cohort_id: cohort.id,
-      lecture_id: lecture_id,
+      lecture_id,
       percentage: this.gradeAnswers(this.state.selectedAnswers),
     })
       .then(data => console.log(data))
       .catch(error => console.log('Error in postResultsToDB ', error));
   }
-
-  // postResultsToDB() {
-  //   const { cohort, profile } = this.props;
-  //   axios.post(`${Config.Local_Host}/api/answers`, {
-  //     percentage: this.state.selectedAnswers,
-  //     cohort_id: cohort.id,
-  //     topic_id: questionId,
-  //     student_id: profile.id,
-  //   })
-  // }
 
   async submitAnswers() {
     const { profile, cohort, quiz } = this.props;
@@ -115,7 +104,7 @@ class LiveQuiz extends Component {
         teacher: cohort.teacher_id,
       });
       await this.postAnswersToDB();
-      // await this.postResultsToDB();
+      await this.postResultsToDB();
       Actions.pop();
     } else {
       Alert.alert(
@@ -133,7 +122,6 @@ class LiveQuiz extends Component {
     const { container } = styles;
     const { quiz, profile } = this.props;
     const questions = JSON.parse(quiz.questions);
-    console.log('these are the props in livequiz', this.props)
     return (
       <View style={container}>
         <Text>Time Remaining: {this.state.secondsRemaining}</Text>

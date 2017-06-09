@@ -9,17 +9,15 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import io from 'socket.io-client';
-import Navbar from '../NavBar/NavBar';
 import Config from 'react-native-config';
 import axios from 'axios';
 import Toast from 'react-native-simple-toast';
-const { width, height } = Dimensions.get("window");
+import Navbar from '../NavBar/NavBar';
 import { currentQuiz } from '../../actions/CurrentQuiz';
 
-
+const { width, height } = Dimensions.get('window');
 
 const socket = io(`${Config.Local_Host}`);
-// const socket = io();
 
 class LiveLecture extends Component {
   constructor(props) {
@@ -40,11 +38,8 @@ class LiveLecture extends Component {
     socket.emit('join', { id: teacher.teacher_id });
     socket.on('live-lecture');
     socket.on('attendance', () => {
-      Toast.show('Teacher is tracking attendance now'
-    , Toast.LONG)});
+      Toast.show('Teacher is tracking attendance now', Toast.LONG) });
     socket.on('pop-quiz', (quizQuestion) => {
-      console.log('Quiz received', quizQuestion);
-      // quizQuestion = JSON.parse(quizQuestion);
       this.handlePopQuiz(quizQuestion);
     });
   }
@@ -90,8 +85,6 @@ class LiveLecture extends Component {
   render() {
     const { topics } = this.props;
     const { container, input, buttonContainer, buttonText } = styles;
-    console.log('this.props in live lecture boiiiiiiiiiiiiiiiI', this.props);
-    console.log('this is the topics in live lecture lime 86 !!!!!!!!!!!!!!!!!!!', topics)
     return (
       <View style={container}>
         {topics.map(topic =>

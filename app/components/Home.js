@@ -5,10 +5,17 @@ import {
   AsyncStorage,
 } from 'react-native';
 import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Footer, FooterTab, Button } from 'native-base';
+import io from 'socket.io-client';
+import Config from 'react-native-config';
+
 import { updateProfile } from '../actions/UpdateProfile';
+import io from 'socket.io-client';
 import NavBar from './NavBar/NavBar';
 import CohortList from './Cohorts/CohortList';
-import Config from 'react-native-config';
+
+const socket = io('http://localhost:5000');
+
+const socket = io('http://localhost:5000');
 
 class Home extends Component {
   constructor(props) {
@@ -20,6 +27,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    socket.on('live-lecture');
     AsyncStorage.getItem('id_token')
       .then((res) => {
         axios.get(`${Config.Local_Host}/api/students/${res}`)

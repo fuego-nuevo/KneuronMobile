@@ -99,8 +99,6 @@ class LiveQuiz extends Component {
     const { profile, cohort, quiz } = this.props;
     const questions = JSON.parse(quiz.questions);
     if (Object.keys(this.state.selectedAnswers).length > questions.length) {
-      console.log('hello this is submitAnswers');
-      console.log('hey this is the cohort.teacher_id ', cohort.teacher_id);
       socket.emit('student-answers', {
         correct: this.gradeAnswers(this.state.selectedAnswers),
         name: `${profile.fName} ${profile.lName}`,

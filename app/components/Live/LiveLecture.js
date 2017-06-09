@@ -42,6 +42,11 @@ class LiveLecture extends Component {
     socket.on('pop-quiz', (quizQuestion) => {
       this.handlePopQuiz(quizQuestion);
     });
+    socket.on('leave', () => {
+      Toast.show('Live lecture has ended!', Toast.LONG);
+      socket.emit('leave', { id: teacher.teacher_id });
+      Actions.home();
+    });
   }
 
   setModalVisible(visible) {

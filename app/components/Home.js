@@ -5,11 +5,12 @@ import {
   AsyncStorage,
 } from 'react-native';
 import { Container, View, Icon, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Footer, FooterTab, Button } from 'native-base';
-import { updateProfile } from '../actions/UpdateProfile';
 import io from 'socket.io-client';
+import Config from 'react-native-config';
+
+import { updateProfile } from '../actions/UpdateProfile';
 import NavBar from './NavBar/NavBar';
 import CohortList from './Cohorts/CohortList';
-import Config from 'react-native-config';
 
 const socket = io('http://localhost:5000');
 

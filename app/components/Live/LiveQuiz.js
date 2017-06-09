@@ -83,27 +83,17 @@ class LiveQuiz extends Component {
   }
 
   postResultsToDB() {
-    const { cohort, profile } = this.props;
+    const { cohort, profile, lecture_id, quiz } = this.props;
     axios.post(`${Config.Local_Host}/api/results`, {
       student_id: profile.id,
-      quiz_id: quizid,
+      quiz_id: quiz.id,
       cohort_id: cohort.id,
-      lecture_id: lecture_id,
+      lecture_id,
       percentage: this.gradeAnswers(this.state.selectedAnswers),
     })
       .then(data => console.log(data))
       .catch(error => console.log('Error in postResultsToDB ', error));
   }
-
-  // postResultsToDB() {
-  //   const { cohort, profile } = this.props;
-  //   axios.post(`${Config.Local_Host}/api/answers`, {
-  //     percentage: this.state.selectedAnswers,
-  //     cohort_id: cohort.id,
-  //     topic_id: questionId,
-  //     student_id: profile.id,
-  //   })
-  // }
 
   async submitAnswers() {
     const { profile, cohort, quiz } = this.props;
@@ -133,7 +123,6 @@ class LiveQuiz extends Component {
     const { container } = styles;
     const { quiz, profile } = this.props;
     const questions = JSON.parse(quiz.questions);
-    console.log('these are the props in livequiz', this.props)
     return (
       <View style={container}>
         <Text>Time Remaining: {this.state.secondsRemaining}</Text>

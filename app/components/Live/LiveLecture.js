@@ -9,14 +9,13 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import io from 'socket.io-client';
-import Navbar from '../NavBar/NavBar';
 import Config from 'react-native-config';
 import axios from 'axios';
 import Toast from 'react-native-simple-toast';
-const { width, height } = Dimensions.get("window");
+import Navbar from '../NavBar/NavBar';
 import { currentQuiz } from '../../actions/CurrentQuiz';
 
-
+const { width, height } = Dimensions.get('window');
 
 const socket = io(`${Config.Local_Host}`);
 
@@ -39,8 +38,7 @@ class LiveLecture extends Component {
     socket.emit('join', { id: teacher.teacher_id });
     socket.on('live-lecture');
     socket.on('attendance', () => {
-      Toast.show('Teacher is tracking attendance now'
-    , Toast.LONG)});
+      Toast.show('Teacher is tracking attendance now', Toast.LONG) });
     socket.on('pop-quiz', (quizQuestion) => {
       this.handlePopQuiz(quizQuestion);
     });

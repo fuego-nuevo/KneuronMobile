@@ -38,7 +38,7 @@ class LectureEntry extends Component {
     return (
       <View style={container}>
         <View style={join}>
-          <Icon name="apps" onPress={this.onLiveClassJoin} />
+          <Icon name="bulb" onPress={this.onLiveClassJoin} />
         </View>
         <View style={title}>
           <Text style={text}>{lecture.name}</Text>

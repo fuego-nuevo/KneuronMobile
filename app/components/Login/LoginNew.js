@@ -26,9 +26,9 @@ const background = require('../images/loginnewpic.jpg');
 
 export default class LoginNew extends Component {
 
-// componentWillMount() {
-//   StatusBar.setHidden(true);
-// }
+  // componentWillMount() {
+  //   StatusBar.setHidden(true);
+  // }
 
   constructor(props) {
     super(props);
@@ -64,61 +64,62 @@ export default class LoginNew extends Component {
   }
 
   render() {
-        const { dispatch, errorMessage, isAuthenticated } = this.props;
-        console.log('this is the props on line 26', this.props);
+    const { dispatch, errorMessage, isAuthenticated } = this.props;
+    // console.log('this is the props on line 26', this.props);
+    console.log('this is the state ,', this.state);
 
     return (
       <ScrollView style={styles.container}>
-          
-          <View style={styles.markWrap}>
-            <Image source={require('../images/kneuronlogo.png')} style={{width: 100, height: 100, marginLeft: '35%', marginTop: 30}} />
-          </View>
-          <View style={styles.header}>
-            <Text style={styles.bigHeader}>Kneuron</Text>
-            <Text style={styles.littleHeader}>Your classroom just got better</Text>
-          </View>
-          <View style={styles.wrapper}>
-            <View style={styles.inputWrap}>
-              {/*<View style={styles.iconWrap}>
+
+        <View style={styles.markWrap}>
+          <Image source={require('../images/kneuronlogo.png')} style={{ width: 100, height: 100, marginLeft: '35%', marginTop: 30 }} />
+        </View>
+        <View style={styles.header}>
+          <Text style={styles.bigHeader}>Kneuron</Text>
+          <Text style={styles.littleHeader}>Your classroom just got better</Text>
+        </View>
+        <View style={styles.wrapper}>
+          <View style={styles.inputWrap}>
+            {/*<View style={styles.iconWrap}>
                 <Icon name='ios-contact' style={styles.icon} />
               </View>*/}
-              <TextInput 
-                placeholder="Username" 
-                placeholderTextColor="#FFF"
-                onChangeText={text => this.emailChange(text)}
-                style={styles.input} 
-              />
-            </View>
-            <View style={styles.inputWrap}>
-              {/*<View style={styles.iconWrap}>
+            <TextInput
+              placeholder="Username"
+              placeholderTextColor="#FFF"
+              onChangeText={text => this.emailChange(text)}
+              style={styles.input}
+            />
+          </View>
+          <View style={styles.inputWrap}>
+            {/*<View style={styles.iconWrap}>
                 <Icon name='md-lock' style={styles.icon} />
               </View>*/}
-              <TextInput 
-                placeholderTextColor="#FFF"
-                placeholder="Password" 
-                style={styles.input}
-                onChangeText={text => this.passwordChange(text)} 
-                secureTextEntry 
-              />
+            <TextInput
+              placeholderTextColor="#FFF"
+              placeholder="Password"
+              style={styles.input}
+              onChangeText={text => this.passwordChange(text)}
+              secureTextEntry
+            />
+          </View>
+          <TouchableOpacity style={styles.up} activeOpacity={.5}>
+            <View style={styles.button}>
+              <Text style={styles.buttonText} onPress={() => this.handleLoginClick()}>Sign In</Text>
             </View>
-            <TouchableOpacity style={styles.up} activeOpacity={.5}>
-              <View style={styles.button}>
-                <Text style={styles.buttonText} onPress={() => this.handleLoginClick()}>Sign In</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.container}>
+          <View style={styles.signupWrap}>
+            <Text style={styles.accountText}>Don't have an account?</Text>
+            <TouchableOpacity activeOpacity={.5}>
+              <View>
+                <Text style={styles.signupLinkText} onPress={Actions.signup}>Sign Up</Text>
               </View>
             </TouchableOpacity>
           </View>
-          <View style={styles.container}>
-            <View style={styles.signupWrap}>
-              <Text style={styles.accountText}>Don't have an account?</Text>
-              <TouchableOpacity activeOpacity={.5}>
-                <View>
-                  <Text style={styles.signupLinkText} onPress={Actions.signup}>Sign Up</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.markWrapTwo}>
-          </View>        
+        </View>
+        <View style={styles.markWrapTwo}>
+        </View>
 
       </ScrollView>
     );

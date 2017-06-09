@@ -70,16 +70,18 @@ class CameraRoute extends Component {
   // }
 
   sendToKairo() {
+    console.log('this is the motherufkcin props', this.props);
     this.camera.capture()
       .then((data) => {
         console.log('this is the data from taking kairo photopic', data);
         RNFS.readFile(data.path, 'base64')
         .then(res => {
           console.log('this is the res of the readfile', typeof res);
+          console.log(this.props);
           const body = {
             image: res,
             subject_id: this.props.profile.username,
-            gallery_name: 'kneuron2',
+            gallery_name: 'kneuron3',
           };
           axios.post(`${Config.Local_Host}/api/facialVerify`, body)
           .then(res => {

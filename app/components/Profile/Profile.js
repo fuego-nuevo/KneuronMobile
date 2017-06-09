@@ -37,7 +37,7 @@ componentDidMount() {
 fetchStudentData() {
   AsyncStorage.getItem('id_token')
   .then(res => {
-  console.log('this is the token in profile please work ', res)
+  console.log('this is the token in profile please workk ', res)
   axios.get(`${Config.Local_Host}/api/students/${res}`)
   .then(data => {
     console.log("this is the data for the students",data)
@@ -58,8 +58,10 @@ fetchStudentData() {
     console.log('this is the props from student profile', this.props)
     return (
       <View style={container} >
+        <View style={{ flex: 1, borderWidth: 15, height: 50, marginTop: 100, borderColor: 'black'}}>
+          <Image source={{uri: `data:image/jpeg;base64,${this.state.image}`}} />
+        </View>
         <View style={styles.logoContainer}>
-          <Image style={styles.logo} source={this.state.image} />
           <Text style={styles.title}>Name: {this.state.fName + " " + this.state.lName}</Text>
           <Text style={styles.title}>Email: {this.state.email}</Text>
           <Text style={styles.title}>UserName: {this.state.username}</Text>
@@ -86,19 +88,26 @@ const styles = {
     position: 'relative',
   },
   logoContainer: {
-    alignItems: 'center',
+
     flexGrow: 1,
     justifyContent: 'center'
   },
   logo: {
     width: 100,
-    height: 100
+    height: 100,
+    
   },
   title: {
-    color: '#FFF',
+    color: 'black',
+    fontSize: 15,
+    fontWeight: 'bold',
     marginTop: 10,
-    width: 160,
+    width: '60%',
+    marginLeft: '20%',
     textAlign: 'center',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 9,
   },
     buttonContainer: {
     backgroundColor: 'black',

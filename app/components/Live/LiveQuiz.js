@@ -11,7 +11,7 @@ import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
 import _ from 'lodash';
 import io from 'socket.io-client';
-import TimerMixin from 'react-timer-mixin';
+// import CountDown from 'react-native-countdown';
 import Config from 'react-native-config';
 
 const socket = io(`${Config.Local_Host}`);
@@ -23,30 +23,33 @@ class LiveQuiz extends Component {
     // super(props);
     this.state = {
       questions: null,
-      secondsRemaining: 1,
       correct: 0,
+      secondsRemaining: 1,
       selectedAnswers: {
-        // student_id: this.props.profile.id,
         student_id: profile.id,
       },
     };
     this.submitAnswers = this.submitAnswers.bind(this);
     this.gradeAnswers = this.gradeAnswers.bind(this);
     this.postAnswersToDB = this.postAnswersToDB.bind(this);
+    this.postResultsToDB = this.postResultsToDB.bind(this);
     this.timerTick = this.timerTick.bind(this);
   }
 
   componentDidMount() {
     const { quiz } = this.props;
     this.setState({ secondsRemaining: quiz.time });
-    this.state.secondsRemaining > 0 ? setInterval(this.timerTick, 1000) : null;
+    typeof this.state.secondsRemaining === 'number' ? setInterval(this.timerTick, 1000) : null;
   }
 
   timerTick() {
     // this.state.secondsRemaining > 0 ? this.setState({ secondsRemaining: this.state.secondsRemaining - 1 }
-    this.state.secondsRemaining > 0 ? this.setState({ secondsRemaining: this.state.secondsRemaining - 1 }) :
-    this.postAnswersToDB();
-    Actions.pop();
+    if (this.state.secondsRemaining === 0) {
+      this.setState({ secondsRemaining: '' });
+      Actions.pop();
+    } else {
+      this.setState({ secondsRemaining: this.state.secondsRemaining - 1 });
+    }
   }
 
   handleSelectedAnswer(id, selected) {
@@ -128,14 +131,24 @@ class LiveQuiz extends Component {
         <Text>Time Remaining: {this.state.secondsRemaining}</Text>
         {questions.map(question =>
           <View>
-            <Text key={question.id}>{question.name}</Text>
-            <Text onPress={() => this.handleSelectedAnswer(question.id, 0)}>{question.choices[0]}</Text>
-            <Text onPress={() => this.handleSelectedAnswer(question.id, 1)}>{question.choices[1]}</Text>
-            <Text onPress={() => this.handleSelectedAnswer(question.id, 2)}>{question.choices[2]}</Text>
-            <Text onPress={() => this.handleSelectedAnswer(question.id, 3)}>{question.choices[3]}</Text>
+            <Text style={styles.center} key={question.id}>Question is {question.name}</Text>
+            <View style={styles.boxes}>
+              <Text onPress={() => this.handleSelectedAnswer(question.id, 0)}>{question.choices[0]}</Text>
+            </View>
+            <View style={styles.boxes}>
+              <Text  onPress={() => this.handleSelectedAnswer(question.id, 1)}>{question.choices[1]}</Text>
+            </View>
+            <View style={styles.boxes}>
+              <Text  onPress={() => this.handleSelectedAnswer(question.id, 2)}>{question.choices[2]}</Text>
+            </View>
+            <View style={styles.boxes}>
+              <Text  onPress={() => this.handleSelectedAnswer(question.id, 3)}>{question.choices[3]}</Text>
+            </View>
           </View>,
         )}
-        <Text onPress={this.submitAnswers}>Submit</Text>
+        <TouchableOpacity style={{borderWidth: 3, borderColor: 'black', width: '30%', textAlign: 'center', borderRadius: 5, marginLeft: '35%', backgroundColor: '#da0576' }} >
+          <Text onPress={this.submitAnswers} style={{textAlign: 'center'}}>Submit</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -145,6 +158,20 @@ const styles = {
   container: {
     padding: 80,
     backgroundColor: 'gray',
+  },
+  center: {
+    textAlign: 'center',
+    marginBottom: 15,
+  },
+  boxes: {
+    width: '60%',
+    borderRadius: 5,
+    backgroundColor: 'rgba(255,255,255, .5)',
+    borderColor: 'black',
+    marginBottom: 15,
+    textAlign: 'center',
+    height: 20,
+    marginLeft: '20%',
   },
   input: {
     height: 40,

@@ -78,7 +78,10 @@ class CohortList extends Component {
     console.log('this is the state of cohorts list ', this.state)
     return (
       <View style={styles.wrapper}>
-        <Button onPress={() => this.setState({isOpen: true})} style={styles.btn}>Add Class</Button>
+        <TouchableOpacity style={styles.btn}>
+
+        <Text onPress={() => this.setState({isOpen: true})} style={{textAlign: 'center', color: 'white'}} >Add Class</Text>
+        </TouchableOpacity>
 
         <Modal isOpen={this.state.isOpen} onClosed={() => this.setState({isOpen: false})} style={[styles.modal]} position={"center"} backdropContent={BContent}>
           <TextInput
@@ -97,7 +100,7 @@ class CohortList extends Component {
             (<CohortListEntry key={cohort.id} id={cohort.id} cohort={cohort} />))}
         </ScrollView>
         }
-        <View style={{position: 'absolute', bottom: 0, width: '100%'}}>
+        <View style={{position: 'absolute', bottom: 13, width: '100%'}}>
           <Navbar />
         </View>
       </View>
@@ -125,6 +128,7 @@ const styles = StyleSheet.create({
   wrapper: {
     paddingTop: 60,
     flex: 1,
+    
   },
 
   container: {
@@ -140,9 +144,13 @@ const styles = StyleSheet.create({
   },
 
   btn: {
-    backgroundColor: '#3B5998',
+    backgroundColor: '#da0576',
     color: 'white',
     padding: 10,
+    width: '80%',
+    marginLeft: '10%',
+    borderRadius: 20,
+    marginTop: 10,
   },
 
   btnModal: {
@@ -169,6 +177,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     backgroundColor: '#2980b9',
     paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 20,
   },
   buttonText: {
     textAlign: 'center',

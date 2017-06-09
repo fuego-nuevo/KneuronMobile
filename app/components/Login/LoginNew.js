@@ -12,7 +12,8 @@ import {
   ScrollView,
   // StatusBar
 } from 'react-native';
-import { Icon } from 'native-base';
+import Icon from 'react-native-vector-icons/Ionicons';
+// import { Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { loginUser } from '../../actions/login';
 
@@ -68,15 +69,19 @@ export default class LoginNew extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        
-        <Image source={background} style={styles.background} >
+          
           <View style={styles.markWrap}>
+            <Image source={require('../images/kneuronlogo.png')} style={{width: 100, height: 100, marginLeft: '35%', marginTop: 30}} />
+          </View>
+          <View style={styles.header}>
+            <Text style={styles.bigHeader}>Kneuron</Text>
+            <Text style={styles.littleHeader}>Your classroom just got better</Text>
           </View>
           <View style={styles.wrapper}>
             <View style={styles.inputWrap}>
-              <View style={styles.iconWrap}>
-                <Icon name='lock' style={styles.icon} resizeMode="contain" />
-              </View>
+              {/*<View style={styles.iconWrap}>
+                <Icon name='ios-contact' style={styles.icon} />
+              </View>*/}
               <TextInput 
                 placeholder="Username" 
                 placeholderTextColor="#FFF"
@@ -85,9 +90,9 @@ export default class LoginNew extends Component {
               />
             </View>
             <View style={styles.inputWrap}>
-              <View style={styles.iconWrap}>
-                <Icon name='person' style={styles.icon} resizeMode="contain" />
-              </View>
+              {/*<View style={styles.iconWrap}>
+                <Icon name='md-lock' style={styles.icon} />
+              </View>*/}
               <TextInput 
                 placeholderTextColor="#FFF"
                 placeholder="Password" 
@@ -96,7 +101,7 @@ export default class LoginNew extends Component {
                 secureTextEntry 
               />
             </View>
-            <TouchableOpacity activeOpacity={.5}>
+            <TouchableOpacity style={styles.up} activeOpacity={.5}>
               <View style={styles.button}>
                 <Text style={styles.buttonText} onPress={() => this.handleLoginClick()}>Sign In</Text>
               </View>
@@ -113,22 +118,51 @@ export default class LoginNew extends Component {
             </View>
           </View>
           <View style={styles.markWrapTwo}>
-          </View>
-        </Image>
+          </View>        
+
       </ScrollView>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    opacity: 0.7,
-    height: '100%',
-    width: '100%',
+    flexDirection: 'column',
+  },
+  signbut: {
+    zIndex: 2,
+    borderColor: 'white',
+    borderWidth: 5,
+    height: 100,
+    marginTop: 250,
+    width: '90%',
+    marginLeft: '5%',
+  },
+  header: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  bigHeader: {
+    fontSize: 28,
+    marginBottom: 20,
+  },
+  littleHeader: {
+    fontWeight: '100',
+  },
+  signpass: {
+    zIndex: 2,
+    borderColor: 'white',
+    borderWidth: 5,
+    height: 100,
+    marginTop: 450,
+    width: '90%',
+    marginLeft: '5%',
+  },
+  goAway: {
+    backgroundColor: 'transparent',
+    // zIndex: 1,
   },
   markWrap: {
-    flex: 1,
-    paddingVertical: 30,
+    paddingVertical: 40,
   },
   markWrapTwo: {
     flex: 1,
@@ -139,18 +173,21 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   background: {
+    position: 'absolute',
+    height,
     width: '100%',
-    height: '100%',
+    zIndex: -1,
   },
   wrapper: {
     paddingVertical: 30,
   },
   inputWrap: {
     flexDirection: "row",
-    marginVertical: 10,
-    height: 40,
-    borderBottomWidth: 3,
-    borderBottomColor: "black"
+    marginVertical: 5,
+    height: 30,
+    width: '70%',
+    marginLeft: '15%',
+    // borderRadius: 8,
   },
   iconWrap: {
     paddingHorizontal: 7,
@@ -164,16 +201,23 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     paddingHorizontal: 10,
-    backgroundColor: 'grey',
+    backgroundColor: '#c2c2d6',
+    opacity: .95,
+    textAlign: 'center',
+    borderRadius: 3,
   },
   button: {
-    backgroundColor: "grey",
-    paddingVertical: 20,
+    backgroundColor: "black",
+
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
+    marginTop: 5,
     width: '70%',
     left: '15%',
+    opacity: 1,
+    height: 35,
+    borderRadius: 3,
+
   },
   buttonText: {
     color: "#FFF",
@@ -192,10 +236,42 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   accountText: {
-    color: "black",
+    color: 'black',
+    textShadowColor: 'white',
+    fontSize: 10,
   },
   signupLinkText: {
-    color: "black",
+    color: '#da0576',
     marginLeft: 5,
-  }
+    textDecorationLine: 'underline',
+  },
+  up: {
+    zIndex: 3,
+  },
+  overlay: {
+    position: 'absolute',
+    backgroundColor: 'black',  /* fallback for old browsers */
+    opacity: 0.6,
+    height,
+    width: '100%',
+    zIndex: 0,
+  },
 });
+
+        /*<View style={styles.overlay} />
+        <Image source={background}style={styles.background} />
+
+        <View style={styles.signbut}>
+          <TextInput
+            placeholder="Username" 
+            placeholderTextColor="#FFF"
+            onChangeText={text => this.emailChange(text)}
+          />
+        </View>
+        <View style={styles.signpass}>
+          <TextInput
+            placeholder="password" 
+            placeholderTextColor="#FFF"
+            onChangeText={text => this.passwordChange(text)}
+          />
+        </View>*/

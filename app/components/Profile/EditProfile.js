@@ -114,7 +114,7 @@ export default class EditProfile extends Component {
             <Text onPress={() => this.handleClick()}>Update Profile</Text>
           </Button>
         </ScrollView >
-        <View style={{position: 'relative', bottom: 0, width: '100%'}}>
+        <View style={{position: 'relative', bottom: 13, width: '100%'}}>
           <Navbar />
         </View>
       </Container>

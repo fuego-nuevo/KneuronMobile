@@ -27,6 +27,7 @@ export default class Profile extends Component {
       email: 'test',
       fName: 'test',
       lName: 'test',
+      image: '',
     };
   }
 
@@ -40,7 +41,7 @@ fetchStudentData() {
   axios.get(`${Config.Local_Host}/api/students/${res}`)
   .then(data => {
     console.log("this is the data for the students",data)
-    this.setState({ username: data.data.username, email: data.data.email, fName: data.data.fName, lName: data.data.lName });
+    this.setState({ username: data.data.username, email: data.data.email, fName: data.data.fName, lName: data.data.lName, image: data.data.image });
   })
   })
     .catch((err) => {
@@ -54,13 +55,14 @@ fetchStudentData() {
   render() {
     const { navbar, container } = styles;
     console.log("this is the state of profile", this.state)
+    console.log('this is the props from student profile', this.props)
     return (
       <View style={container} >
         <View style={styles.logoContainer}>
-          <Image style={styles.logo} source={require('../images/loginpic.jpg')} />
-          <Text style={styles.title}>{this.state.fName + " " + this.state.lName}</Text>
-          <Text style={styles.title}>{this.state.email}</Text>
-          <Text style={styles.title}>{this.state.username}</Text>
+          <Image style={styles.logo} source={this.state.image} />
+          <Text style={styles.title}>Name: {this.state.fName + " " + this.state.lName}</Text>
+          <Text style={styles.title}>Email: {this.state.email}</Text>
+          <Text style={styles.title}>UserName: {this.state.username}</Text>
         </View> 
         {/*<Button
         onPress={Actions.editprofile}
@@ -69,7 +71,7 @@ fetchStudentData() {
         <TouchableOpacity style={styles.buttonContainer}>
           <Text style={styles.buttonText} onPress={Actions.editprofile}>Edit Profile!</Text>
         </TouchableOpacity>
-          <View style={{position: 'absolute', bottom: 0, width: '100%'}}>
+          <View style={{position: 'absolute', bottom: 13, width: '100%'}}>
             <Navbar />
           </View> 
       </View>
@@ -80,7 +82,7 @@ fetchStudentData() {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#3498db',
+    backgroundColor: '#dcdfe5',
     position: 'relative',
   },
   logoContainer: {
@@ -99,9 +101,12 @@ const styles = {
     textAlign: 'center',
   },
     buttonContainer: {
-    backgroundColor: '#2980b9',
-    padding: 80,
-
+    backgroundColor: 'black',
+    padding: 15,
+    marginBottom: 150,
+    width: '60%',
+    marginLeft: '20%',
+    borderRadius: 20, 
   },
   buttonText: {
     textAlign: 'center',

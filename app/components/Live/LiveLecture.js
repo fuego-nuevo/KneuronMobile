@@ -39,13 +39,16 @@ class LiveLecture extends Component {
     const { teacher, currentQuiz } = this.props;
     socket.emit('join', { id: teacher.teacher_id });
     socket.on('live-lecture');
-    socket.on('attendance', () => {
-      Toast.show('Teacher is tracking attendance now'
-    , Toast.LONG)});
+    socket.on('attendance', () => { Toast.show('Teacher is tracking attendance now', Toast.LONG); });
     socket.on('pop-quiz', (quizQuestion) => {
       console.log('Quiz received', quizQuestion);
       // quizQuestion = JSON.parse(quizQuestion);
       this.handlePopQuiz(quizQuestion);
+    });
+    socket.on('leave', () => {
+      Toast.show('Live lecture has ended!', Toast.LONG);
+      socket.emit('leave', { id: teacher.teacher_id });
+      Actions.home();
     });
   }
 

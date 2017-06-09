@@ -96,22 +96,10 @@ class LiveQuiz extends Component {
       .catch(error => console.log('Error in postResultsToDB ', error));
   }
 
-  // postResultsToDB() {
-  //   const { cohort, profile } = this.props;
-  //   axios.post(`${Config.Local_Host}/api/answers`, {
-  //     percentage: this.state.selectedAnswers,
-  //     cohort_id: cohort.id,
-  //     topic_id: questionId,
-  //     student_id: profile.id,
-  //   })
-  // }
-
   async submitAnswers() {
     const { profile, cohort, quiz } = this.props;
     const questions = JSON.parse(quiz.questions);
     if (Object.keys(this.state.selectedAnswers).length > questions.length) {
-      console.log('hello this is submitAnswers');
-      console.log('hey this is the cohort.teacher_id ', cohort.teacher_id);
       socket.emit('student-answers', {
         correct: this.gradeAnswers(this.state.selectedAnswers),
         name: `${profile.fName} ${profile.lName}`,
